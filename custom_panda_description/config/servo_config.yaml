@@ -1,0 +1,50 @@
+/**:
+  ros__parameters:
+    # 이 계층이 반드시 추가되어야 노드가 인식합니다.
+    moveit_servo:
+      use_gazebo: false
+      command_in_type: "speed_units"
+
+      scale:
+        linear: 2.0
+        rotational: 3.5
+        joint: 2.0
+
+      publish_period: 0.01
+      low_latency_mode: false
+      low_pass_filter_coeff: 1.1
+
+      move_group_name: "panda_arm"
+      planning_frame: "panda_link0"
+      ee_frame_name: "panda_link8"
+      robot_link_command_frame: "panda_link8"  # End-effector 기준으로 변경
+
+      incoming_command_timeout: 0.5
+      num_outgoing_halt_msgs_to_publish: 4
+
+      lower_singularity_threshold: 7.0
+      hard_stop_singularity_threshold: 12.0
+      joint_limit_margin: 0.05
+
+      # 충돌 체크 설정 (필수 파라미터: collision_check_rate > 0)
+      check_collisions: false
+      collision_check_rate: 50.0
+      self_collision_proximity_threshold: 100.0
+      scene_collision_proximity_threshold: 100.0
+
+      cartesian_command_in_topic: "~/delta_twist_cmds"
+      joint_command_in_topic: "~/delta_joint_cmds"
+      command_out_topic: "/panda_arm_controller/joint_trajectory"
+      command_out_type: "trajectory_msgs/JointTrajectory"
+
+      publish_joint_positions: true
+      publish_joint_velocities: true
+      publish_joint_accelerations: false
+
+      # MoveIt Servo가 요구하는 smoothing filter 플러그인
+      # Butterworth 필터를 사용 (MoveIt 2 예제와 동일)
+      smoothing_filter_plugin_name: "online_signal_smoothing::ButterworthFilterPlugin"
+      override_velocity_scaling_factor: 1.0
+      override_acceleration_scaling_factor: 1.0
+
+      is_primary_planning_scene_monitor: true

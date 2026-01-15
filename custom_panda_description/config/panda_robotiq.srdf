@@ -1,0 +1,171 @@
+<?xml version="1.0" ?>
+<robot name="panda_with_robotiq">
+    
+    <!-- ========================================== -->
+    <!-- Planning Groups -->
+    <!-- ========================================== -->
+    
+    <!-- Panda Arm Group -->
+    <group name="panda_arm">
+        <chain base_link="panda_link0" tip_link="panda_link8" />
+    </group>
+    
+    <!-- Gripper Group -->
+    <group name="gripper">
+        <link name="robotiq_85_base_link" />
+        <link name="left_outer_knuckle" />
+        <link name="left_outer_finger" />
+        <link name="left_inner_knuckle" />
+        <link name="left_inner_finger" />
+        <link name="right_outer_knuckle" />
+        <link name="right_outer_finger" />
+        <link name="right_inner_knuckle" />
+        <link name="right_inner_finger" />
+        <joint name="finger_joint" />
+    </group>
+    
+    <!-- Full Robot Group -->
+    <group name="panda_arm_gripper">
+        <group name="panda_arm" />
+        <group name="gripper" />
+    </group>
+    
+    <!-- ========================================== -->
+    <!-- End Effector -->
+    <!-- ========================================== -->
+    
+    <end_effector name="gripper" parent_link="panda_link8" group="gripper" parent_group="panda_arm" />
+    
+    <!-- ========================================== -->
+    <!-- Group States -->
+    <!-- ========================================== -->
+    
+    <!-- Arm States -->
+    <group_state name="ready" group="panda_arm">
+        <joint name="panda_joint1" value="0" />
+        <joint name="panda_joint2" value="-0.785" />
+        <joint name="panda_joint3" value="0" />
+        <joint name="panda_joint4" value="-2.356" />
+        <joint name="panda_joint5" value="0" />
+        <joint name="panda_joint6" value="1.571" />
+        <joint name="panda_joint7" value="0.785" />
+    </group_state>
+    
+    <group_state name="home" group="panda_arm">
+        <joint name="panda_joint1" value="0" />
+        <joint name="panda_joint2" value="0" />
+        <joint name="panda_joint3" value="0" />
+        <joint name="panda_joint4" value="0" />
+        <joint name="panda_joint5" value="0" />
+        <joint name="panda_joint6" value="0" />
+        <joint name="panda_joint7" value="0" />
+    </group_state>
+    
+    <!-- Gripper States -->
+    <group_state name="open" group="gripper">
+        <joint name="finger_joint" value="0" />
+    </group_state>
+    
+    <group_state name="closed" group="gripper">
+        <joint name="finger_joint" value="0.8" />
+    </group_state>
+    
+    <group_state name="half_open" group="gripper">
+        <joint name="finger_joint" value="0.4" />
+    </group_state>
+    
+    <!-- ========================================== -->
+    <!-- Disable Collisions -->
+    <!-- ========================================== -->
+    
+    <!-- Gripper Internal Collisions -->
+    <disable_collisions link1="robotiq_85_base_link" link2="left_outer_knuckle" reason="Adjacent" />
+    <disable_collisions link1="robotiq_85_base_link" link2="right_outer_knuckle" reason="Adjacent" />
+    <disable_collisions link1="robotiq_85_base_link" link2="left_inner_knuckle" reason="Adjacent" />
+    <disable_collisions link1="robotiq_85_base_link" link2="right_inner_knuckle" reason="Adjacent" />
+    
+    <disable_collisions link1="left_outer_knuckle" link2="left_outer_finger" reason="Adjacent" />
+    <disable_collisions link1="right_outer_knuckle" link2="right_outer_finger" reason="Adjacent" />
+    
+    <disable_collisions link1="left_inner_knuckle" link2="left_inner_finger" reason="Adjacent" />
+    <disable_collisions link1="right_inner_knuckle" link2="right_inner_finger" reason="Adjacent" />
+    
+    <disable_collisions link1="left_outer_finger" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="right_outer_finger" link2="right_inner_finger" reason="Never" />
+    
+    <disable_collisions link1="left_inner_finger" link2="right_inner_finger" reason="Default" />
+    <disable_collisions link1="left_outer_finger" link2="right_outer_finger" reason="Default" />
+    
+    <!-- Arm-Gripper Collisions -->
+    <disable_collisions link1="panda_link7" link2="robotiq_85_base_link" reason="Adjacent" />
+    <disable_collisions link1="panda_link8" link2="robotiq_85_base_link" reason="Adjacent" />
+    
+    <!-- Additional Arm-Gripper safe collisions to prevent false positives in Servo -->
+    <!-- panda_link4 and gripper fingers/knuckles (collision warnings were observed for right_inner_finger) -->
+    <disable_collisions link1="panda_link4" link2="right_inner_finger" reason="Default" />
+    <disable_collisions link1="panda_link4" link2="left_inner_finger" reason="Default" />
+    <disable_collisions link1="panda_link4" link2="right_outer_finger" reason="Default" />
+    <disable_collisions link1="panda_link4" link2="left_outer_finger" reason="Default" />
+    <disable_collisions link1="panda_link4" link2="right_inner_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link4" link2="left_inner_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link4" link2="right_outer_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link4" link2="left_outer_knuckle" reason="Default" />
+    
+    <!-- panda_link5 and gripper base (new collision warnings observed) -->
+    <disable_collisions link1="panda_link5" link2="robotiq_85_base_link" reason="Default" />
+    
+    <!-- panda_link5 and right_inner_knuckle (new collision warnings observed) -->
+    <disable_collisions link1="panda_link5" link2="right_inner_finger" reason="Default" />
+    <disable_collisions link1="panda_link5" link2="left_inner_finger" reason="Default" />
+    <disable_collisions link1="panda_link5" link2="right_outer_finger" reason="Default" />
+    <disable_collisions link1="panda_link5" link2="left_outer_finger" reason="Default" />
+    <disable_collisions link1="panda_link5" link2="right_inner_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link5" link2="left_inner_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link5" link2="right_outer_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link5" link2="left_outer_knuckle" reason="Default" />
+    
+    <!-- panda_link3 and gripper (prevent collision warnings during movement) -->
+    <disable_collisions link1="panda_link3" link2="right_inner_finger" reason="Default" />
+    <disable_collisions link1="panda_link3" link2="left_inner_finger" reason="Default" />
+    <disable_collisions link1="panda_link3" link2="right_outer_finger" reason="Default" />
+    <disable_collisions link1="panda_link3" link2="left_outer_finger" reason="Default" />
+    <disable_collisions link1="panda_link3" link2="right_inner_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link3" link2="left_inner_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link3" link2="right_outer_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link3" link2="left_outer_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link3" link2="robotiq_85_base_link" reason="Default" />
+    
+    <!-- panda_link6 and gripper (prevent collision warnings during movement) -->
+    <disable_collisions link1="panda_link6" link2="right_inner_finger" reason="Default" />
+    <disable_collisions link1="panda_link6" link2="left_inner_finger" reason="Default" />
+    <disable_collisions link1="panda_link6" link2="right_outer_finger" reason="Default" />
+    <disable_collisions link1="panda_link6" link2="left_outer_finger" reason="Default" />
+    <disable_collisions link1="panda_link6" link2="right_inner_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link6" link2="left_inner_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link6" link2="right_outer_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link6" link2="left_outer_knuckle" reason="Default" />
+    <disable_collisions link1="panda_link6" link2="robotiq_85_base_link" reason="Default" />
+    
+    <!-- Standard Panda Arm Internal Collisions -->
+    <disable_collisions link1="panda_link0" link2="panda_link1" reason="Adjacent" />
+    <disable_collisions link1="panda_link1" link2="panda_link2" reason="Adjacent" />
+    <disable_collisions link1="panda_link2" link2="panda_link3" reason="Adjacent" />
+    <disable_collisions link1="panda_link3" link2="panda_link4" reason="Adjacent" />
+    <disable_collisions link1="panda_link4" link2="panda_link5" reason="Adjacent" />
+    <disable_collisions link1="panda_link5" link2="panda_link6" reason="Adjacent" />
+    <disable_collisions link1="panda_link6" link2="panda_link7" reason="Adjacent" />
+    
+    <!-- Additional safe collisions -->
+    <disable_collisions link1="panda_link0" link2="panda_link2" reason="Never" />
+    <disable_collisions link1="panda_link1" link2="panda_link3" reason="Never" />
+    <disable_collisions link1="panda_link2" link2="panda_link4" reason="Never" />
+    <disable_collisions link1="panda_link3" link2="panda_link5" reason="Never" />
+    <disable_collisions link1="panda_link4" link2="panda_link6" reason="Never" />
+    <disable_collisions link1="panda_link5" link2="panda_link7" reason="Never" />
+    
+    <!-- Virtual Planning Frame -->
+    <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="panda_link0" />
+
+    
+    
+</robot>

@@ -1,0 +1,42 @@
+[0.006s] Invoking command in '/home/etri/ros2_ws/build/custom_panda_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/custom_panda_description -- -j24 -l24
+[0.029s] Invoked command in '/home/etri/ros2_ws/build/custom_panda_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/custom_panda_description -- -j24 -l24
+[0.034s] Invoking command in '/home/etri/ros2_ws/build/custom_panda_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/custom_panda_description
+[0.038s] -- Install configuration: ""
+[0.038s] -- Execute custom install script
+[0.038s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/urdf/panda_with_robotiq.urdf
+[0.038s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/inner_finger_coarse.STL
+[0.038s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/inner_finger_fine.STL
+[0.038s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/inner_knuckle_coarse.STL
+[0.038s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/inner_knuckle_fine.STL
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/outer_finger_coarse.STL
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/outer_finger_fine.STL
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/outer_knuckle_coarse.STL
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/outer_knuckle_fine.STL
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/robotiq_85_base_link_coarse.STL
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/meshes/robotiq_85_base_link_fine.STL
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/config/kinematics.yaml
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/config/panda_robotiq.ros2_control.xacro
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/config/panda_robotiq.srdf
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/config/ros2_controllers.yaml
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/config/servo_config.yaml
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/config/view_robot.rviz
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/launch/servo_complete.launch.py
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/lib/custom_panda_description/joy_to_twist_node.py
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/lib/custom_panda_description/trajectory_to_joint_states.py
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/lib/custom_panda_description/joy_to_gripper_node.py
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/ament_index/resource_index/package_run_dependencies/custom_panda_description
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/ament_index/resource_index/parent_prefix_path/custom_panda_description
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/environment/ament_prefix_path.sh
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/environment/ament_prefix_path.dsv
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/environment/path.sh
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/environment/path.dsv
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/local_setup.bash
+[0.039s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/local_setup.sh
+[0.042s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/local_setup.zsh
+[0.042s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/local_setup.dsv
+[0.042s] -- Symlinking: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.dsv
+[0.044s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/ament_index/resource_index/packages/custom_panda_description
+[0.044s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/cmake/custom_panda_descriptionConfig.cmake
+[0.044s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/cmake/custom_panda_descriptionConfig-version.cmake
+[0.044s] -- Up-to-date symlink: /home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.xml
+[0.046s] Invoked command in '/home/etri/ros2_ws/build/custom_panda_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/custom_panda_description

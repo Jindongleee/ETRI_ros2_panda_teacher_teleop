@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <xacro:macro name="panda_robotiq_ros2_control" params="name initial_positions_file">
+    
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <plugin>mock_components/GenericSystem</plugin>
+        <param name="calculate_dynamics">true</param>
+      </hardware>
+      
+      <!-- Panda Arm Joints -->
+      <joint name="panda_joint1">
+        <command_interface name="position">
+          <param name="min">-2.9671</param>
+          <param name="max">2.9671</param>
+        </command_interface>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      
+      <joint name="panda_joint2">
+        <command_interface name="position">
+          <param name="min">-1.8326</param>
+          <param name="max">1.8326</param>
+        </command_interface>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      
+      <joint name="panda_joint3">
+        <command_interface name="position">
+          <param name="min">-2.9671</param>
+          <param name="max">2.9671</param>
+        </command_interface>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      
+      <joint name="panda_joint4">
+        <command_interface name="position">
+          <param name="min">-3.1416</param>
+          <param name="max">0.0873</param>
+        </command_interface>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      
+      <joint name="panda_joint5">
+        <command_interface name="position">
+          <param name="min">-2.9671</param>
+          <param name="max">2.9671</param>
+        </command_interface>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      
+      <joint name="panda_joint6">
+        <command_interface name="position">
+          <param name="min">-0.0873</param>
+          <param name="max">3.8223</param>
+        </command_interface>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      
+      <joint name="panda_joint7">
+        <command_interface name="position">
+          <param name="min">-2.9671</param>
+          <param name="max">2.9671</param>
+        </command_interface>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      
+      <!-- Robotiq Gripper Joint -->
+      <joint name="robotiq_left_outer_knuckle_joint">
+        <command_interface name="position">
+          <param name="min">0.0</param>
+          <param name="max">0.8</param>
+        </command_interface>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.0</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      
+    </ros2_control>
+    
+  </xacro:macro>
+  
+</robot>
