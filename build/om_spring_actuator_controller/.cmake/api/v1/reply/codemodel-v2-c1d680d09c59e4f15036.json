@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-dc846b14ce3f001f6e61.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "om_spring_actuator_controller",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "om_spring_actuator_controller_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-om_spring_actuator_controller_uninstall-822097a72cea7a7dda4b.json",
+					"name" : "om_spring_actuator_controller_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "spring_actuator_controller::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-spring_actuator_controller-30d8bf4b6b9f8fc2bb4f.json",
+					"name" : "spring_actuator_controller",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "spring_actuator_controller_parameters::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-spring_actuator_controller_parameters-c80ede8ef6ec93b29dad.json",
+					"name" : "spring_actuator_controller_parameters",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-d5e91f2ee4fe59213961.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/etri/ros2_ws/build/om_spring_actuator_controller",
+		"source" : "/home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

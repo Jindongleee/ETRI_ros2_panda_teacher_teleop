@@ -1,0 +1,31 @@
+[ 50%] Building CXX object CMakeFiles/self_collision_node.dir/src/self_collision_node.cpp.o
+[100%] Linking CXX executable self_collision_node
+[100%] Built target self_collision_node
+-- Install configuration: ""
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/lib/open_manipulator_collision/self_collision_node
+-- Set runtime path of "/home/etri/ros2_ws/install/open_manipulator_collision/lib/open_manipulator_collision/self_collision_node" to ""
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/include/
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/include//open_manipulator_collision
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/include//open_manipulator_collision/self_collision_node.hpp
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/self_collision.launch.py
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/library_path.sh
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/library_path.dsv
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/package_run_dependencies/open_manipulator_collision
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/parent_prefix_path/open_manipulator_collision
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/ament_prefix_path.sh
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/ament_prefix_path.dsv
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/path.sh
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/path.dsv
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.bash
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.sh
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.zsh
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.dsv
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/package.dsv
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/packages/open_manipulator_collision
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/open_manipulator_collisionConfig.cmake
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/open_manipulator_collisionConfig-version.cmake
+-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/package.xml

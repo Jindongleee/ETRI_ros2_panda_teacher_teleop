@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-9309066b3fc07eb32fb2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "om_joint_trajectory_command_broadcaster",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "joint_trajectory_command_broadcaster::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-joint_trajectory_command_broadcaster-0472d26b1c36aaf287d1.json",
+					"name" : "joint_trajectory_command_broadcaster",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "joint_trajectory_command_broadcaster_parameters::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-joint_trajectory_command_broadcaster_parameters-7779ddb196cf0dba051b.json",
+					"name" : "joint_trajectory_command_broadcaster_parameters",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "om_joint_trajectory_command_broadcaster_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-om_joint_trajectory_command_broadcaster_uninstall-612f0aaa032a58a00879.json",
+					"name" : "om_joint_trajectory_command_broadcaster_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-f7d1c9a0a9e41e5cf9f0.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/etri/ros2_ws/build/om_joint_trajectory_command_broadcaster",
+		"source" : "/home/etri/ros2_ws/open_manipulator/ros2_controller/om_joint_trajectory_command_broadcaster"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

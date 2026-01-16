@@ -1,0 +1,122 @@
+[0.000000] (-) TimerEvent: {}
+[0.000703] (-) JobUnselected: {'identifier': 'custom_panda_description'}
+[0.000723] (-) JobUnselected: {'identifier': 'dynamixel_hardware_interface'}
+[0.000730] (-) JobUnselected: {'identifier': 'dynamixel_interfaces'}
+[0.000735] (-) JobUnselected: {'identifier': 'dynamixel_sdk'}
+[0.000740] (-) JobUnselected: {'identifier': 'dynamixel_sdk_custom_interfaces'}
+[0.000744] (-) JobUnselected: {'identifier': 'dynamixel_sdk_examples'}
+[0.000749] (-) JobUnselected: {'identifier': 'om_gravity_compensation_controller'}
+[0.000753] (-) JobUnselected: {'identifier': 'om_joint_trajectory_command_broadcaster'}
+[0.000757] (-) JobUnselected: {'identifier': 'om_spring_actuator_controller'}
+[0.000761] (-) JobUnselected: {'identifier': 'open_manipulator'}
+[0.000766] (-) JobUnselected: {'identifier': 'open_manipulator_bringup'}
+[0.000770] (-) JobUnselected: {'identifier': 'open_manipulator_description'}
+[0.000774] (-) JobUnselected: {'identifier': 'open_manipulator_gui'}
+[0.000778] (-) JobUnselected: {'identifier': 'open_manipulator_moveit_config'}
+[0.000782] (-) JobUnselected: {'identifier': 'open_manipulator_playground'}
+[0.000786] (-) JobUnselected: {'identifier': 'open_manipulator_teleop'}
+[0.000790] (-) JobUnselected: {'identifier': 'panda_teleop_omy_l100'}
+[0.000796] (open_manipulator_collision) JobQueued: {'identifier': 'open_manipulator_collision', 'dependencies': OrderedDict()}
+[0.000802] (open_manipulator_collision) JobStarted: {'identifier': 'open_manipulator_collision'}
+[0.004590] (open_manipulator_collision) JobProgress: {'identifier': 'open_manipulator_collision', 'progress': 'cmake'}
+[0.004610] (open_manipulator_collision) JobProgress: {'identifier': 'open_manipulator_collision', 'progress': 'build'}
+[0.005262] (open_manipulator_collision) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/etri/ros2_ws/build/open_manipulator_collision', '--', '-j24', '-l24'], 'cwd': '/home/etri/ros2_ws/build/open_manipulator_collision', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('VSCODE_CWD', '/home/etri'), ('CURSOR_EXTENSION_HOST_ROLE', 'agent-exec'), ('VSCODE_ESM_ENTRYPOINT', 'vs/workbench/api/node/extensionHostProcess'), ('LANGUAGE', 'ko:en_US:en'), ('USER', 'etri'), ('LC_TIME', 'ko_KR.UTF-8'), ('VSCODE_NLS_CONFIG', '{"userLocale":"ko","osLocale":"ko","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/cursor/resources/app/out/nls.messages.json","locale":"ko","availableLanguages":{}}'), ('CI', '1'), ('VSCODE_HANDLES_UNCAUGHT_ERRORS', 'true'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '0'), ('LD_LIBRARY_PATH', '/home/etri/ros2_ws/install/open_manipulator_collision/lib:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster/lib:/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib:/home/etri/ros2_ws/install/dynamixel_sdk/lib:/home/etri/ros2_ws/install/dynamixel_interfaces/lib:/home/etri/ws_ros2/install/service_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/etri'), ('CHROME_DESKTOP', 'cursor.desktop'), ('OLDPWD', '/home/etri/ros2_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('VSCODE_IPC_HOOK', '/run/user/1000/vscode-30070241-2.3.-main.sock'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/cursor.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'ko_KR.UTF-8'), ('MANAGERPID', '1861'), ('SYSTEMD_EXEC_PID', '2147'), ('NO_COLOR', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '5142'), ('VSCODE_CRASH_REPORTER_PROCESS_TYPE', 'extensionHost'), ('COLCON_PREFIX_PATH', '/home/etri/ros2_ws/install:/home/etri/ws_ros2/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'etri'), ('FORCE_COLOR', '0'), ('JOURNAL_STREAM', '8:18509'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'etri'), ('TERM', 'dumb'), ('EVERYSPHERE_RIPGREP_PATH', '/usr/share/cursor/resources/app/node_modules/@vscode/ripgrep/bin/rg'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '1'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/etri-HP-Z2-Tower-G1i:@/tmp/.ICE-unix/2119,unix/etri-HP-Z2-Tower-G1i:/tmp/.ICE-unix/2119'), ('INVOCATION_ID', '5a99293a9b70420ba5782225baf2f6fe'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'ko_KR.UTF-8'), ('VSCODE_PROCESS_TITLE', 'extension-host (agent-exec) [1-3]'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('CURSOR_AGENT', '1'), ('DISPLAY', ':1'), ('LANG', 'ko_KR.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'ko_KR.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', ''), ('CURSOR_TRACE_ID', '292c0dd82b9e4716b7c9a05e3f99dadc'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '0'), ('AMENT_PREFIX_PATH', '/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/custom_panda_description:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/bash'), ('LC_NAME', 'ko_KR.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'ko_KR.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'ko_KR.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/etri/ros2_ws/build/open_manipulator_collision'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('VSCODE_CODE_CACHE_PATH', '/home/etri/.config/Cursor/CachedData/643ba67cd252e2888e296dd0cf34a0c5d7625b90'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/etri/ros2_ws/build/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_teleop/lib/python3.10/site-packages:/home/etri/ros2_ws/build/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages:/home/etri/ros2_ws/install/dynamixel_sdk/local/lib/python3.10/dist-packages:/home/etri/ros2_ws/install/dynamixel_interfaces/local/lib/python3.10/dist-packages:/home/etri/ws_ros2/install/service_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'ko_KR.UTF-8'), ('LC_PAPER', 'ko_KR.UTF-8'), ('COLCON', '1'), ('_ZO_DOCTOR', '0'), ('CMAKE_PREFIX_PATH', '/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/custom_panda_description:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_bringup:/opt/ros/humble'), ('VSCODE_PID', '5142')]), 'shell': False}
+[0.033879] (open_manipulator_collision) StdoutLine: {'line': b'[ 50%] Building CXX object CMakeFiles/self_collision_node.dir/src/self_collision_node.cpp.o\n'}
+[0.100037] (-) TimerEvent: {}
+[0.200201] (-) TimerEvent: {}
+[0.300366] (-) TimerEvent: {}
+[0.400525] (-) TimerEvent: {}
+[0.500691] (-) TimerEvent: {}
+[0.600871] (-) TimerEvent: {}
+[0.701053] (-) TimerEvent: {}
+[0.801239] (-) TimerEvent: {}
+[0.901416] (-) TimerEvent: {}
+[1.001582] (-) TimerEvent: {}
+[1.101749] (-) TimerEvent: {}
+[1.201917] (-) TimerEvent: {}
+[1.302085] (-) TimerEvent: {}
+[1.402276] (-) TimerEvent: {}
+[1.502442] (-) TimerEvent: {}
+[1.602601] (-) TimerEvent: {}
+[1.702814] (-) TimerEvent: {}
+[1.802983] (-) TimerEvent: {}
+[1.903150] (-) TimerEvent: {}
+[2.003319] (-) TimerEvent: {}
+[2.103485] (-) TimerEvent: {}
+[2.203652] (-) TimerEvent: {}
+[2.303819] (-) TimerEvent: {}
+[2.404002] (-) TimerEvent: {}
+[2.504232] (-) TimerEvent: {}
+[2.604400] (-) TimerEvent: {}
+[2.704637] (-) TimerEvent: {}
+[2.804886] (-) TimerEvent: {}
+[2.905060] (-) TimerEvent: {}
+[3.005240] (-) TimerEvent: {}
+[3.105417] (-) TimerEvent: {}
+[3.205588] (-) TimerEvent: {}
+[3.305774] (-) TimerEvent: {}
+[3.407036] (-) TimerEvent: {}
+[3.507207] (-) TimerEvent: {}
+[3.607391] (-) TimerEvent: {}
+[3.707586] (-) TimerEvent: {}
+[3.807771] (-) TimerEvent: {}
+[3.907956] (-) TimerEvent: {}
+[4.008164] (-) TimerEvent: {}
+[4.108327] (-) TimerEvent: {}
+[4.208500] (-) TimerEvent: {}
+[4.308683] (-) TimerEvent: {}
+[4.408874] (-) TimerEvent: {}
+[4.509043] (-) TimerEvent: {}
+[4.609201] (-) TimerEvent: {}
+[4.709358] (-) TimerEvent: {}
+[4.809539] (-) TimerEvent: {}
+[4.909711] (-) TimerEvent: {}
+[5.010124] (-) TimerEvent: {}
+[5.110291] (-) TimerEvent: {}
+[5.210494] (-) TimerEvent: {}
+[5.310697] (-) TimerEvent: {}
+[5.410856] (-) TimerEvent: {}
+[5.511006] (-) TimerEvent: {}
+[5.611168] (-) TimerEvent: {}
+[5.711329] (-) TimerEvent: {}
+[5.811570] (-) TimerEvent: {}
+[5.911737] (-) TimerEvent: {}
+[5.970656] (open_manipulator_collision) StdoutLine: {'line': b'[100%] Linking CXX executable self_collision_node\n'}
+[6.011828] (-) TimerEvent: {}
+[6.112033] (-) TimerEvent: {}
+[6.212605] (-) TimerEvent: {}
+[6.237185] (open_manipulator_collision) StdoutLine: {'line': b'[100%] Built target self_collision_node\n'}
+[6.243339] (open_manipulator_collision) CommandEnded: {'returncode': 0}
+[6.243960] (open_manipulator_collision) JobProgress: {'identifier': 'open_manipulator_collision', 'progress': 'install'}
+[6.247612] (open_manipulator_collision) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/etri/ros2_ws/build/open_manipulator_collision'], 'cwd': '/home/etri/ros2_ws/build/open_manipulator_collision', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('VSCODE_CWD', '/home/etri'), ('CURSOR_EXTENSION_HOST_ROLE', 'agent-exec'), ('VSCODE_ESM_ENTRYPOINT', 'vs/workbench/api/node/extensionHostProcess'), ('LANGUAGE', 'ko:en_US:en'), ('USER', 'etri'), ('LC_TIME', 'ko_KR.UTF-8'), ('VSCODE_NLS_CONFIG', '{"userLocale":"ko","osLocale":"ko","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/cursor/resources/app/out/nls.messages.json","locale":"ko","availableLanguages":{}}'), ('CI', '1'), ('VSCODE_HANDLES_UNCAUGHT_ERRORS', 'true'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '0'), ('LD_LIBRARY_PATH', '/home/etri/ros2_ws/install/open_manipulator_collision/lib:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster/lib:/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib:/home/etri/ros2_ws/install/dynamixel_sdk/lib:/home/etri/ros2_ws/install/dynamixel_interfaces/lib:/home/etri/ws_ros2/install/service_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/etri'), ('CHROME_DESKTOP', 'cursor.desktop'), ('OLDPWD', '/home/etri/ros2_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('VSCODE_IPC_HOOK', '/run/user/1000/vscode-30070241-2.3.-main.sock'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/cursor.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'ko_KR.UTF-8'), ('MANAGERPID', '1861'), ('SYSTEMD_EXEC_PID', '2147'), ('NO_COLOR', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '5142'), ('VSCODE_CRASH_REPORTER_PROCESS_TYPE', 'extensionHost'), ('COLCON_PREFIX_PATH', '/home/etri/ros2_ws/install:/home/etri/ws_ros2/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'etri'), ('FORCE_COLOR', '0'), ('JOURNAL_STREAM', '8:18509'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'etri'), ('TERM', 'dumb'), ('EVERYSPHERE_RIPGREP_PATH', '/usr/share/cursor/resources/app/node_modules/@vscode/ripgrep/bin/rg'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '1'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/etri-HP-Z2-Tower-G1i:@/tmp/.ICE-unix/2119,unix/etri-HP-Z2-Tower-G1i:/tmp/.ICE-unix/2119'), ('INVOCATION_ID', '5a99293a9b70420ba5782225baf2f6fe'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'ko_KR.UTF-8'), ('VSCODE_PROCESS_TITLE', 'extension-host (agent-exec) [1-3]'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('CURSOR_AGENT', '1'), ('DISPLAY', ':1'), ('LANG', 'ko_KR.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'ko_KR.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', ''), ('CURSOR_TRACE_ID', '292c0dd82b9e4716b7c9a05e3f99dadc'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '0'), ('AMENT_PREFIX_PATH', '/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/custom_panda_description:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/bash'), ('LC_NAME', 'ko_KR.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'ko_KR.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'ko_KR.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/etri/ros2_ws/build/open_manipulator_collision'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('VSCODE_CODE_CACHE_PATH', '/home/etri/.config/Cursor/CachedData/643ba67cd252e2888e296dd0cf34a0c5d7625b90'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/etri/ros2_ws/build/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_teleop/lib/python3.10/site-packages:/home/etri/ros2_ws/build/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages:/home/etri/ros2_ws/install/dynamixel_sdk/local/lib/python3.10/dist-packages:/home/etri/ros2_ws/install/dynamixel_interfaces/local/lib/python3.10/dist-packages:/home/etri/ws_ros2/install/service_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'ko_KR.UTF-8'), ('LC_PAPER', 'ko_KR.UTF-8'), ('COLCON', '1'), ('_ZO_DOCTOR', '0'), ('CMAKE_PREFIX_PATH', '/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/custom_panda_description:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_bringup:/opt/ros/humble'), ('VSCODE_PID', '5142')]), 'shell': False}
+[6.251183] (open_manipulator_collision) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[6.251383] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/lib/open_manipulator_collision/self_collision_node\n'}
+[6.253000] (open_manipulator_collision) StdoutLine: {'line': b'-- Set runtime path of "/home/etri/ros2_ws/install/open_manipulator_collision/lib/open_manipulator_collision/self_collision_node" to ""\n'}
+[6.253039] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/include/\n'}
+[6.253351] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/include//open_manipulator_collision\n'}
+[6.253380] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/include//open_manipulator_collision/self_collision_node.hpp\n'}
+[6.253402] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision\n'}
+[6.253421] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/self_collision.launch.py\n'}
+[6.253439] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/library_path.sh\n'}
+[6.253504] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/library_path.dsv\n'}
+[6.253532] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/package_run_dependencies/open_manipulator_collision\n'}
+[6.253554] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/parent_prefix_path/open_manipulator_collision\n'}
+[6.253573] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/ament_prefix_path.sh\n'}
+[6.253591] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/ament_prefix_path.dsv\n'}
+[6.253609] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/path.sh\n'}
+[6.253626] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/path.dsv\n'}
+[6.253643] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.bash\n'}
+[6.253660] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.sh\n'}
+[6.253678] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.zsh\n'}
+[6.253695] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.dsv\n'}
+[6.253950] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/package.dsv\n'}
+[6.253976] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/packages/open_manipulator_collision\n'}
+[6.254021] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[6.254042] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[6.254060] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[6.254077] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/open_manipulator_collisionConfig.cmake\n'}
+[6.254093] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/open_manipulator_collisionConfig-version.cmake\n'}
+[6.254109] (open_manipulator_collision) StdoutLine: {'line': b'-- Installing: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/package.xml\n'}
+[6.255080] (open_manipulator_collision) CommandEnded: {'returncode': 0}
+[6.260727] (open_manipulator_collision) JobEnded: {'identifier': 'open_manipulator_collision', 'rc': 0}
+[6.260897] (-) EventReactorShutdown: {}
