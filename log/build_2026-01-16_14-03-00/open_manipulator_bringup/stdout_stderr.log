@@ -1,0 +1,97 @@
+running egg_info
+creating ../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info
+writing ../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info/PKG-INFO
+writing dependency_links to ../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info/dependency_links.txt
+writing entry points to ../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info/entry_points.txt
+writing requirements to ../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info/requires.txt
+writing top-level names to ../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info/top_level.txt
+writing manifest file '../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info/SOURCES.txt'
+reading manifest file '../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info/SOURCES.txt'
+writing manifest file '../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/etri/ros2_ws/build/open_manipulator_bringup/build
+creating /home/etri/ros2_ws/build/open_manipulator_bringup/build/lib
+creating /home/etri/ros2_ws/build/open_manipulator_bringup/build/lib/open_manipulator_bringup
+copying open_manipulator_bringup/__init__.py -> /home/etri/ros2_ws/build/open_manipulator_bringup/build/lib/open_manipulator_bringup
+copying open_manipulator_bringup/joint_trajectory_executor.py -> /home/etri/ros2_ws/build/open_manipulator_bringup/build/lib/open_manipulator_bringup
+copying open_manipulator_bringup/om_create_udev_rules.py -> /home/etri/ros2_ws/build/open_manipulator_bringup/build/lib/open_manipulator_bringup
+running install
+running install_lib
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages/open_manipulator_bringup
+copying /home/etri/ros2_ws/build/open_manipulator_bringup/build/lib/open_manipulator_bringup/__init__.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages/open_manipulator_bringup
+copying /home/etri/ros2_ws/build/open_manipulator_bringup/build/lib/open_manipulator_bringup/joint_trajectory_executor.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages/open_manipulator_bringup
+copying /home/etri/ros2_ws/build/open_manipulator_bringup/build/lib/open_manipulator_bringup/om_create_udev_rules.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages/open_manipulator_bringup
+byte-compiling /home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages/open_manipulator_bringup/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages/open_manipulator_bringup/joint_trajectory_executor.py to joint_trajectory_executor.cpython-310.pyc
+byte-compiling /home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages/open_manipulator_bringup/om_create_udev_rules.py to om_create_udev_rules.cpython-310.pyc
+running install_data
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/ament_index
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/ament_index/resource_index
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/ament_index/resource_index/packages
+copying resource/open_manipulator_bringup -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/ament_index/resource_index/packages
+copying package.xml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omx_ai.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_f3m_follower_ai.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_f3m_gazebo.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/camera_usb_cam.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omx_f_follower_ai.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/camera_realsense.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_f3m_leader_ai.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omx_f_gazebo.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_l100_follower_ai.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_3m_gazebo.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omx_f_follower_ai_gazebo.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omx_l_leader_ai.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_f3m_follower_ai_gazebo.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_3m_pack.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_ai_reverse.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/open_manipulator_x.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/open_manipulator_x_gazebo.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omx_f.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_f3m.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_3m.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_l100_leader_ai.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_ai.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+copying launch/omy_3m_unpack.launch.py -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/launch
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/open_manipulator_x
+copying config/open_manipulator_x/initial_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/open_manipulator_x
+copying config/open_manipulator_x/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/open_manipulator_x
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_3m
+copying config/omy_3m/qc_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_3m
+copying config/omy_3m/initial_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_3m
+copying config/omy_3m/pack_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_3m
+copying config/omy_3m/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_3m
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m
+copying config/omy_f3m/initial_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m
+copying config/omy_f3m/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m_follower_ai
+copying config/omy_f3m_follower_ai/qc_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m_follower_ai
+copying config/omy_f3m_follower_ai/initial_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m_follower_ai
+copying config/omy_f3m_follower_ai/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m_follower_ai
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m_leader_ai
+copying config/omy_f3m_leader_ai/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_f3m_leader_ai
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_l100_follower_ai
+copying config/omy_l100_follower_ai/initial_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_l100_follower_ai
+copying config/omy_l100_follower_ai/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_l100_follower_ai
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_l100_leader_ai
+copying config/omy_l100_leader_ai/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omy_l100_leader_ai
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omx_f
+copying config/omx_f/initial_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omx_f
+copying config/omx_f/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omx_f
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omx_f_follower_ai
+copying config/omx_f_follower_ai/initial_positions.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omx_f_follower_ai
+copying config/omx_f_follower_ai/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omx_f_follower_ai
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omx_l_leader_ai
+copying config/omx_l_leader_ai/hardware_controller_manager.yaml -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/config/omx_l_leader_ai
+creating /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/worlds
+copying worlds/empty_world.sdf -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup/worlds
+copying open-manipulator-cdc.rules -> /home/etri/ros2_ws/install/open_manipulator_bringup/share/open_manipulator_bringup
+running install_egg_info
+Copying ../../build/open_manipulator_bringup/open_manipulator_bringup.egg-info to /home/etri/ros2_ws/install/open_manipulator_bringup/lib/python3.10/site-packages/open_manipulator_bringup-4.1.2-py3.10.egg-info
+running install_scripts
+Installing joint_trajectory_executor script to /home/etri/ros2_ws/install/open_manipulator_bringup/lib/open_manipulator_bringup
+Installing om_create_udev_rules script to /home/etri/ros2_ws/install/open_manipulator_bringup/lib/open_manipulator_bringup
+writing list of installed files to '/home/etri/ros2_ws/build/open_manipulator_bringup/install.log'

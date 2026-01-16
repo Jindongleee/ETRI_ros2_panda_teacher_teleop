@@ -1,0 +1,4 @@
+source;share/panda_teleop_omy_l100/local_setup.bash
+source;share/panda_teleop_omy_l100/local_setup.dsv
+source;share/panda_teleop_omy_l100/local_setup.sh
+source;share/panda_teleop_omy_l100/local_setup.zsh
