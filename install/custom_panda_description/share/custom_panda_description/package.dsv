@@ -1,1 +1,8 @@
-/home/etri/ros2_ws/build/custom_panda_description/ament_cmake_environment_hooks/package.dsv
+source;share/custom_panda_description/hook/cmake_prefix_path.ps1
+source;share/custom_panda_description/hook/cmake_prefix_path.dsv
+source;share/custom_panda_description/hook/cmake_prefix_path.sh
+source;share/custom_panda_description/local_setup.bash
+source;share/custom_panda_description/local_setup.dsv
+source;share/custom_panda_description/local_setup.ps1
+source;share/custom_panda_description/local_setup.sh
+source;share/custom_panda_description/local_setup.zsh

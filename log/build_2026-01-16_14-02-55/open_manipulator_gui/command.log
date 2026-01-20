@@ -1,1 +1,0 @@
-Invoking command in '/home/etri/ros2_ws/build/open_manipulator_gui': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_bringup:/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/open_manipulator/open_manipulator_gui -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/open_manipulator_gui

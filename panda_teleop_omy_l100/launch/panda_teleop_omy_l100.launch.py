@@ -50,7 +50,8 @@ def generate_launch_description():
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
-    port_name = LaunchConfiguration('port_name', default='/dev/ttyUSB1')
+    # OMY L100 리더 하드웨어 포트 (기본: /dev/ttyUSB0)
+    port_name = LaunchConfiguration('port_name', default='/dev/ttyUSB0')
     
     # Read URDF file
     with open(urdf_file, 'r') as infp:
@@ -156,7 +157,7 @@ def generate_launch_description():
             'base_frame': 'leader_link0',  # omy_l100 base frame
             'ee_frame': 'leader_link7',    # omy_l100 end-effector frame
             'joint_states_topic': '/leader/joint_states',
-            'linear_scale': 1.0,   # Adjust based on testing
+            'linear_scale': 2.0,   # Adjust based on testing
             'angular_scale': 1.0,  # Adjust based on testing
             'publish_rate': 50.0
         }]
@@ -226,7 +227,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'port_name',
-            default_value='/dev/ttyUSB1',
+            default_value='/dev/ttyUSB0',
             description='Port name for omy_l100 hardware connection (e.g., /dev/ttyUSB0, /dev/ttyUSB1)'
         ),
         

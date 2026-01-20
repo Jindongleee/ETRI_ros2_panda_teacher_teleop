@@ -1,13 +1,1 @@
-########################################
-# Goals request
-########################################
-std_msgs/Header header
-uint8 id
-string item_name
-float64 timeout_sec
----
-########################################
-# Respones
-########################################
-uint32 item_data
-bool result
+/home/etri/ros2_ws/dynamixel_interfaces/srv/GetDataFromDxl.srv

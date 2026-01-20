@@ -1,5 +1,6 @@
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/config/kinematics.yaml
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/config/servo_config.yaml
+/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/launch/omy_l100_leader_ai/omy_l100_leader_ai.launch.py
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/launch/panda_teleop_omy_l100.launch.py
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/trajectory_to_joint_states.py
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/omy_l100_to_twist_node.py

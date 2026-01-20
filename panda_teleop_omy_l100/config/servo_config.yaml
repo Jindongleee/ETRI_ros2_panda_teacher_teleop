@@ -6,9 +6,10 @@
       command_in_type: "speed_units"
 
       scale:
-        linear: 2.0
-        rotational: 3.5
-        joint: 2.0
+        # 사용자 요청: 스케일 1.5
+        linear: 1.5
+        rotational: 1.5
+        joint: 1.5
 
       publish_period: 0.01
       low_latency_mode: false

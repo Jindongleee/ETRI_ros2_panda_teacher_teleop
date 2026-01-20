@@ -1,9 +1,1 @@
-########################################
-# Goals request
-########################################
-std_msgs/Header header
----
-########################################
-# Respones
-########################################
-bool result
+/home/etri/ros2_ws/dynamixel_interfaces/srv/RebootDxl.srv

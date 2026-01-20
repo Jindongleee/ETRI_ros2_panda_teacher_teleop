@@ -1,0 +1,1 @@
+/home/etri/ros2_ws/open_manipulator/open_manipulator_bringup/launch/camera_usb_cam.launch.py

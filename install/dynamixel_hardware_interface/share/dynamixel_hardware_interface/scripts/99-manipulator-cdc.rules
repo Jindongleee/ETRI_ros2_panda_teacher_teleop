@@ -1,1 +1,1 @@
-KERNEL=="ttyUSB*", DRIVERS=="ftdi_sio", MODE="0666", ATTR{device/latency_timer}="1"
+/home/etri/ros2_ws/dynamixel_hardware_interface/scripts/99-manipulator-cdc.rules

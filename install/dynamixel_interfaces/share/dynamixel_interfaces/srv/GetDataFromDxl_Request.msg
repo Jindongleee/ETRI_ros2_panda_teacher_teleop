@@ -1,7 +1,1 @@
-########################################
-# Goals request
-########################################
-std_msgs/Header header
-uint8 id
-string item_name
-float64 timeout_sec
+/home/etri/ros2_ws/build/dynamixel_interfaces/rosidl_cmake/srv/GetDataFromDxl_Request.msg

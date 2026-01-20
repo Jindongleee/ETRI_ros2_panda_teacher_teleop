@@ -1,3 +1,1 @@
-source;share/open_manipulator_collision/environment/ament_prefix_path.sh
-source;share/open_manipulator_collision/environment/library_path.sh
-source;share/open_manipulator_collision/environment/path.sh
+/home/etri/ros2_ws/build/open_manipulator_collision/ament_cmake_environment_hooks/local_setup.dsv

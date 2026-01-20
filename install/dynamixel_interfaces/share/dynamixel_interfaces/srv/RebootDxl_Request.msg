@@ -1,4 +1,1 @@
-########################################
-# Goals request
-########################################
-std_msgs/Header header
+/home/etri/ros2_ws/build/dynamixel_interfaces/rosidl_cmake/srv/RebootDxl_Request.msg

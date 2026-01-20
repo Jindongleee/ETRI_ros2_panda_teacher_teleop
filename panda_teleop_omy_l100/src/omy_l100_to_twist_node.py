@@ -31,8 +31,10 @@ class OmyL100ToTwist(Node):
         self.declare_parameter('ee_frame', 'leader_link7')  # omy_l100 end-effector frame
         self.declare_parameter('target_frame', 'panda_link0')  # panda base frame (for coordinate transform)
         self.declare_parameter('joint_states_topic', '/leader/joint_states')
-        self.declare_parameter('linear_scale', 1.0)  # Scale factor for linear velocity
-        self.declare_parameter('angular_scale', 1.0)  # Scale factor for angular velocity
+        # 스케일: 기본 1.5 (사용자 요청)
+        self.declare_parameter('linear_scale', 1.5)   # Scale factor for linear velocity
+        self.declare_parameter('angular_scale', 1.5)  # Scale factor for angular velocity
+        # 제어 주기: 50 Hz (dt = 0.02s, 사용자 요청)
         self.declare_parameter('publish_rate', 50.0)  # Hz
 
         self.base_frame = self.get_parameter('base_frame').value
@@ -42,6 +44,10 @@ class OmyL100ToTwist(Node):
         self.linear_scale = self.get_parameter('linear_scale').value
         self.angular_scale = self.get_parameter('angular_scale').value
         publish_rate = self.get_parameter('publish_rate').value
+
+        # 최대 속도 제한 (사용자 요청)
+        self.max_linear_speed = 0.2   # [m/s]
+        self.max_angular_speed = 0.5  # [rad/s]
 
         # TF buffer and listener
         self.tf_buffer = Buffer()
@@ -149,30 +155,29 @@ class OmyL100ToTwist(Node):
                     # Create TwistStamped message
                     twist = TwistStamped()
                     twist.header.stamp = current_time.to_msg()
-                    twist.header.frame_id = 'panda_link8'  # panda end-effector frame
+                    twist.header.frame_id = 'panda_link0'  # panda end-effector frame
 
                     # Apply scale and compute velocity
-                    twist.twist.linear.x = (dx / dt) * self.linear_scale
-                    twist.twist.linear.y = (dy / dt) * self.linear_scale
-                    twist.twist.linear.z = (dz / dt) * self.linear_scale
+                    lin_vec = np.array([dx, dy, dz]) / dt * self.linear_scale
+                    ang_vec = np.array(axis_angle) / dt * self.angular_scale
 
-                    twist.twist.angular.x = (axis_angle[0] / dt) * self.angular_scale
-                    twist.twist.angular.y = (axis_angle[1] / dt) * self.angular_scale
-                    twist.twist.angular.z = (axis_angle[2] / dt) * self.angular_scale
+                    # 최대 선속도 제한 (벡터 크기 기준)
+                    lin_norm = np.linalg.norm(lin_vec)
+                    if lin_norm > self.max_linear_speed and lin_norm > 0.0:
+                        lin_vec *= self.max_linear_speed / lin_norm
 
-                    # Limit twist components to reasonable values (MoveIt Servo requirement)
-                    max_component = max(
-                        abs(twist.twist.linear.x), abs(twist.twist.linear.y), abs(twist.twist.linear.z),
-                        abs(twist.twist.angular.x), abs(twist.twist.angular.y), abs(twist.twist.angular.z)
-                    )
-                    if max_component > 1.0:
-                        scale = 1.0 / max_component
-                        twist.twist.linear.x *= scale
-                        twist.twist.linear.y *= scale
-                        twist.twist.linear.z *= scale
-                        twist.twist.angular.x *= scale
-                        twist.twist.angular.y *= scale
-                        twist.twist.angular.z *= scale
+                    # 최대 각속도 제한 (벡터 크기 기준)
+                    ang_norm = np.linalg.norm(ang_vec)
+                    if ang_norm > self.max_angular_speed and ang_norm > 0.0:
+                        ang_vec *= self.max_angular_speed / ang_norm
+
+                    twist.twist.linear.x = lin_vec[0]
+                    twist.twist.linear.y = lin_vec[1]
+                    twist.twist.linear.z = lin_vec[2]
+
+                    twist.twist.angular.x = ang_vec[0]
+                    twist.twist.angular.y = ang_vec[1]
+                    twist.twist.angular.z = ang_vec[2]
 
                     # Publish twist
                     self.twist_pub.publish(twist)

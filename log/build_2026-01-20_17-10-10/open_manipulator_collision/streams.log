@@ -1,0 +1,54 @@
+[0.006s] Invoking command in '/home/etri/ros2_ws/build/open_manipulator_collision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/open_manipulator/open_manipulator_collision -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/open_manipulator_collision
+[0.012s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.068s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.071s] -- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)
+[0.083s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.084s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.086s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.090s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.094s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.107s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.108s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.155s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.174s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.185s] -- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)
+[0.193s] -- Found kdl_parser: 2.6.4 (/opt/ros/humble/share/kdl_parser/cmake)
+[0.193s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[0.194s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.194s] -- Found urdf: 2.6.1 (/opt/ros/humble/share/urdf/cmake)
+[0.234s] -- Configuring done
+[0.239s] -- Generating done
+[0.240s] -- Build files have been written to: /home/etri/ros2_ws/build/open_manipulator_collision
+[0.246s] Invoked command in '/home/etri/ros2_ws/build/open_manipulator_collision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/open_manipulator/open_manipulator_collision -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/open_manipulator_collision
+[0.247s] Invoking command in '/home/etri/ros2_ws/build/open_manipulator_collision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/open_manipulator_collision -- -j24 -l24
+[0.274s] [ 50%] [32mBuilding CXX object CMakeFiles/self_collision_node.dir/src/self_collision_node.cpp.o[0m
+[5.879s] [100%] [32m[1mLinking CXX executable self_collision_node[0m
+[6.135s] [100%] Built target self_collision_node
+[6.142s] Invoked command in '/home/etri/ros2_ws/build/open_manipulator_collision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/open_manipulator_collision -- -j24 -l24
+[6.147s] Invoking command in '/home/etri/ros2_ws/build/open_manipulator_collision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/open_manipulator_collision
+[6.151s] -- Install configuration: ""
+[6.151s] -- Execute custom install script
+[6.151s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/lib/open_manipulator_collision/self_collision_node
+[6.156s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/include//open_manipulator_collision/self_collision_node.hpp
+[6.160s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/self_collision.launch.py
+[6.164s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/library_path.sh
+[6.168s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/library_path.dsv
+[6.172s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/package_run_dependencies/open_manipulator_collision
+[6.175s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/parent_prefix_path/open_manipulator_collision
+[6.180s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/ament_prefix_path.sh
+[6.184s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/ament_prefix_path.dsv
+[6.188s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/path.sh
+[6.192s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/environment/path.dsv
+[6.195s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.bash
+[6.198s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.sh
+[6.205s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.zsh
+[6.209s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/local_setup.dsv
+[6.212s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/package.dsv
+[6.216s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/ament_index/resource_index/packages/open_manipulator_collision
+[6.220s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_dependencies-extras.cmake
+[6.223s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_include_directories-extras.cmake
+[6.227s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/ament_cmake_export_libraries-extras.cmake
+[6.232s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/open_manipulator_collisionConfig.cmake
+[6.235s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/cmake/open_manipulator_collisionConfig-version.cmake
+[6.239s] -- Symlinking: /home/etri/ros2_ws/install/open_manipulator_collision/share/open_manipulator_collision/package.xml
+[6.244s] Invoked command in '/home/etri/ros2_ws/build/open_manipulator_collision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/open_manipulator_collision

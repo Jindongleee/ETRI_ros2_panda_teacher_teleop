@@ -1,5 +1,1 @@
-
-########################################
-# Respones
-########################################
-bool result
+/home/etri/ros2_ws/build/dynamixel_interfaces/rosidl_cmake/srv/SetDataToDxl_Response.msg

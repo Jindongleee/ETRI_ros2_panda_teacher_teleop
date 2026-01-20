@@ -1,7 +1,1 @@
-########################################
-# Goals request
-########################################
-std_msgs/Header header
-uint8 id
-string item_name
-uint32 item_data
+/home/etri/ros2_ws/build/dynamixel_interfaces/rosidl_cmake/srv/SetDataToDxl_Request.msg

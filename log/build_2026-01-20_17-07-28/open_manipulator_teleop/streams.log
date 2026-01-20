@@ -1,0 +1,28 @@
+[0.332s] Invoking command in '/home/etri/ros2_ws/build/open_manipulator_teleop': PYTHONPATH=/home/etri/ros2_ws/build/open_manipulator_teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/etri/ros2_ws/install/open_manipulator_teleop/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/etri/ros2_ws/build/open_manipulator_teleop/build --no-deps symlink_data
+[0.437s] running develop
+[0.500s] running egg_info
+[0.500s] creating open_manipulator_teleop.egg-info
+[0.500s] writing open_manipulator_teleop.egg-info/PKG-INFO
+[0.500s] writing dependency_links to open_manipulator_teleop.egg-info/dependency_links.txt
+[0.500s] writing entry points to open_manipulator_teleop.egg-info/entry_points.txt
+[0.500s] writing requirements to open_manipulator_teleop.egg-info/requires.txt
+[0.500s] writing top-level names to open_manipulator_teleop.egg-info/top_level.txt
+[0.500s] writing manifest file 'open_manipulator_teleop.egg-info/SOURCES.txt'
+[0.501s] reading manifest file 'open_manipulator_teleop.egg-info/SOURCES.txt'
+[0.501s] writing manifest file 'open_manipulator_teleop.egg-info/SOURCES.txt'
+[0.502s] running build_ext
+[0.502s] Creating /home/etri/ros2_ws/install/open_manipulator_teleop/lib/python3.10/site-packages/open-manipulator-teleop.egg-link (link to .)
+[0.502s] Installing omx_f_teleop script to /home/etri/ros2_ws/install/open_manipulator_teleop/lib/open_manipulator_teleop
+[0.502s] Installing omy_3m_teleop script to /home/etri/ros2_ws/install/open_manipulator_teleop/lib/open_manipulator_teleop
+[0.502s] Installing omy_f3m_teleop script to /home/etri/ros2_ws/install/open_manipulator_teleop/lib/open_manipulator_teleop
+[0.502s] Installing open_manipulator_x_teleop script to /home/etri/ros2_ws/install/open_manipulator_teleop/lib/open_manipulator_teleop
+[0.502s] 
+[0.502s] Installed /home/etri/ros2_ws/build/open_manipulator_teleop
+[0.502s] running symlink_data
+[0.502s] creating /home/etri/ros2_ws/install/open_manipulator_teleop/share/ament_index
+[0.502s] creating /home/etri/ros2_ws/install/open_manipulator_teleop/share/ament_index/resource_index
+[0.502s] creating /home/etri/ros2_ws/install/open_manipulator_teleop/share/ament_index/resource_index/packages
+[0.502s] symbolically linking /home/etri/ros2_ws/build/open_manipulator_teleop/resource/open_manipulator_teleop -> /home/etri/ros2_ws/install/open_manipulator_teleop/share/ament_index/resource_index/packages
+[0.502s] symbolically linking /home/etri/ros2_ws/build/open_manipulator_teleop/package.xml -> /home/etri/ros2_ws/install/open_manipulator_teleop/share/open_manipulator_teleop
+[0.502s] creating /home/etri/ros2_ws/install/open_manipulator_teleop/share/open_manipulator_teleop/launch
+[0.531s] Invoked command in '/home/etri/ros2_ws/build/open_manipulator_teleop' returned '0': PYTHONPATH=/home/etri/ros2_ws/build/open_manipulator_teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/etri/ros2_ws/install/open_manipulator_teleop/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/etri/ros2_ws/build/open_manipulator_teleop/build --no-deps symlink_data

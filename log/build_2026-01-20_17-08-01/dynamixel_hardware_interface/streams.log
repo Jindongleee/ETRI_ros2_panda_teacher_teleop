@@ -1,0 +1,219 @@
+[0.005s] Invoking command in '/home/etri/ros2_ws/build/dynamixel_hardware_interface': CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble LD_LIBRARY_PATH=/home/etri/ros2_ws/install/dynamixel_sdk/lib:/home/etri/ros2_ws/install/dynamixel_interfaces/lib:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster/lib:/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib:/home/etri/ros2_ws/install/open_manipulator_collision/lib:/home/etri/ws_ros2/install/service_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake /home/etri/ros2_ws/dynamixel_hardware_interface -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/dynamixel_hardware_interface
+[0.031s] -- The C compiler identification is GNU 11.4.0
+[0.099s] -- The CXX compiler identification is GNU 11.4.0
+[0.103s] -- Detecting C compiler ABI info
+[0.138s] -- Detecting C compiler ABI info - done
+[0.141s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.142s] -- Detecting C compile features
+[0.142s] -- Detecting C compile features - done
+[0.145s] -- Detecting CXX compiler ABI info
+[0.227s] -- Detecting CXX compiler ABI info - done
+[0.229s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.229s] -- Detecting CXX compile features
+[0.230s] -- Detecting CXX compile features - done
+[0.231s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.307s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.353s] -- Found hardware_interface: 2.53.0 (/opt/ros/humble/share/hardware_interface/cmake)
+[0.371s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.374s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.377s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.383s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.390s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.476s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.477s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.488s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.523s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.525s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.531s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.533s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.537s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[0.542s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.547s] -- Looking for pthread.h
+[0.584s] -- Looking for pthread.h - found
+[0.584s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.625s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.625s] -- Found Threads: TRUE  
+[0.646s] -- Found realtime_tools: 2.15.0 (/opt/ros/humble/share/realtime_tools/cmake)
+[0.652s] -- Found dynamixel_sdk: 4.0.3 (/home/etri/ros2_ws/install/dynamixel_sdk/share/dynamixel_sdk/cmake)
+[0.653s] -- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)
+[0.657s] -- Found dynamixel_interfaces: 1.0.1 (/home/etri/ros2_ws/install/dynamixel_interfaces/share/dynamixel_interfaces/cmake)
+[0.664s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.706s] -- Added test 'copyright' to check source files copyright and LICENSE
+[0.708s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.708s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/etri/ros2_ws/dynamixel_hardware_interface/include>
+[0.708s] -- Configured cppcheck exclude dirs and/or files: 
+[0.710s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[0.710s] -- Configured cpplint exclude dirs and/or files: 
+[0.710s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.711s] -- Added test 'lint_cmake' to check CMake code style
+[0.711s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.713s] -- Added test 'uncrustify' to check C / C++ code style
+[0.713s] -- Configured uncrustify additional arguments: 
+[0.714s] -- Added test 'xmllint' to check XML markup files
+[0.715s] -- Configuring done
+[0.721s] -- Generating done
+[0.723s] -- Build files have been written to: /home/etri/ros2_ws/build/dynamixel_hardware_interface
+[0.729s] Invoked command in '/home/etri/ros2_ws/build/dynamixel_hardware_interface' returned '0': CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble LD_LIBRARY_PATH=/home/etri/ros2_ws/install/dynamixel_sdk/lib:/home/etri/ros2_ws/install/dynamixel_interfaces/lib:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster/lib:/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib:/home/etri/ros2_ws/install/open_manipulator_collision/lib:/home/etri/ws_ros2/install/service_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake /home/etri/ros2_ws/dynamixel_hardware_interface -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/dynamixel_hardware_interface
+[0.729s] Invoking command in '/home/etri/ros2_ws/build/dynamixel_hardware_interface': CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble LD_LIBRARY_PATH=/home/etri/ros2_ws/install/dynamixel_sdk/lib:/home/etri/ros2_ws/install/dynamixel_interfaces/lib:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster/lib:/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib:/home/etri/ros2_ws/install/open_manipulator_collision/lib:/home/etri/ws_ros2/install/service_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/etri/ros2_ws/build/dynamixel_hardware_interface -- -j24 -l24
+[0.758s] [ 25%] Building CXX object CMakeFiles/dynamixel_hardware_interface.dir/src/dynamixel/dynamixel.cpp.o
+[0.758s] [ 75%] Building CXX object CMakeFiles/dynamixel_hardware_interface.dir/src/dynamixel_hardware_interface.cpp.o
+[0.758s] [ 75%] Building CXX object CMakeFiles/dynamixel_hardware_interface.dir/src/dynamixel/dynamixel_info.cpp.o
+[5.012s] [100%] Linking CXX shared library libdynamixel_hardware_interface.so
+[5.293s] [100%] Built target dynamixel_hardware_interface
+[5.299s] Invoked command in '/home/etri/ros2_ws/build/dynamixel_hardware_interface' returned '0': CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble LD_LIBRARY_PATH=/home/etri/ros2_ws/install/dynamixel_sdk/lib:/home/etri/ros2_ws/install/dynamixel_interfaces/lib:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster/lib:/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib:/home/etri/ros2_ws/install/open_manipulator_collision/lib:/home/etri/ws_ros2/install/service_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/etri/ros2_ws/build/dynamixel_hardware_interface -- -j24 -l24
+[5.300s] Invoking command in '/home/etri/ros2_ws/build/dynamixel_hardware_interface': CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble LD_LIBRARY_PATH=/home/etri/ros2_ws/install/dynamixel_sdk/lib:/home/etri/ros2_ws/install/dynamixel_interfaces/lib:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster/lib:/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib:/home/etri/ros2_ws/install/open_manipulator_collision/lib:/home/etri/ws_ros2/install/service_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/etri/ros2_ws/build/dynamixel_hardware_interface
+[5.303s] -- Install configuration: ""
+[5.303s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/dynamixel_hardware_interface_plugin.xml
+[5.303s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/lib/libdynamixel_hardware_interface.so
+[5.307s] -- Set runtime path of "/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib/libdynamixel_hardware_interface.so" to ""
+[5.307s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/include
+[5.307s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/include/dynamixel_hardware_interface
+[5.307s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/include/dynamixel_hardware_interface/dynamixel
+[5.307s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/include/dynamixel_hardware_interface/dynamixel/dynamixel.hpp
+[5.307s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/include/dynamixel_hardware_interface/dynamixel/dynamixel_info.hpp
+[5.307s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/include/dynamixel_hardware_interface/visibility_control.h
+[5.307s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/include/dynamixel_hardware_interface/dynamixel_hardware_interface.hpp
+[5.307s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/lib/dynamixel_hardware_interface/create_udev_rules
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface//scripts
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface//scripts/check_model_file_formatting.py
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface//scripts/create_udev_rules
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface//scripts/99-manipulator-cdc.rules
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface//scripts/xml_to_model_parser.py
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface//scripts/hx_synctable_model_generator.py
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface//scripts/cluster_model_files.py
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_sg2_drive_2.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc330_m181_fw52.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ph54_100_s500.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_1_device_1.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_g40_imu.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc430_w240.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_1_device_2.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/pm42_010_s260.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_4_device_1.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_4_device_2.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xh430_v350.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xm540_w150.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_5_device_5.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_5_device_1.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_3_device_4.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/m54_60_s250_ra.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_rr.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym070_210_r099.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym070_210_a051.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym080_230_a051.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc330_m181.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_g10_led.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xw430_t333.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_4_device_3.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc330_m288.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/mx_28.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_3_device_2.model
+[5.308s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xw540_t140.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/m54_40_s250_ra.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_5_device_4.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xl330_m288.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym070_210_m001.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/omy_hat.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/pm54_040_s250.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc330_t288.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xh540_w270.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/sensorxel_joy.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc330_t288_fw52.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/omy_end_rh_p12_rn.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_2_device_3.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xh430_w210.model
+[5.311s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc335_t332.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xm540_w270.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xl320.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/m42_10_s260_ra.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/h54_100_s500_ra.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/dynamixel.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xl330_m077_fw52.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_2_device_2.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_5_device_3.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_g10_rcu.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xd430_t350.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym070_210_a099.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xw430_t200.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_5_device_2.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ph54_200_s500.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_3_device_3.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xw540_h260.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_4_device_4.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/mx_106.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_sg2_steer_2.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xm430_w350.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym080_230_a099.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_2_device_5.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_1_device_3.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/omy_end.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/2xc430_w250.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym070_210_b001.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xd540_t270.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/pm54_060_s250.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xh540_w150.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym080_230_b001.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_2_device_1.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xh540_v150.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_sg2_steer_1.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym080_230_r099.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xh430_w350.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym080_230_m001.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xl330_m077.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/h54_200_s500_ra.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_3_device_5.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc430_w150.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym070_210_r051.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xl330_m288_fw52.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_3_device_1.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ym080_230_r051.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xl430_w250.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_sg2_drive_3.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xh430_v210.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ph42_020_s300.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_2_device_4.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_sg2_drive_1.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/mx_64.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc330_t181_fw52.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/h42_20_s300_ra.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xm430_w210.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_rl.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/ffw_sg2_steer_3.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xw540_t260.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xh540_v270.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc330_m288_fw52.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xc330_t181.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_1_device_5.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xd430_t210.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/2xl430_w250.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_1_device_4.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/rh_p12_rn.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/hx5_d20_r_synctable_4_device_5.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/param/dxl_model/xd540_t150.model
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/environment/library_path.sh
+[5.312s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/environment/library_path.dsv
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/ament_index/resource_index/package_run_dependencies/dynamixel_hardware_interface
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/ament_index/resource_index/parent_prefix_path/dynamixel_hardware_interface
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/environment/ament_prefix_path.sh
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/environment/ament_prefix_path.dsv
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/environment/path.sh
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/environment/path.dsv
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/local_setup.bash
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/local_setup.sh
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/local_setup.zsh
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/local_setup.dsv
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.dsv
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/ament_index/resource_index/packages/dynamixel_hardware_interface
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/dynamixel_hardware_interface
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/export_dynamixel_hardware_interfaceExport.cmake
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/export_dynamixel_hardware_interfaceExport-noconfig.cmake
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/ament_cmake_export_include_directories-extras.cmake
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/ament_cmake_export_libraries-extras.cmake
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/ament_cmake_export_targets-extras.cmake
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/ament_cmake_export_dependencies-extras.cmake
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/dynamixel_hardware_interfaceConfig.cmake
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/dynamixel_hardware_interfaceConfig-version.cmake
+[5.313s] -- Installing: /home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.xml
+[5.313s] Invoked command in '/home/etri/ros2_ws/build/dynamixel_hardware_interface' returned '0': CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/dynamixel_sdk:/home/etri/ros2_ws/install/dynamixel_interfaces:/home/etri/ros2_ws/install/panda_teleop_omy_l100:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster:/home/etri/ros2_ws/install/dynamixel_hardware_interface:/home/etri/ros2_ws/install/open_manipulator_moveit_config:/home/etri/ros2_ws/install/open_manipulator_collision:/home/etri/ws_ros2/install/inspire_hand:/home/etri/ws_ros2/install/service_interfaces:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/home/etri/ros2_ws/install/open_manipulator_description:/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble LD_LIBRARY_PATH=/home/etri/ros2_ws/install/dynamixel_sdk/lib:/home/etri/ros2_ws/install/dynamixel_interfaces/lib:/home/etri/ros2_ws/install/om_joint_trajectory_command_broadcaster/lib:/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib:/home/etri/ros2_ws/install/open_manipulator_collision/lib:/home/etri/ws_ros2/install/service_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --install /home/etri/ros2_ws/build/dynamixel_hardware_interface

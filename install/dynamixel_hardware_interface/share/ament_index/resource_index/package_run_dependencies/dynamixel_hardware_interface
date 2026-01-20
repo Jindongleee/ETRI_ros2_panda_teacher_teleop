@@ -1,1 +1,1 @@
-rclcpp;hardware_interface;pluginlib;realtime_tools;dynamixel_sdk;std_srvs;dynamixel_interfaces;ament_lint_auto;ament_lint_common
+/home/etri/ros2_ws/build/dynamixel_hardware_interface/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/dynamixel_hardware_interface
