@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/dynamixel_hardware_interface/scripts/hx_synctable_model_generator.py

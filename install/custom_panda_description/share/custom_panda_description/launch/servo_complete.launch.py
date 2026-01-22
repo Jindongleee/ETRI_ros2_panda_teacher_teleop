@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/custom_panda_description/launch/servo_complete.launch.py

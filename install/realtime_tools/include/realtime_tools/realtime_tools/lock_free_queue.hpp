@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/realtime_tools/include/realtime_tools/lock_free_queue.hpp

@@ -1,1 +1,0 @@
-Invoking command in '/home/etri/ros2_ws/build/dynamixel_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/etri/ros2_ws/install/open_manipulator_bringup:/home/etri/ros2_ws/install/open_manipulator_teleop:/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/dynamixel_interfaces -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/dynamixel_interfaces

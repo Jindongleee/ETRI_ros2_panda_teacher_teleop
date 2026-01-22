@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/realtime_tools/include/realtime_tools/realtime_server_goal_handle.hpp

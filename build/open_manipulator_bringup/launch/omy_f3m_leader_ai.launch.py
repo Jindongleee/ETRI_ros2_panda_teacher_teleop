@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/open_manipulator/open_manipulator_bringup/launch/omy_f3m_leader_ai.launch.py

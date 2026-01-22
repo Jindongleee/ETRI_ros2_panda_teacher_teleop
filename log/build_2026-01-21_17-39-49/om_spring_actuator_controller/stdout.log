@@ -1,4 +1,0 @@
-[ 25%] Running `/opt/ros/humble/bin/generate_parameter_library_cpp /home/etri/ros2_ws/build/om_spring_actuator_controller/include/om_spring_actuator_controller/spring_actuator_controller_parameters.hpp /home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller/src/spring_actuator_controller_parameters.yaml `
-[ 50%] Creating deprecated header file /home/etri/ros2_ws/build/om_spring_actuator_controller/include/spring_actuator_controller_parameters.hpp
-[ 50%] Built target spring_actuator_controller_parameters
-[ 75%] Building CXX object CMakeFiles/spring_actuator_controller.dir/src/spring_actuator_controller.cpp.o

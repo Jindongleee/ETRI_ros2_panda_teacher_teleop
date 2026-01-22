@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/panda_teleop_omy_l100/src/omy_l100_to_twist_node.py

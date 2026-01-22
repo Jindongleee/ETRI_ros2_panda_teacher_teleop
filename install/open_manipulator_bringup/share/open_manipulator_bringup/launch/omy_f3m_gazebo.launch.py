@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/build/open_manipulator_bringup/launch/omy_f3m_gazebo.launch.py

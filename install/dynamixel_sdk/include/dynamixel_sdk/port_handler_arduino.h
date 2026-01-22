@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/DynamixelSDK/ros/dynamixel_sdk/include/dynamixel_sdk/port_handler_arduino.h

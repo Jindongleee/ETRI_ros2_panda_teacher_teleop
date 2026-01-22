@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/panda_teleop_omy_l100/src/trajectory_to_joint_states.py

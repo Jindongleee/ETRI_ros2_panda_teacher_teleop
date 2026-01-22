@@ -1,4 +1,0 @@
-[0.023s] Invoking command in '/home/etri/ros2_ws/build/open_manipulator_collision': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/open_manipulator_collision -- -j24 -l24
-[0.142s] [ 50%] Building CXX object CMakeFiles/self_collision_node.dir/src/self_collision_node.cpp.o
-[6.690s] [100%] Linking CXX executable self_collision_node
-[6.964s] [100%] Built target self_collision_node

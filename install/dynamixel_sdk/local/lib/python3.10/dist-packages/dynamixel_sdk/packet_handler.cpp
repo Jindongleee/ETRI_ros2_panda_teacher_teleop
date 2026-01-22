@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/DynamixelSDK/ros/dynamixel_sdk/src/dynamixel_sdk/packet_handler.cpp

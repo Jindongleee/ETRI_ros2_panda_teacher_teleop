@@ -1,3 +1,0 @@
-/home/etri/ros2_ws/install/dynamixel_hardware_interface/lib/libdynamixel_hardware_interface.so
-/home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/export_dynamixel_hardware_interfaceExport.cmake
-/home/etri/ros2_ws/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/cmake/export_dynamixel_hardware_interfaceExport-noconfig.cmake

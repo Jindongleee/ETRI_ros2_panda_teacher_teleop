@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/panda_teleop_omy_l100/launch/omy_l100_leader_ai/omy_l100_leader_ai.launch.py

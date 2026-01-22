@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/build/open_manipulator_bringup/launch/open_manipulator_x_gazebo.launch.py

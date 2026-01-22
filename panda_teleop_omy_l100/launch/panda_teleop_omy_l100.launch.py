@@ -188,14 +188,28 @@ def generate_launch_description():
         }]
     )
     
-    # Clutch Control Node (keyboard 'b' key for clutch toggle)
-    clutch_control_node = Node(
+    # Clutch Pedal Node (evdev-based - reads PCsensor FootSwitch directly)
+    clutch_pedal_node = Node(
         package='panda_teleop_omy_l100',
-        executable='clutch_control_node.py',
-        name='clutch_control_node',
+        executable='clutch_pedal_node.py',
+        name='clutch_pedal_node',
         output='screen',
-        prefix='xterm -e'  # Run in separate terminal for keyboard input
+        parameters=[{
+            'device_name': 'PCsensor FootSwitch',  # Auto-detect by name
+            # 'device_path': '/dev/input/event18',  # Or specify path directly
+            'key_code': 48  # KEY_B = 48
+        }]
     )
+    
+    # Alternative: Old clutch control node (terminal-based, less reliable)
+    # Uncomment if evdev doesn't work or for testing
+    # clutch_control_node = Node(
+    #     package='panda_teleop_omy_l100',
+    #     executable='clutch_control_node.py',
+    #     name='clutch_control_node',
+    #     output='screen',
+    #     prefix='xterm -e'  # Run in separate terminal for keyboard input
+    # )
     
     # ========================================
     # Delayed Starts (to avoid resource conflicts)
@@ -205,7 +219,7 @@ def generate_launch_description():
     # and trajectory_to_joint_states_node has time to publish initial joint_states
     delayed_control_nodes = TimerAction(
         period=3.0,
-        actions=[servo_node, omy_l100_to_twist_node, omy_l100_to_gripper_node, clutch_control_node]
+        actions=[servo_node, omy_l100_to_twist_node, omy_l100_to_gripper_node, clutch_pedal_node]
     )
     
     # Delay RViz startup by 5 seconds to ensure everything is ready

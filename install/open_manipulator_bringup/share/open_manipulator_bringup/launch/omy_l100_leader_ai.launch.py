@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/build/open_manipulator_bringup/launch/omy_l100_leader_ai.launch.py

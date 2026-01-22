@@ -30,6 +30,7 @@ install(PROGRAMS
   src/omy_l100_to_twist_node.py
   src/omy_l100_to_gripper_node.py
   src/clutch_control_node.py
+  src/clutch_pedal_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

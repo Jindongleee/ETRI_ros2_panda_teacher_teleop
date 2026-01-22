@@ -1,5 +1,0 @@
--I/home/etri/ros2_ws/open_manipulator/open_manipulator_gui
--I/home/etri/ros2_ws/build/open_manipulator_gui
--o
-/home/etri/ros2_ws/build/open_manipulator_gui/include/omx_f_gui/moc_main_window.cpp
-/home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omx_f_gui/main_window.hpp

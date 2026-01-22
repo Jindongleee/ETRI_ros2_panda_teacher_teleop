@@ -1,1 +1,0 @@
-Invoking command in '/home/etri/ros2_ws/build/open_manipulator_collision': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/open_manipulator_collision -- -j24 -l24

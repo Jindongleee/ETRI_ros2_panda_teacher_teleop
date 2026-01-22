@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/dynamixel_hardware_interface/scripts/cluster_model_files.py

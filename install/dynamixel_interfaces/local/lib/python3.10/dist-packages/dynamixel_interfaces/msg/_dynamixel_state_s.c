@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/build/dynamixel_interfaces/rosidl_generator_py/dynamixel_interfaces/msg/_dynamixel_state_s.c

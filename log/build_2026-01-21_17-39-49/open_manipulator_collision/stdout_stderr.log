@@ -1,3 +1,0 @@
-[ 50%] Building CXX object CMakeFiles/self_collision_node.dir/src/self_collision_node.cpp.o
-[100%] Linking CXX executable self_collision_node
-[100%] Built target self_collision_node

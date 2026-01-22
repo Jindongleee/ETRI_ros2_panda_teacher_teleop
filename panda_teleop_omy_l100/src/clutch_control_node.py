@@ -35,6 +35,10 @@ class ClutchControlNode(Node):
         self.clutch_active = False
         self.last_key_state = False
         
+        # Time tracking for hold detection
+        self.last_b_key_time = None
+        self.key_timeout = 0.1  # 100ms timeout - if no 'b' key within this time, deactivate
+        
         # Publisher
         self.clutch_pub = self.create_publisher(
             Bool,
@@ -63,20 +67,29 @@ class ClutchControlNode(Node):
         self.get_logger().info('===================================')
         self.get_logger().info('Current state: PAUSED (waiting for clutch)')
         self.get_logger().info('Press "q" to quit')
+        self.get_logger().info(f'Key timeout: {self.key_timeout*1000:.0f}ms (for hold detection)')
     
     def timer_callback(self):
-        """Check for keyboard input - hold 'b' to activate"""
+        """Check for keyboard input - hold 'b' to activate
+        
+        Uses time-based hold detection:
+        - When 'b' key is detected, update timestamp
+        - Clutch stays active while 'b' keys keep arriving within timeout
+        - If no 'b' key for timeout duration, clutch deactivates
+        """
         try:
-            # Check if 'b' key is currently pressed
-            key_pressed = False
+            current_time = self.get_clock().now()
             
             # Check if input is available (non-blocking)
-            if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
+            # Read ALL available characters to drain buffer
+            b_key_detected = False
+            while sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
                 key = sys.stdin.read(1)
                 
-                # Check for 'b' key being held
+                # Check for 'b' key
                 if key.lower() == 'b':
-                    key_pressed = True
+                    b_key_detected = True
+                    self.last_b_key_time = current_time
                 
                 # Check for 'q' key to quit
                 elif key.lower() == 'q':
@@ -84,9 +97,16 @@ class ClutchControlNode(Node):
                     rclpy.shutdown()
                     return
             
-            # Update clutch state based on key press
+            # Determine clutch state based on recent 'b' key activity
             prev_state = self.clutch_active
-            self.clutch_active = key_pressed
+            
+            if self.last_b_key_time is not None:
+                # Check if 'b' key was pressed recently (within timeout)
+                time_since_last_b = (current_time - self.last_b_key_time).nanoseconds * 1e-9
+                self.clutch_active = (time_since_last_b < self.key_timeout)
+            else:
+                # No 'b' key pressed yet
+                self.clutch_active = False
             
             # Only log and publish when state changes
             if prev_state != self.clutch_active:

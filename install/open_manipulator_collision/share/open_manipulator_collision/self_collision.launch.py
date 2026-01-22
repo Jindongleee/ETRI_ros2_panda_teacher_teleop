@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/open_manipulator/open_manipulator_collision/launch/self_collision.launch.py

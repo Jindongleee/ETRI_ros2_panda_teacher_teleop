@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/build/dynamixel_interfaces/rosidl_typesupport_fastrtps_cpp/dynamixel_interfaces/srv/detail/get_data_from_dxl__rosidl_typesupport_fastrtps_cpp.hpp

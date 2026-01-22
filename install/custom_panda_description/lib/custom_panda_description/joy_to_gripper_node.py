@@ -1,1 +1,0 @@
-/home/etri/ros2_ws/custom_panda_description/src/joy_to_gripper_node.py

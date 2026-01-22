@@ -1,1 +1,0 @@
-Invoking command in '/home/etri/ros2_ws/build/om_spring_actuator_controller': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/om_spring_actuator_controller -- -j24 -l24
