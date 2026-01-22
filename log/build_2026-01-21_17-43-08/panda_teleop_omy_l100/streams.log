@@ -1,0 +1,80 @@
+[0.005s] Invoking command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/panda_teleop_omy_l100 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/panda_teleop_omy_l100
+[0.034s] -- The C compiler identification is GNU 11.4.0
+[0.062s] -- The CXX compiler identification is GNU 11.4.0
+[0.067s] -- Detecting C compiler ABI info
+[0.105s] -- Detecting C compiler ABI info - done
+[0.108s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.108s] -- Detecting C compile features
+[0.108s] -- Detecting C compile features - done
+[0.109s] -- Detecting CXX compiler ABI info
+[0.148s] -- Detecting CXX compiler ABI info - done
+[0.151s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.151s] -- Detecting CXX compile features
+[0.152s] -- Detecting CXX compile features - done
+[0.153s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.222s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.252s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.266s] -- Found rclpy: 3.3.19 (/opt/ros/humble/share/rclpy/cmake)
+[0.266s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.283s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.285s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.288s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.296s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.300s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.324s] -- Found trajectory_msgs: 4.9.0 (/opt/ros/humble/share/trajectory_msgs/cmake)
+[0.331s] -- Found moveit_servo: 2.5.9 (/opt/ros/humble/share/moveit_servo/cmake)
+[0.373s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.374s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.425s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.437s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.456s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.460s] -- Looking for pthread.h
+[0.501s] -- Looking for pthread.h - found
+[0.501s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.546s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.547s] -- Found Threads: TRUE  
+[0.617s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+[0.631s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: filesystem 
+[0.680s] -- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+[0.700s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[0.700s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.773s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread chrono 
+[0.791s] -- Found robot_state_publisher: 3.0.3 (/opt/ros/humble/share/robot_state_publisher/cmake)
+[0.794s] -- Found xacro: 2.1.1 (/opt/ros/humble/share/xacro/cmake)
+[0.795s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.829s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.830s] -- Added test 'lint_cmake' to check CMake code style
+[0.830s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.830s] -- Added test 'xmllint' to check XML markup files
+[0.830s] -- Configuring done
+[0.833s] -- Generating done
+[0.834s] -- Build files have been written to: /home/etri/ros2_ws/build/panda_teleop_omy_l100
+[0.843s] Invoked command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100' returned '0': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/panda_teleop_omy_l100 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/panda_teleop_omy_l100
+[0.843s] Invoking command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/panda_teleop_omy_l100 -- -j24 -l24
+[0.869s] Invoked command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100' returned '0': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/panda_teleop_omy_l100 -- -j24 -l24
+[0.869s] Invoking command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/panda_teleop_omy_l100
+[0.873s] -- Install configuration: ""
+[0.873s] -- Execute custom install script
+[0.873s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/config/kinematics.yaml
+[0.877s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/config/servo_config.yaml
+[0.881s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/launch/omy_l100_leader_ai/omy_l100_leader_ai.launch.py
+[0.885s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/launch/panda_teleop_omy_l100.launch.py
+[0.890s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/trajectory_to_joint_states.py
+[0.893s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/omy_l100_to_twist_node.py
+[0.897s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/omy_l100_to_gripper_node.py
+[0.900s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/ament_index/resource_index/package_run_dependencies/panda_teleop_omy_l100
+[0.904s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/ament_index/resource_index/parent_prefix_path/panda_teleop_omy_l100
+[0.908s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/environment/ament_prefix_path.sh
+[0.911s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/environment/ament_prefix_path.dsv
+[0.916s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/environment/path.sh
+[0.920s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/environment/path.dsv
+[0.925s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/local_setup.bash
+[0.929s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/local_setup.sh
+[0.933s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/local_setup.zsh
+[0.937s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/local_setup.dsv
+[0.941s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.dsv
+[0.945s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/ament_index/resource_index/packages/panda_teleop_omy_l100
+[0.949s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/cmake/panda_teleop_omy_l100Config.cmake
+[0.952s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/cmake/panda_teleop_omy_l100Config-version.cmake
+[0.955s] -- Symlinking: /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.xml
+[0.960s] Invoked command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100' returned '0': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/panda_teleop_omy_l100

@@ -6,10 +6,10 @@
       command_in_type: "speed_units"
 
       scale:
-        # 사용자 요청: 스케일 1.5
-        linear: 1.5
-        rotational: 1.5
-        joint: 1.5
+        # 스케일 증가: omy_l100_to_twist_node에서 이미 스케일 적용하므로 여기서는 1.0으로 설정
+        linear: 1.0
+        rotational: 1.0
+        joint: 1.0
 
       publish_period: 0.01
       low_latency_mode: false
@@ -47,5 +47,5 @@
       smoothing_filter_plugin_name: "online_signal_smoothing::ButterworthFilterPlugin"
       override_velocity_scaling_factor: 1.0
       override_acceleration_scaling_factor: 1.0
-
+      
       is_primary_planning_scene_monitor: true

@@ -1,0 +1,192 @@
+[0.024s] Invoking command in '/home/etri/ros2_ws/build/open_manipulator_gui': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/open_manipulator_gui -- -j24 -l24
+[0.140s] [  1%] Generating ui_omy_f3m_main_window.h
+[0.140s] [  5%] Generating ui_omx_f_main_window.h
+[0.140s] [  5%] Generating ui_open_manipulator_x_main_window.h
+[0.140s] [  7%] Generating ui_omy_3m_main_window.h
+[0.140s] [  9%] Generating open_manipulator_x_gui/ui_open_manipulator_x_main_window.h
+[0.140s] [ 13%] Generating omy_3m_gui/ui_omy_3m_main_window.h
+[0.140s] [ 13%] Generating omx_f_gui/ui_omx_f_main_window.h
+[0.140s] [ 15%] Generating omy_f3m_gui/ui_omy_f3m_main_window.h
+[0.147s] [ 15%] Built target copy_ui_headers
+[0.178s] [ 17%] Automatic MOC and UIC for target open_manipulator_x_gui_node
+[0.178s] [ 19%] Automatic MOC and UIC for target omy_f3m_gui_node
+[0.178s] [ 23%] Automatic MOC and UIC for target omx_f_gui_node
+[0.178s] [ 23%] Automatic MOC and UIC for target omy_3m_gui_node
+[0.180s] [ 23%] Built target omy_f3m_gui_node_autogen
+[0.181s] [ 23%] Built target open_manipulator_x_gui_node_autogen
+[0.185s] [ 23%] Built target omx_f_gui_node_autogen
+[0.185s] [ 25%] Generating include/omy_f3m_gui/moc_qnode.cpp
+[0.186s] [ 26%] Generating include/omy_f3m_gui/moc_main_window.cpp
+[0.189s] [ 28%] Generating include/open_manipulator_x_gui/moc_main_window.cpp
+[0.189s] [ 30%] Generating include/open_manipulator_x_gui/moc_qnode.cpp
+[0.189s] [ 30%] Built target omy_3m_gui_node_autogen
+[0.191s] [ 32%] Generating include/omx_f_gui/moc_qnode.cpp
+[0.192s] [ 34%] Generating include/omx_f_gui/moc_main_window.cpp
+[0.196s] [ 38%] Generating include/omy_3m_gui/moc_main_window.cpp
+[0.196s] [ 38%] Generating include/omy_3m_gui/moc_qnode.cpp
+[0.203s] [ 40%] Building CXX object CMakeFiles/omy_f3m_gui_node.dir/src/omy_f3m/main.cpp.o
+[0.203s] [ 42%] Building CXX object CMakeFiles/omy_f3m_gui_node.dir/src/omy_f3m/main_window.cpp.o
+[0.203s] [ 44%] Building CXX object CMakeFiles/omy_f3m_gui_node.dir/omy_f3m_gui_node_autogen/mocs_compilation.cpp.o
+[0.205s] [ 48%] Building CXX object CMakeFiles/omy_f3m_gui_node.dir/include/omy_f3m_gui/moc_qnode.cpp.o
+[0.205s] [ 48%] Building CXX object CMakeFiles/omy_f3m_gui_node.dir/include/omy_f3m_gui/moc_main_window.cpp.o
+[0.208s] [ 50%] Building CXX object CMakeFiles/open_manipulator_x_gui_node.dir/include/open_manipulator_x_gui/moc_main_window.cpp.o
+[0.208s] [ 51%] Building CXX object CMakeFiles/open_manipulator_x_gui_node.dir/src/open_manipulator_x/main_window.cpp.o
+[0.208s] [ 53%] Building CXX object CMakeFiles/open_manipulator_x_gui_node.dir/src/open_manipulator_x/main.cpp.o
+[0.208s] [ 55%] Building CXX object CMakeFiles/omy_f3m_gui_node.dir/src/omy_f3m/qnode.cpp.o
+[0.209s] [ 57%] Building CXX object CMakeFiles/open_manipulator_x_gui_node.dir/open_manipulator_x_gui_node_autogen/mocs_compilation.cpp.o
+[0.209s] [ 59%] Building CXX object CMakeFiles/open_manipulator_x_gui_node.dir/include/open_manipulator_x_gui/moc_qnode.cpp.o
+[0.212s] [ 61%] Building CXX object CMakeFiles/open_manipulator_x_gui_node.dir/src/open_manipulator_x/qnode.cpp.o
+[0.213s] [ 63%] Building CXX object CMakeFiles/omy_3m_gui_node.dir/omy_3m_gui_node_autogen/mocs_compilation.cpp.o
+[0.218s] [ 65%] Building CXX object CMakeFiles/omx_f_gui_node.dir/omx_f_gui_node_autogen/mocs_compilation.cpp.o
+[0.218s] [ 67%] Building CXX object CMakeFiles/omx_f_gui_node.dir/src/omx_f/main.cpp.o
+[0.219s] [ 69%] Building CXX object CMakeFiles/omy_3m_gui_node.dir/src/omy_3m/main.cpp.o
+[0.236s] [ 71%] Building CXX object CMakeFiles/omy_3m_gui_node.dir/src/omy_3m/qnode.cpp.o
+[0.236s] [ 73%] Building CXX object CMakeFiles/omx_f_gui_node.dir/src/omx_f/qnode.cpp.o
+[0.236s] [ 75%] Building CXX object CMakeFiles/omx_f_gui_node.dir/src/omx_f/main_window.cpp.o
+[0.236s] [ 76%] Building CXX object CMakeFiles/omy_3m_gui_node.dir/src/omy_3m/main_window.cpp.o
+[0.242s] [ 78%] Building CXX object CMakeFiles/omx_f_gui_node.dir/include/omx_f_gui/moc_qnode.cpp.o
+[0.242s] [ 80%] Building CXX object CMakeFiles/omy_3m_gui_node.dir/include/omy_3m_gui/moc_main_window.cpp.o
+[0.242s] [ 82%] Building CXX object CMakeFiles/omx_f_gui_node.dir/include/omx_f_gui/moc_main_window.cpp.o
+[0.242s] [ 84%] Building CXX object CMakeFiles/omy_3m_gui_node.dir/include/omy_3m_gui/moc_qnode.cpp.o
+[0.427s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omy_3m/qnode.cpp:17:
+[0.427s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omy_3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.427s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.428s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.428s] compilation terminated.
+[0.431s] gmake[2]: *** [CMakeFiles/omy_3m_gui_node.dir/build.make:130: CMakeFiles/omy_3m_gui_node.dir/src/omy_3m/qnode.cpp.o] 오류 1
+[0.431s] gmake[2]: *** 끝나지 않은 작업을 기다리고 있습니다....
+[0.457s] In file included from /home/etri/ros2_ws/build/open_manipulator_gui/include/omy_3m_gui/moc_qnode.cpp:10:
+[0.457s] /home/etri/ros2_ws/build/open_manipulator_gui/include/omy_3m_gui/../../../../open_manipulator/open_manipulator_gui/include/omy_3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.457s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.457s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.457s] compilation terminated.
+[0.459s] gmake[2]: *** [CMakeFiles/omy_3m_gui_node.dir/build.make:158: CMakeFiles/omy_3m_gui_node.dir/include/omy_3m_gui/moc_qnode.cpp.o] 오류 1
+[0.461s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/open_manipulator_x/qnode.cpp:17:
+[0.461s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/open_manipulator_x_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.461s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.461s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.461s] compilation terminated.
+[0.467s] gmake[2]: *** [CMakeFiles/open_manipulator_x_gui_node.dir/build.make:130: CMakeFiles/open_manipulator_x_gui_node.dir/src/open_manipulator_x/qnode.cpp.o] 오류 1
+[0.467s] gmake[2]: *** 끝나지 않은 작업을 기다리고 있습니다....
+[0.514s] In file included from /home/etri/ros2_ws/build/open_manipulator_gui/include/open_manipulator_x_gui/moc_qnode.cpp:10:
+[0.514s] /home/etri/ros2_ws/build/open_manipulator_gui/include/open_manipulator_x_gui/../../../../open_manipulator/open_manipulator_gui/include/open_manipulator_x_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.514s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.514s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.514s] compilation terminated.
+[0.516s] gmake[2]: *** [CMakeFiles/open_manipulator_x_gui_node.dir/build.make:158: CMakeFiles/open_manipulator_x_gui_node.dir/include/open_manipulator_x_gui/moc_qnode.cpp.o] 오류 1
+[0.518s] In file included from /home/etri/ros2_ws/build/open_manipulator_gui/include/omx_f_gui/moc_qnode.cpp:10:
+[0.518s] /home/etri/ros2_ws/build/open_manipulator_gui/include/omx_f_gui/../../../../open_manipulator/open_manipulator_gui/include/omx_f_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.518s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.518s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.518s] compilation terminated.
+[0.520s] gmake[2]: *** [CMakeFiles/omx_f_gui_node.dir/build.make:158: CMakeFiles/omx_f_gui_node.dir/include/omx_f_gui/moc_qnode.cpp.o] 오류 1
+[0.520s] gmake[2]: *** 끝나지 않은 작업을 기다리고 있습니다....
+[0.522s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omy_f3m/qnode.cpp:17:
+[0.522s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omy_f3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.522s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.522s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.522s] compilation terminated.
+[0.526s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omx_f/qnode.cpp:17:
+[0.526s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omx_f_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.526s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.526s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.526s] compilation terminated.
+[0.526s] gmake[2]: *** [CMakeFiles/omy_f3m_gui_node.dir/build.make:130: CMakeFiles/omy_f3m_gui_node.dir/src/omy_f3m/qnode.cpp.o] 오류 1
+[0.527s] gmake[2]: *** 끝나지 않은 작업을 기다리고 있습니다....
+[0.528s] gmake[2]: *** [CMakeFiles/omx_f_gui_node.dir/build.make:130: CMakeFiles/omx_f_gui_node.dir/src/omx_f/qnode.cpp.o] 오류 1
+[0.580s] In file included from /home/etri/ros2_ws/build/open_manipulator_gui/include/omy_f3m_gui/moc_qnode.cpp:10:
+[0.580s] /home/etri/ros2_ws/build/open_manipulator_gui/include/omy_f3m_gui/../../../../open_manipulator/open_manipulator_gui/include/omy_f3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.580s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.580s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.580s] compilation terminated.
+[0.586s] gmake[2]: *** [CMakeFiles/omy_f3m_gui_node.dir/build.make:158: CMakeFiles/omy_f3m_gui_node.dir/include/omy_f3m_gui/moc_qnode.cpp.o] 오류 1
+[0.637s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/../include/open_manipulator_x_gui/main_window.hpp:36,
+[0.637s]                  from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/open_manipulator_x/main_window.cpp:26:
+[0.637s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/open_manipulator_x_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.637s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.637s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.637s] compilation terminated.
+[0.643s] gmake[2]: *** [CMakeFiles/open_manipulator_x_gui_node.dir/build.make:116: CMakeFiles/open_manipulator_x_gui_node.dir/src/open_manipulator_x/main_window.cpp.o] 오류 1
+[0.647s] In file included from /home/etri/ros2_ws/build/open_manipulator_gui/include/open_manipulator_x_gui/../../../../open_manipulator/open_manipulator_gui/include/open_manipulator_x_gui/main_window.hpp:36,
+[0.647s]                  from /home/etri/ros2_ws/build/open_manipulator_gui/include/open_manipulator_x_gui/moc_main_window.cpp:10:
+[0.647s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/open_manipulator_x_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.647s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.647s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.647s] compilation terminated.
+[0.654s] In file included from /home/etri/ros2_ws/build/open_manipulator_gui/include/omy_f3m_gui/../../../../open_manipulator/open_manipulator_gui/include/omy_f3m_gui/main_window.hpp:35,
+[0.654s]                  from /home/etri/ros2_ws/build/open_manipulator_gui/include/omy_f3m_gui/moc_main_window.cpp:10:
+[0.654s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omy_f3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.654s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.654s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.654s] compilation terminated.
+[0.656s] gmake[2]: *** [CMakeFiles/open_manipulator_x_gui_node.dir/build.make:144: CMakeFiles/open_manipulator_x_gui_node.dir/include/open_manipulator_x_gui/moc_main_window.cpp.o] 오류 1
+[0.658s] In file included from /home/etri/ros2_ws/build/open_manipulator_gui/include/omx_f_gui/../../../../open_manipulator/open_manipulator_gui/include/omx_f_gui/main_window.hpp:36,
+[0.658s]                  from /home/etri/ros2_ws/build/open_manipulator_gui/include/omx_f_gui/moc_main_window.cpp:10:
+[0.658s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omx_f_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.658s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.658s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.658s] compilation terminated.
+[0.661s] gmake[2]: *** [CMakeFiles/omy_f3m_gui_node.dir/build.make:144: CMakeFiles/omy_f3m_gui_node.dir/include/omy_f3m_gui/moc_main_window.cpp.o] 오류 1
+[0.665s] gmake[2]: *** [CMakeFiles/omx_f_gui_node.dir/build.make:144: CMakeFiles/omx_f_gui_node.dir/include/omx_f_gui/moc_main_window.cpp.o] 오류 1
+[0.665s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/../include/omy_3m_gui/main_window.hpp:35,
+[0.665s]                  from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omy_3m/main_window.cpp:26:
+[0.665s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omy_3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.665s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.665s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.665s] compilation terminated.
+[0.669s] gmake[2]: *** [CMakeFiles/omy_3m_gui_node.dir/build.make:116: CMakeFiles/omy_3m_gui_node.dir/src/omy_3m/main_window.cpp.o] 오류 1
+[0.701s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/../include/omx_f_gui/main_window.hpp:36,
+[0.701s]                  from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omx_f/main_window.cpp:26:
+[0.701s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omx_f_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.701s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.701s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.701s] compilation terminated.
+[0.706s] gmake[2]: *** [CMakeFiles/omx_f_gui_node.dir/build.make:116: CMakeFiles/omx_f_gui_node.dir/src/omx_f/main_window.cpp.o] 오류 1
+[0.713s] In file included from /home/etri/ros2_ws/build/open_manipulator_gui/include/omy_3m_gui/../../../../open_manipulator/open_manipulator_gui/include/omy_3m_gui/main_window.hpp:35,
+[0.713s]                  from /home/etri/ros2_ws/build/open_manipulator_gui/include/omy_3m_gui/moc_main_window.cpp:10:
+[0.713s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omy_3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.713s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.713s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.713s] compilation terminated.
+[0.713s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/../include/omy_f3m_gui/main_window.hpp:35,
+[0.713s]                  from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omy_f3m/main_window.cpp:26:
+[0.714s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omy_f3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.714s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.714s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.714s] compilation terminated.
+[0.719s] gmake[2]: *** [CMakeFiles/omy_3m_gui_node.dir/build.make:144: CMakeFiles/omy_3m_gui_node.dir/include/omy_3m_gui/moc_main_window.cpp.o] 오류 1
+[0.719s] gmake[2]: *** [CMakeFiles/omy_f3m_gui_node.dir/build.make:116: CMakeFiles/omy_f3m_gui_node.dir/src/omy_f3m/main_window.cpp.o] 오류 1
+[0.902s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/../include/open_manipulator_x_gui/main_window.hpp:36,
+[0.902s]                  from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/open_manipulator_x/main.cpp:19:
+[0.902s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/open_manipulator_x_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.902s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.902s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.902s] compilation terminated.
+[0.907s] gmake[2]: *** [CMakeFiles/open_manipulator_x_gui_node.dir/build.make:102: CMakeFiles/open_manipulator_x_gui_node.dir/src/open_manipulator_x/main.cpp.o] 오류 1
+[0.907s] gmake[1]: *** [CMakeFiles/Makefile2:150: CMakeFiles/open_manipulator_x_gui_node.dir/all] 오류 2
+[0.907s] gmake[1]: *** 끝나지 않은 작업을 기다리고 있습니다....
+[0.926s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/../include/omy_3m_gui/main_window.hpp:35,
+[0.926s]                  from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omy_3m/main.cpp:19:
+[0.926s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omy_3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.926s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.926s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.926s] compilation terminated.
+[0.930s] gmake[2]: *** [CMakeFiles/omy_3m_gui_node.dir/build.make:102: CMakeFiles/omy_3m_gui_node.dir/src/omy_3m/main.cpp.o] 오류 1
+[0.930s] gmake[1]: *** [CMakeFiles/Makefile2:177: CMakeFiles/omy_3m_gui_node.dir/all] 오류 2
+[0.952s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/../include/omy_f3m_gui/main_window.hpp:35,
+[0.952s]                  from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omy_f3m/main.cpp:19:
+[0.952s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omy_f3m_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.952s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.952s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.952s] compilation terminated.
+[0.959s] gmake[2]: *** [CMakeFiles/omy_f3m_gui_node.dir/build.make:102: CMakeFiles/omy_f3m_gui_node.dir/src/omy_f3m/main.cpp.o] 오류 1
+[0.959s] gmake[1]: *** [CMakeFiles/Makefile2:204: CMakeFiles/omy_f3m_gui_node.dir/all] 오류 2
+[0.982s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/../include/omx_f_gui/main_window.hpp:36,
+[0.982s]                  from /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/src/omx_f/main.cpp:19:
+[0.982s] /home/etri/ros2_ws/open_manipulator/open_manipulator_gui/include/omx_f_gui/qnode.hpp:33:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.982s]    33 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.982s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.983s] compilation terminated.
+[0.991s] gmake[2]: *** [CMakeFiles/omx_f_gui_node.dir/build.make:102: CMakeFiles/omx_f_gui_node.dir/src/omx_f/main.cpp.o] 오류 1
+[0.991s] gmake[1]: *** [CMakeFiles/Makefile2:231: CMakeFiles/omx_f_gui_node.dir/all] 오류 2
+[0.991s] gmake: *** [Makefile:146: all] 오류 2

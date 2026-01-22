@@ -5,6 +5,7 @@
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/trajectory_to_joint_states.py
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/omy_l100_to_twist_node.py
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/omy_l100_to_gripper_node.py
+/home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/panda_teleop_omy_l100/clutch_control_node.py
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/ament_index/resource_index/package_run_dependencies/panda_teleop_omy_l100
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/ament_index/resource_index/parent_prefix_path/panda_teleop_omy_l100
 /home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/environment/ament_prefix_path.sh

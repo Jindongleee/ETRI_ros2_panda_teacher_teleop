@@ -309,3 +309,60 @@ endfunction()
 message(STATUS "Execute custom install script")
 
 # begin of custom install code
+
+# install(DIRECTORY "include/" "DESTINATION" "include/realtime_tools")
+ament_cmake_symlink_install_directory("/home/etri/ros2_ws/realtime_tools" DIRECTORY "include/" "DESTINATION" "include/realtime_tools")
+
+# install(FILES "/opt/ros/humble/lib/python3.10/site-packages/ament_package/template/environment_hook/library_path.sh" "DESTINATION" "share/realtime_tools/environment")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/opt/ros/humble/lib/python3.10/site-packages/ament_package/template/environment_hook/library_path.sh" "DESTINATION" "share/realtime_tools/environment")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/library_path.dsv" "DESTINATION" "share/realtime_tools/environment")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/library_path.dsv" "DESTINATION" "share/realtime_tools/environment")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/realtime_tools" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/realtime_tools" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/realtime_tools" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/realtime_tools" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
+
+# install(FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/realtime_tools/environment")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/realtime_tools/environment")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/realtime_tools/environment")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/realtime_tools/environment")
+
+# install(FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/realtime_tools/environment")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/realtime_tools/environment")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/realtime_tools/environment")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/realtime_tools/environment")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/realtime_tools")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/realtime_tools")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/realtime_tools")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/realtime_tools")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/realtime_tools")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/realtime_tools")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/realtime_tools")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/realtime_tools")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/realtime_tools")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/realtime_tools")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_index/share/ament_index/resource_index/packages/realtime_tools" "DESTINATION" "share/ament_index/resource_index/packages")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_index/share/ament_index/resource_index/packages/realtime_tools" "DESTINATION" "share/ament_index/resource_index/packages")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_export_targets/ament_cmake_export_targets-extras.cmake" "DESTINATION" "share/realtime_tools/cmake")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_export_targets/ament_cmake_export_targets-extras.cmake" "DESTINATION" "share/realtime_tools/cmake")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_export_dependencies/ament_cmake_export_dependencies-extras.cmake" "DESTINATION" "share/realtime_tools/cmake")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_export_dependencies/ament_cmake_export_dependencies-extras.cmake" "DESTINATION" "share/realtime_tools/cmake")
+
+# install(FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_core/realtime_toolsConfig.cmake" "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_core/realtime_toolsConfig-version.cmake" "DESTINATION" "share/realtime_tools/cmake")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_core/realtime_toolsConfig.cmake" "/home/etri/ros2_ws/build/realtime_tools/ament_cmake_core/realtime_toolsConfig-version.cmake" "DESTINATION" "share/realtime_tools/cmake")
+
+# install(FILES "/home/etri/ros2_ws/realtime_tools/package.xml" "DESTINATION" "share/realtime_tools")
+ament_cmake_symlink_install_files("/home/etri/ros2_ws/realtime_tools" FILES "/home/etri/ros2_ws/realtime_tools/package.xml" "DESTINATION" "share/realtime_tools")

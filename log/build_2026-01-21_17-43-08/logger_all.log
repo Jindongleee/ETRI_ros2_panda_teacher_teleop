@@ -1,0 +1,223 @@
+[0.044s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'custom_panda_description', 'panda_teleop_omy_l100', '--symlink-install']
+[0.044s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=24, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['custom_panda_description', 'panda_teleop_omy_l100'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x75d9de462620>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x75d9de57f610>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x75d9de57f610>>, mixin_verb=('build',))
+[0.105s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.105s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.105s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.105s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.105s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.105s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.105s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/etri/ros2_ws'
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extensions ['ignore', 'ignore_ament_install']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'ignore'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) ignored
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extensions ['ignore', 'ignore_ament_install']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extension 'ignore'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extension 'ignore_ament_install'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extensions ['colcon_pkg']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extension 'colcon_pkg'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extensions ['colcon_meta']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extension 'colcon_meta'
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extensions ['ros']
+[0.110s] Level 1:colcon.colcon_core.package_identification:_identify(custom_panda_description) by extension 'ros'
+[0.111s] DEBUG:colcon.colcon_core.package_identification:Package 'custom_panda_description' with type 'ros.ament_cmake' and name 'custom_panda_description'
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extensions ['ignore', 'ignore_ament_install']
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extension 'ignore'
+[0.111s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) ignored
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extension 'ignore'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extension 'ignore_ament_install'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extensions ['colcon_pkg']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extension 'colcon_pkg'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extensions ['colcon_meta']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extension 'colcon_meta'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extensions ['ros']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_interfaces) by extension 'ros'
+[0.112s] DEBUG:colcon.colcon_core.package_identification:Package 'dynamixel_interfaces' with type 'ros.ament_cmake' and name 'dynamixel_interfaces'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(open_manipulator) by extensions ['ignore', 'ignore_ament_install']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(open_manipulator) by extension 'ignore'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(open_manipulator) ignored
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extensions ['ignore', 'ignore_ament_install']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extension 'ignore'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extension 'ignore_ament_install'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extensions ['colcon_pkg']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extension 'colcon_pkg'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extensions ['colcon_meta']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extension 'colcon_meta'
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extensions ['ros']
+[0.112s] Level 1:colcon.colcon_core.package_identification:_identify(panda_teleop_omy_l100) by extension 'ros'
+[0.113s] DEBUG:colcon.colcon_core.package_identification:Package 'panda_teleop_omy_l100' with type 'ros.ament_cmake' and name 'panda_teleop_omy_l100'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extensions ['ignore', 'ignore_ament_install']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extension 'ignore'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extension 'ignore_ament_install'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extensions ['colcon_pkg']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extension 'colcon_pkg'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extensions ['colcon_meta']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extension 'colcon_meta'
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extensions ['ros']
+[0.113s] Level 1:colcon.colcon_core.package_identification:_identify(realtime_tools) by extension 'ros'
+[0.113s] DEBUG:colcon.colcon_core.package_identification:Package 'realtime_tools' with type 'ros.ament_cmake' and name 'realtime_tools'
+[0.113s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.113s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.113s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.113s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.114s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.128s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'dynamixel_interfaces' in 'dynamixel_interfaces'
+[0.128s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'realtime_tools' in 'realtime_tools'
+[0.128s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.128s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.129s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 400 installed packages in /opt/ros/humble
+[0.130s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'cmake_target' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'custom_panda_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.148s] DEBUG:colcon.colcon_core.verb:Building package 'custom_panda_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/etri/ros2_ws/build/custom_panda_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/etri/ros2_ws/install/custom_panda_description', 'merge_install': False, 'path': '/home/etri/ros2_ws/custom_panda_description', 'symlink_install': True, 'test_result_base': None}
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'cmake_target' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'cmake_clean_cache' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'cmake_clean_first' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'cmake_force_configure' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'ament_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'catkin_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'panda_teleop_omy_l100' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.148s] DEBUG:colcon.colcon_core.verb:Building package 'panda_teleop_omy_l100' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/etri/ros2_ws/build/panda_teleop_omy_l100', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/etri/ros2_ws/install/panda_teleop_omy_l100', 'merge_install': False, 'path': '/home/etri/ros2_ws/panda_teleop_omy_l100', 'symlink_install': True, 'test_result_base': None}
+[0.148s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.149s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.149s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/etri/ros2_ws/custom_panda_description' with build type 'ament_cmake'
+[0.149s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/etri/ros2_ws/custom_panda_description'
+[0.150s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.150s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.150s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.154s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/etri/ros2_ws/build/custom_panda_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/custom_panda_description -- -j24 -l24
+[0.179s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/etri/ros2_ws/build/custom_panda_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/custom_panda_description -- -j24 -l24
+[0.183s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/etri/ros2_ws/build/custom_panda_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/custom_panda_description
+[0.323s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(custom_panda_description)
+[0.323s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/etri/ros2_ws/build/custom_panda_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/custom_panda_description
+[0.324s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description' for CMake module files
+[0.324s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description' for CMake config files
+[0.324s] Level 1:colcon.colcon_core.shell:create_environment_hook('custom_panda_description', 'cmake_prefix_path')
+[0.324s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/hook/cmake_prefix_path.ps1'
+[0.325s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/hook/cmake_prefix_path.dsv'
+[0.325s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/hook/cmake_prefix_path.sh'
+[0.325s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/lib'
+[0.325s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/bin'
+[0.325s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/lib/pkgconfig/custom_panda_description.pc'
+[0.325s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/lib/python3.10/site-packages'
+[0.325s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/bin'
+[0.326s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.ps1'
+[0.326s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.dsv'
+[0.326s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.sh'
+[0.326s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.bash'
+[0.327s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.zsh'
+[0.327s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/etri/ros2_ws/install/custom_panda_description/share/colcon-core/packages/custom_panda_description)
+[0.327s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(custom_panda_description)
+[0.327s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description' for CMake module files
+[0.327s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description' for CMake config files
+[0.327s] Level 1:colcon.colcon_core.shell:create_environment_hook('custom_panda_description', 'cmake_prefix_path')
+[0.327s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/hook/cmake_prefix_path.ps1'
+[0.328s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/hook/cmake_prefix_path.dsv'
+[0.328s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/hook/cmake_prefix_path.sh'
+[0.328s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/lib'
+[0.328s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/bin'
+[0.328s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/lib/pkgconfig/custom_panda_description.pc'
+[0.328s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/lib/python3.10/site-packages'
+[0.328s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/custom_panda_description/bin'
+[0.328s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.ps1'
+[0.328s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.dsv'
+[0.329s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.sh'
+[0.329s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.bash'
+[0.329s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/custom_panda_description/share/custom_panda_description/package.zsh'
+[0.329s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/etri/ros2_ws/install/custom_panda_description/share/colcon-core/packages/custom_panda_description)
+[0.329s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/etri/ros2_ws/panda_teleop_omy_l100' with build type 'ament_cmake'
+[0.329s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/etri/ros2_ws/panda_teleop_omy_l100'
+[0.329s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.329s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.335s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/panda_teleop_omy_l100 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/panda_teleop_omy_l100
+[1.172s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100' returned '0': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/panda_teleop_omy_l100 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/panda_teleop_omy_l100
+[1.172s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/panda_teleop_omy_l100 -- -j24 -l24
+[1.199s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100' returned '0': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/panda_teleop_omy_l100 -- -j24 -l24
+[1.199s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/panda_teleop_omy_l100
+[1.289s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(panda_teleop_omy_l100)
+[1.289s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100' for CMake module files
+[1.290s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/etri/ros2_ws/build/panda_teleop_omy_l100' returned '0': AMENT_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/etri/ros2_ws/install/custom_panda_description:/opt/ros/humble /usr/bin/cmake --install /home/etri/ros2_ws/build/panda_teleop_omy_l100
+[1.290s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100' for CMake config files
+[1.290s] Level 1:colcon.colcon_core.shell:create_environment_hook('panda_teleop_omy_l100', 'cmake_prefix_path')
+[1.290s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/hook/cmake_prefix_path.ps1'
+[1.290s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/hook/cmake_prefix_path.dsv'
+[1.290s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/hook/cmake_prefix_path.sh'
+[1.291s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/lib'
+[1.291s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/bin'
+[1.291s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/pkgconfig/panda_teleop_omy_l100.pc'
+[1.291s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/python3.10/site-packages'
+[1.291s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/bin'
+[1.291s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.ps1'
+[1.291s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.dsv'
+[1.291s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.sh'
+[1.292s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.bash'
+[1.292s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.zsh'
+[1.292s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/colcon-core/packages/panda_teleop_omy_l100)
+[1.292s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(panda_teleop_omy_l100)
+[1.292s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100' for CMake module files
+[1.292s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100' for CMake config files
+[1.292s] Level 1:colcon.colcon_core.shell:create_environment_hook('panda_teleop_omy_l100', 'cmake_prefix_path')
+[1.292s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/hook/cmake_prefix_path.ps1'
+[1.293s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/hook/cmake_prefix_path.dsv'
+[1.293s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/hook/cmake_prefix_path.sh'
+[1.293s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/lib'
+[1.293s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/bin'
+[1.293s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/pkgconfig/panda_teleop_omy_l100.pc'
+[1.293s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/lib/python3.10/site-packages'
+[1.293s] Level 1:colcon.colcon_core.environment:checking '/home/etri/ros2_ws/install/panda_teleop_omy_l100/bin'
+[1.293s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.ps1'
+[1.295s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.dsv'
+[1.295s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.sh'
+[1.295s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.bash'
+[1.295s] INFO:colcon.colcon_core.shell:Creating package script '/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/panda_teleop_omy_l100/package.zsh'
+[1.295s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/etri/ros2_ws/install/panda_teleop_omy_l100/share/colcon-core/packages/panda_teleop_omy_l100)
+[1.295s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.295s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.295s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.296s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.298s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.298s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.298s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.304s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.304s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/etri/ros2_ws/install/local_setup.ps1'
+[1.304s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/etri/ros2_ws/install/_local_setup_util_ps1.py'
+[1.305s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/etri/ros2_ws/install/setup.ps1'
+[1.305s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/etri/ros2_ws/install/local_setup.sh'
+[1.305s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/etri/ros2_ws/install/_local_setup_util_sh.py'
+[1.306s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/etri/ros2_ws/install/setup.sh'
+[1.306s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/etri/ros2_ws/install/local_setup.bash'
+[1.306s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/etri/ros2_ws/install/setup.bash'
+[1.307s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/etri/ros2_ws/install/local_setup.zsh'
+[1.307s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/etri/ros2_ws/install/setup.zsh'

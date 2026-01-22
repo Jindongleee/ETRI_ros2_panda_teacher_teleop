@@ -313,8 +313,8 @@ message(STATUS "Execute custom install script")
 # install(DIRECTORY "config" "launch" "DESTINATION" "share/panda_teleop_omy_l100")
 ament_cmake_symlink_install_directory("/home/etri/ros2_ws/panda_teleop_omy_l100" DIRECTORY "config" "launch" "DESTINATION" "share/panda_teleop_omy_l100")
 
-# install(PROGRAMS "src/trajectory_to_joint_states.py" "src/omy_l100_to_twist_node.py" "src/omy_l100_to_gripper_node.py" "DESTINATION" "lib/panda_teleop_omy_l100")
-ament_cmake_symlink_install_programs("/home/etri/ros2_ws/panda_teleop_omy_l100" PROGRAMS "src/trajectory_to_joint_states.py" "src/omy_l100_to_twist_node.py" "src/omy_l100_to_gripper_node.py" "DESTINATION" "lib/panda_teleop_omy_l100")
+# install(PROGRAMS "src/trajectory_to_joint_states.py" "src/omy_l100_to_twist_node.py" "src/omy_l100_to_gripper_node.py" "src/clutch_control_node.py" "DESTINATION" "lib/panda_teleop_omy_l100")
+ament_cmake_symlink_install_programs("/home/etri/ros2_ws/panda_teleop_omy_l100" PROGRAMS "src/trajectory_to_joint_states.py" "src/omy_l100_to_twist_node.py" "src/omy_l100_to_gripper_node.py" "src/clutch_control_node.py" "DESTINATION" "lib/panda_teleop_omy_l100")
 
 # install(FILES "/home/etri/ros2_ws/build/panda_teleop_omy_l100/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/panda_teleop_omy_l100" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 ament_cmake_symlink_install_files("/home/etri/ros2_ws/panda_teleop_omy_l100" FILES "/home/etri/ros2_ws/build/panda_teleop_omy_l100/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/panda_teleop_omy_l100" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")

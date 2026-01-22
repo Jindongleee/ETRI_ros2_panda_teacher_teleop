@@ -29,6 +29,7 @@ install(PROGRAMS
   src/trajectory_to_joint_states.py
   src/omy_l100_to_twist_node.py
   src/omy_l100_to_gripper_node.py
+  src/clutch_control_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

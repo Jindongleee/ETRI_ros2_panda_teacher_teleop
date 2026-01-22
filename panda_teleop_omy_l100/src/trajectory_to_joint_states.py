@@ -88,7 +88,7 @@ class TrajectoryToJointStates(Node):
         )
         
         # Timer to publish joint_states at regular intervals (50 Hz)
-        self.timer = self.create_timer(0.02, self.publish_joint_states)
+        self.timer = self.create_timer(0.01, self.publish_joint_states)
         
         # Immediately publish initial joint_states so servo_node can receive it
         # This breaks the circular dependency: servo_node needs joint_states to calculate trajectory

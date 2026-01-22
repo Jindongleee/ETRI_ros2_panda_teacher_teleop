@@ -1,0 +1,4 @@
+Invoking command in '/home/etri/ros2_ws/build/dynamixel_sdk': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/DynamixelSDK/ros/dynamixel_sdk -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/dynamixel_sdk
+Invoked command in '/home/etri/ros2_ws/build/dynamixel_sdk' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/etri/ros2_ws/DynamixelSDK/ros/dynamixel_sdk -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/etri/ros2_ws/install/dynamixel_sdk
+Invoking command in '/home/etri/ros2_ws/build/dynamixel_sdk': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/dynamixel_sdk -- -j24 -l24
+Invoked command in '/home/etri/ros2_ws/build/dynamixel_sdk' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/dynamixel_sdk -- -j24 -l24

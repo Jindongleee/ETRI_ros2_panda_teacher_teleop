@@ -1,0 +1,23 @@
+In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/src/omy_3m_hello_moveit.cpp:17:
+/home/etri/ros2_ws/open_manipulator/open_manipulator_playground/include/open_manipulator_playground/omy_3m_hello_moveit.h:25:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+   25 | #include <moveit/move_group_interface/move_group_interface.hpp>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/omy_3m_hello_moveit.dir/build.make:76: CMakeFiles/omy_3m_hello_moveit.dir/src/omy_3m_hello_moveit.cpp.o] 오류 1
+gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/omy_3m_hello_moveit.dir/all] 오류 2
+gmake[1]: *** 끝나지 않은 작업을 기다리고 있습니다....
+In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/src/open_manipulator_x_hello_moveit.cpp:17:
+/home/etri/ros2_ws/open_manipulator/open_manipulator_playground/include/open_manipulator_playground/open_manipulator_x_hello_moveit.h:25:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+   25 | #include <moveit/move_group_interface/move_group_interface.hpp>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/open_manipulator_x_hello_moveit.dir/build.make:76: CMakeFiles/open_manipulator_x_hello_moveit.dir/src/open_manipulator_x_hello_moveit.cpp.o] 오류 1
+gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/open_manipulator_x_hello_moveit.dir/all] 오류 2
+In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/src/omy_f3m_hello_moveit.cpp:17:
+/home/etri/ros2_ws/open_manipulator/open_manipulator_playground/include/open_manipulator_playground/omy_f3m_hello_moveit.h:25:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+   25 | #include <moveit/move_group_interface/move_group_interface.hpp>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[2]: *** [CMakeFiles/omy_f3m_hello_moveit.dir/build.make:76: CMakeFiles/omy_f3m_hello_moveit.dir/src/omy_f3m_hello_moveit.cpp.o] 오류 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/omy_f3m_hello_moveit.dir/all] 오류 2
+gmake: *** [Makefile:146: all] 오류 2

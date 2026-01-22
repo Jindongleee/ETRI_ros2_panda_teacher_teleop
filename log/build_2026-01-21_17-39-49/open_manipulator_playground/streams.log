@@ -1,0 +1,27 @@
+[0.025s] Invoking command in '/home/etri/ros2_ws/build/open_manipulator_playground': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/etri/ros2_ws/build/open_manipulator_playground -- -j24 -l24
+[0.139s] [ 16%] Building CXX object CMakeFiles/omy_f3m_hello_moveit.dir/src/omy_f3m_hello_moveit.cpp.o
+[0.139s] [ 33%] Building CXX object CMakeFiles/omy_3m_hello_moveit.dir/src/omy_3m_hello_moveit.cpp.o
+[0.139s] [ 50%] Building CXX object CMakeFiles/open_manipulator_x_hello_moveit.dir/src/open_manipulator_x_hello_moveit.cpp.o
+[0.248s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/src/omy_3m_hello_moveit.cpp:17:
+[0.248s] /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/include/open_manipulator_playground/omy_3m_hello_moveit.h:25:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.248s]    25 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.249s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.249s] compilation terminated.
+[0.253s] gmake[2]: *** [CMakeFiles/omy_3m_hello_moveit.dir/build.make:76: CMakeFiles/omy_3m_hello_moveit.dir/src/omy_3m_hello_moveit.cpp.o] 오류 1
+[0.253s] gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/omy_3m_hello_moveit.dir/all] 오류 2
+[0.253s] gmake[1]: *** 끝나지 않은 작업을 기다리고 있습니다....
+[0.281s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/src/open_manipulator_x_hello_moveit.cpp:17:
+[0.281s] /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/include/open_manipulator_playground/open_manipulator_x_hello_moveit.h:25:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.281s]    25 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.281s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.281s] compilation terminated.
+[0.285s] gmake[2]: *** [CMakeFiles/open_manipulator_x_hello_moveit.dir/build.make:76: CMakeFiles/open_manipulator_x_hello_moveit.dir/src/open_manipulator_x_hello_moveit.cpp.o] 오류 1
+[0.285s] gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/open_manipulator_x_hello_moveit.dir/all] 오류 2
+[0.383s] In file included from /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/src/omy_f3m_hello_moveit.cpp:17:
+[0.385s] /home/etri/ros2_ws/open_manipulator/open_manipulator_playground/include/open_manipulator_playground/omy_f3m_hello_moveit.h:25:10: fatal error: moveit/move_group_interface/move_group_interface.hpp: 그런 파일이나 디렉터리가 없습니다
+[0.385s]    25 | #include <moveit/move_group_interface/move_group_interface.hpp>
+[0.385s]       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.385s] compilation terminated.
+[0.391s] gmake[2]: *** [CMakeFiles/omy_f3m_hello_moveit.dir/build.make:76: CMakeFiles/omy_f3m_hello_moveit.dir/src/omy_f3m_hello_moveit.cpp.o] 오류 1
+[0.391s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/omy_f3m_hello_moveit.dir/all] 오류 2
+[0.391s] gmake: *** [Makefile:146: all] 오류 2

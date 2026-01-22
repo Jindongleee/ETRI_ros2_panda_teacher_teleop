@@ -157,9 +157,18 @@ def generate_launch_description():
             'base_frame': 'leader_link0',  # omy_l100 base frame
             'ee_frame': 'leader_link7',    # omy_l100 end-effector frame
             'joint_states_topic': '/leader/joint_states',
-            'linear_scale': 2.0,   # Adjust based on testing
-            'angular_scale': 1.0,  # Adjust based on testing
-            'publish_rate': 50.0
+            'linear_scale': 10.0,   # 스케일 대폭 증가 (이전: 2.0)
+            'angular_scale': 5.0,   # 스케일 대폭 증가 (이전: 1.0)
+            'publish_rate': 100.0,   # Servo와 주파수 일치 (이전: 50.0)
+            # 축 반전 파라미터 (리더암과 팔로워암 좌표계 방향이 반대일 때)
+            # 1.0 = 정방향, -1.0 = 반전
+            # 리더암 위로 올리면 팔로워암도 위로 가도록 Z축 반전
+            'invert_linear_x': 1.0,
+            'invert_linear_y': 1.0,
+            'invert_linear_z': -1.0,  # Z축 반전 (위로 올리면 위로 가도록)
+            'invert_angular_x': 1.0,
+            'invert_angular_y': 1.0,
+            'invert_angular_z': 1.0
         }]
     )
     
@@ -179,6 +188,15 @@ def generate_launch_description():
         }]
     )
     
+    # Clutch Control Node (keyboard 'b' key for clutch toggle)
+    clutch_control_node = Node(
+        package='panda_teleop_omy_l100',
+        executable='clutch_control_node.py',
+        name='clutch_control_node',
+        output='screen',
+        prefix='xterm -e'  # Run in separate terminal for keyboard input
+    )
+    
     # ========================================
     # Delayed Starts (to avoid resource conflicts)
     # ========================================
@@ -187,7 +205,7 @@ def generate_launch_description():
     # and trajectory_to_joint_states_node has time to publish initial joint_states
     delayed_control_nodes = TimerAction(
         period=3.0,
-        actions=[servo_node, omy_l100_to_twist_node, omy_l100_to_gripper_node]
+        actions=[servo_node, omy_l100_to_twist_node, omy_l100_to_gripper_node, clutch_control_node]
     )
     
     # Delay RViz startup by 5 seconds to ensure everything is ready

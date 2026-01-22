@@ -1,0 +1,16 @@
+/home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller/src/spring_actuator_controller.cpp: In instantiation of ‘spring_actuator_controller::SpringActuatorController::update(const rclcpp::Time&, const rclcpp::Duration&)::<lambda(std::vector<double, std::allocator<double> >&, const auto:42&)> [with auto:42 = std::vector<std::reference_wrapper<hardware_interface::LoanedStateInterface>, std::allocator<std::reference_wrapper<hardware_interface::LoanedStateInterface> > >]’:
+/home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller/src/spring_actuator_controller.cpp:80:30:   required from here
+/home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller/src/spring_actuator_controller.cpp:75:40: error: ‘class hardware_interface::LoanedStateInterface’ has no member named ‘get_optional’
+   75 |           joint_interface[index].get().get_optional().value_or(0.0);
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller/src/spring_actuator_controller.cpp: In member function ‘virtual controller_interface::return_type spring_actuator_controller::SpringActuatorController::update(const rclcpp::Time&, const rclcpp::Duration&)’:
+/home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller/src/spring_actuator_controller.cpp:117:65: error: void value not ignored as it ought to be
+  117 |     bool set_ok = joint_command_interface_[0][i].get().set_value(scaled_torque);
+      |                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+/home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller/src/spring_actuator_controller.cpp: In member function ‘virtual controller_interface::CallbackReturn spring_actuator_controller::SpringActuatorController::on_deactivate(const rclcpp_lifecycle::State&)’:
+/home/etri/ros2_ws/open_manipulator/ros2_controller/om_spring_actuator_controller/src/spring_actuator_controller.cpp:233:91: error: void value not ignored as it ought to be
+  233 |       bool set_ok = command_interfaces_[i * command_interface_types_.size() + j].set_value(0.0);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+gmake[2]: *** [CMakeFiles/spring_actuator_controller.dir/build.make:76: CMakeFiles/spring_actuator_controller.dir/src/spring_actuator_controller.cpp.o] 오류 1
+gmake[1]: *** [CMakeFiles/Makefile2:165: CMakeFiles/spring_actuator_controller.dir/all] 오류 2
+gmake: *** [Makefile:146: all] 오류 2
