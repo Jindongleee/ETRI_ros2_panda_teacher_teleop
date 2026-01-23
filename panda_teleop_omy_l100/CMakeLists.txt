@@ -12,6 +12,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(trajectory_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 find_package(moveit_servo REQUIRED)
 find_package(robot_state_publisher REQUIRED)
 find_package(urdf REQUIRED)
@@ -31,6 +32,7 @@ install(PROGRAMS
   src/omy_l100_to_gripper_node.py
   src/clutch_control_node.py
   src/clutch_pedal_node.py
+  src/data_collection_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -17,8 +17,9 @@ Usage:
     ros2 launch panda_teleop_omy_l100 panda_teleop_omy_l100.launch.py
     
 Optional arguments:
-    use_sim_time:=true/false  (default: false)
-    use_rviz:=true/false      (default: true)
+    use_sim_time:=true/false           (default: false)
+    use_rviz:=true/false               (default: true)
+    enable_data_collection:=true/false (default: false)
 """
 
 import os
@@ -46,10 +47,12 @@ def generate_launch_description():
     rviz_config_file = os.path.join(custom_panda_pkg, 'config', 'view_robot.rviz')
     servo_config_file = os.path.join(panda_teleop_pkg, 'config', 'servo_config.yaml')
     kinematics_file = os.path.join(panda_teleop_pkg, 'config', 'kinematics.yaml')
+    data_collection_config_file = os.path.join(panda_teleop_pkg, 'config', 'data_collection_config.yaml')
     
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
+    enable_data_collection = LaunchConfiguration('enable_data_collection', default='false')
     # OMY L100 리더 하드웨어 포트 (기본: /dev/ttyUSB0)
     port_name = LaunchConfiguration('port_name', default='/dev/ttyUSB0')
     
@@ -212,6 +215,20 @@ def generate_launch_description():
     # )
     
     # ========================================
+    # Data Collection Node (for Imitation Learning)
+    # ========================================
+    
+    # Data Collection Node (optional - enable with enable_data_collection:=true)
+    data_collection_node = Node(
+        package='panda_teleop_omy_l100',
+        executable='data_collection_node.py',
+        name='data_collection_node',
+        output='screen',
+        parameters=[data_collection_config_file],
+        condition=IfCondition(enable_data_collection)
+    )
+    
+    # ========================================
     # Delayed Starts (to avoid resource conflicts)
     # ========================================
     
@@ -220,6 +237,12 @@ def generate_launch_description():
     delayed_control_nodes = TimerAction(
         period=3.0,
         actions=[servo_node, omy_l100_to_twist_node, omy_l100_to_gripper_node, clutch_pedal_node]
+    )
+    
+    # Data collection node (delayed 7 seconds to ensure all systems ready)
+    delayed_data_collection = TimerAction(
+        period=7.0,
+        actions=[data_collection_node]
     )
     
     # Delay RViz startup by 5 seconds to ensure everything is ready
@@ -262,6 +285,11 @@ def generate_launch_description():
             default_value='/dev/ttyUSB0',
             description='Port name for omy_l100 hardware connection (e.g., /dev/ttyUSB0, /dev/ttyUSB1)'
         ),
+        DeclareLaunchArgument(
+            'enable_data_collection',
+            default_value='false',
+            description='Enable data collection for imitation learning (default: false)'
+        ),
         
         # Omy L100 Leader Arm (starts immediately)
         omy_l100_leader_launch,
@@ -277,5 +305,8 @@ def generate_launch_description():
         delayed_start_servo,
         
         # Visualization (delayed 5 seconds at t=5s)
-        delayed_rviz
+        delayed_rviz,
+        
+        # Data collection (delayed 7 seconds at t=7s, optional)
+        delayed_data_collection
     ])

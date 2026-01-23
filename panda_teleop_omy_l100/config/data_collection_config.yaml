@@ -1,0 +1,30 @@
+data_collection_node:
+  ros__parameters:
+    # Episode Configuration
+    max_episodes: 3                    # Number of episodes to collect
+    controller_type: "omy_l100"        # Controller identifier for comparison
+    
+    # Data Collection Rate
+    collection_rate: 15.0              # Hz (samples per second)
+    
+    # Workspace Limits (Panda robot safe operating range)
+    # All values in meters relative to panda_link0
+    workspace_x_min: 0.3               # Forward limit
+    workspace_x_max: 0.65              # Backward limit
+    workspace_y_min: -0.3              # Left limit
+    workspace_y_max: 0.3               # Right limit
+    workspace_z_min: 0.15              # Lower limit (above table)
+    workspace_z_max: 0.55              # Upper limit
+    
+    # Episode Termination Conditions
+    reach_threshold: 0.02              # Target reach distance in meters (2cm)
+    velocity_threshold: 0.008          # Linear velocity threshold in m/s (8mm/s)
+    angular_velocity_threshold: 0.015  # Angular velocity threshold in rad/s (~0.86 deg/s)
+    stationary_duration: 3.0           # Required stationary time in seconds
+    max_episode_duration: 60.0         # Maximum episode time in seconds (timeout)
+    
+    # Storage Configuration
+    output_dir: "./data"               # Output directory for collected data
+    
+    # Visualization
+    enable_rviz_markers: true          # Enable RViz marker visualization
