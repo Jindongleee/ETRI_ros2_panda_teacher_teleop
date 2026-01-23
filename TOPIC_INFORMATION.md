@@ -6,6 +6,10 @@
 1. **조이스틱 제어 모드** (servo_complete.launch.py)
 2. **OMY L100 리더암 텔레오퍼레이션 모드** (panda_teleop_omy_l100.launch.py)
 
+**공통 안전 기능**: 두 모드 모두 클러치 페달(PCsensor FootSwitch)을 사용하여 안전 제어를 수행합니다.
+- 클러치 페달을 누르고 있을 때만 로봇이 움직입니다 (hold-to-activate)
+- 클러치를 놓으면 즉시 정지합니다
+
 ---
 
 ## 1. 조이스틱 제어 모드 (Joystick Control Mode)
@@ -15,33 +19,42 @@
   - 조이스틱 입력 데이터 (버튼, 축 값)
 
 ### 1.2 joy_to_twist_node
-- **Sub**: `/joy` (MT: `sensor_msgs/msg/Joy`)
+- **Sub**: 
+  - `/joy` (MT: `sensor_msgs/msg/Joy`)
+  - `/clutch/active` (MT: `std_msgs/msg/Bool`)
+    - 클러치 페달 상태 (True: 활성, False: 비활성) - 안전 제어용
 - **Pub**: 
   - `/servo_node/delta_twist_cmds` (MT: `geometry_msgs/msg/TwistStamped`)
-    - 조이스틱 입력을 변환한 엔드이펙터 속도 명령
+    - 조이스틱 입력을 변환한 엔드이펙터 속도 명령 (클러치가 활성화된 경우에만)
   - `/joy_to_twist/status` (MT: `std_msgs/msg/Float64`)
-    - 데드맨 버튼 상태 (1.0: 활성, 0.0: 비활성)
+    - 클러치/제어 상태 (1.0: 활성, 0.0: 비활성)
 
-### 1.3 joy_to_gripper_node
+### 1.3 clutch_pedal_node
+- **Pub**: `/clutch/active` (MT: `std_msgs/msg/Bool`)
+  - 클러치 페달 상태 (True: 활성/로봇 제어 활성화, False: 비활성/일시정지)
+  - PCsensor FootSwitch 하드웨어에서 직접 읽음 (evdev 기반)
+  - 안전 기능: 클러치를 누르고 있을 때만 로봇이 움직임 (hold-to-activate)
+
+### 1.4 joy_to_gripper_node
 - **Sub**: `/joy` (MT: `sensor_msgs/msg/Joy`)
 - **Pub**: `/gripper/position` (MT: `std_msgs/msg/Float64`)
   - 그리퍼 위치 명령 (0.0: 열림, 0.8: 닫힘)
 
-### 1.4 trajectory_to_joint_states (custom_panda_description)
+### 1.5 trajectory_to_joint_states (custom_panda_description)
 - **Sub**: 
   - `/panda_arm_controller/joint_trajectory` (MT: `trajectory_msgs/msg/JointTrajectory`)
   - `/gripper/position` (MT: `std_msgs/msg/Float64`)
 - **Pub**: `/joint_states` (MT: `sensor_msgs/msg/JointState`)
   - 로봇의 모든 관절 상태 (위치, 속도)
 
-### 1.5 servo_node (MoveIt Servo)
+### 1.6 servo_node (MoveIt Servo)
 - **Sub**: 
   - `/servo_node/delta_twist_cmds` (MT: `geometry_msgs/msg/TwistStamped`)
   - `/joint_states` (MT: `sensor_msgs/msg/JointState`)
 - **Pub**: `/panda_arm_controller/joint_trajectory` (MT: `trajectory_msgs/msg/JointTrajectory`)
   - 역기구학으로 계산된 관절 궤적 명령
 
-### 1.6 robot_state_publisher
+### 1.7 robot_state_publisher
 - **Sub**: `/joint_states` (MT: `sensor_msgs/msg/JointState`)
 - **Pub**: 
   - `/tf` (MT: `tf2_msgs/msg/TFMessage`)
@@ -99,7 +112,7 @@
 ### 주요 입력 토픽 (Input Topics)
 - `/joy` - 조이스틱 입력 (조이스틱 모드)
 - `/leader/joint_states` - 리더암 관절 상태 (텔레오퍼레이션 모드)
-- `/clutch/active` - 클러치 페달 상태 (텔레오퍼레이션 모드)
+- `/clutch/active` - 클러치 페달 상태 (두 모드 모두에서 안전 제어용)
 - `/panda_arm_controller/joint_trajectory` - 관절 궤적 명령
 - `/gripper/position` - 그리퍼 위치 명령
 - `/joint_states` - 로봇 관절 상태
@@ -144,8 +157,10 @@
 
 ### 조이스틱 모드:
 ```
+clutch_pedal_node → /clutch/active
 joy_node → joy_to_twist_node → servo_node → trajectory_to_joint_states → robot_state_publisher
          → joy_to_gripper_node → trajectory_to_joint_states
+         (joy_to_twist_node는 /clutch/active를 구독하여 안전 제어)
 ```
 
 ### 텔레오퍼레이션 모드:
@@ -161,3 +176,6 @@ clutch_pedal_node → (모든 제어 노드에 클러치 신호 전달)
 - 모든 토픽은 ROS2 표준 메시지 타입을 사용합니다.
 - QoS 설정은 노드별로 다를 수 있습니다 (일반적으로 BEST_EFFORT 또는 RELIABLE).
 - TF는 robot_state_publisher를 통해 자동으로 발행됩니다.
+- **안전 기능**: 두 모드 모두 클러치 페달을 사용하여 안전 제어를 수행합니다.
+  - 클러치 페달을 누르고 있을 때만 로봇이 움직입니다 (hold-to-activate).
+  - 클러치를 놓으면 즉시 정지합니다.

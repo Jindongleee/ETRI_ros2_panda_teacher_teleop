@@ -4,21 +4,25 @@
 Joy to Twist Node
 Converts joystick inputs to TwistStamped commands for MoveIt Servo
 
+Safety control:
+- By default, uses clutch pedal (/clutch/active topic) for safety control
+- Can fall back to joystick deadman button (L1) if use_clutch:=false
+
 Button mapping for your joystick:
-- L1 (Button 4): Deadman switch (must be held for movement)
+- Clutch pedal (default): Must be held for movement (safety feature)
 - Left Stick X (Axis 0): Linear X (좌: 0.5, 우: -0.5)
 - Left Stick Y (Axis 1): Linear Y (상: 0.5, 하: -0.5)
 - Right Stick X (Axis 3): Linear Z (좌: 0.5, 우: -0.5)
 - Right Stick Y (Axis 4): Not used
-- L1 (Button 4): Angular Z = 0.8
-- L1+L2 (Button 4+8): Angular Z = -0.8
+- L1 (Button 4): Angular Z = 0.8 (when clutch is active)
+- L1+L2 (Button 4+8): Angular Z = -0.8 (when clutch is active)
 """
 
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import TwistStamped
-from std_msgs.msg import Float64
+from std_msgs.msg import Float64, Bool
 
 
 class JoyToTwist(Node):
@@ -29,9 +33,10 @@ class JoyToTwist(Node):
         # We keep the result roughly in [-1, 1] so MoveIt Servo doesn't skip commands.
         self.declare_parameter('linear_scale', 3.0)
         self.declare_parameter('angular_scale', 3.5)
-        self.declare_parameter('deadman_button', 6)  # L1 button
+        self.declare_parameter('deadman_button', 6)  # L1 button (deprecated, use clutch instead)
         self.declare_parameter('l2_button', 8)  # L2 button
         self.declare_parameter('frame_id', 'panda_link8')  # End-effector 기준
+        self.declare_parameter('use_clutch', True)  # Use clutch pedal instead of deadman button
         
         # Joystick axis mapping (which axis controls which linear/angular direction)
         self.declare_parameter('axis_linear_x', 0)   # Left stick X
@@ -54,6 +59,10 @@ class JoyToTwist(Node):
         self.l2_button = self.get_parameter('l2_button').value
         self.frame_id = self.get_parameter('frame_id').value
         self.axis_deadzone = self.get_parameter('axis_deadzone').value
+        self.use_clutch = self.get_parameter('use_clutch').value
+        
+        # Clutch state (when use_clutch is True)
+        self.clutch_active = False
         
         self.axis_linear_x = self.get_parameter('axis_linear_x').value
         self.axis_linear_y = self.get_parameter('axis_linear_y').value
@@ -73,6 +82,18 @@ class JoyToTwist(Node):
             10
         )
         
+        # Clutch subscriber (if using clutch instead of deadman button)
+        if self.use_clutch:
+            self.clutch_sub = self.create_subscription(
+                Bool,
+                '/clutch/active',
+                self.clutch_callback,
+                10
+            )
+            self.get_logger().info('Using clutch pedal for safety control')
+        else:
+            self.get_logger().info('Using joystick deadman button for safety control')
+        
         # Publishers
         self.twist_pub = self.create_publisher(
             TwistStamped,
@@ -89,6 +110,10 @@ class JoyToTwist(Node):
         
         self.last_joy_time = self.get_clock().now()
         self.joy_received = False
+    
+    def clutch_callback(self, msg: Bool):
+        """Handle clutch state changes"""
+        self.clutch_active = msg.data
         
     def joy_callback(self, msg: Joy):
         """Convert joystick input to twist command"""
@@ -109,11 +134,17 @@ class JoyToTwist(Node):
         twist.twist.angular.y = 0.0
         twist.twist.angular.z = 0.0
         
-        # Check if deadman button (L1) is pressed
-        l1_pressed = len(msg.buttons) > self.deadman_button and msg.buttons[self.deadman_button] == 1
+        # Check if control is enabled (clutch or deadman button)
+        if self.use_clutch:
+            # Use clutch pedal state
+            control_enabled = self.clutch_active
+        else:
+            # Use deadman button (legacy mode)
+            control_enabled = len(msg.buttons) > self.deadman_button and msg.buttons[self.deadman_button] == 1
+        
         l2_pressed = len(msg.buttons) > self.l2_button and msg.buttons[self.l2_button] == 1
         
-        if l1_pressed:
+        if control_enabled:
             # Helper function to apply deadzone
             def apply_deadzone(value, deadzone):
                 """Apply deadzone: if |value| < deadzone, return 0.0"""
@@ -185,9 +216,9 @@ class JoyToTwist(Node):
         # Always publish (even zeros for safety)
         self.twist_pub.publish(twist)
         
-        # Publish status (1.0 if deadman pressed, 0.0 otherwise)
+        # Publish status (1.0 if control enabled, 0.0 otherwise)
         status = Float64()
-        if l1_pressed:
+        if control_enabled:
             status.data = 1.0
         else:
             status.data = 0.0

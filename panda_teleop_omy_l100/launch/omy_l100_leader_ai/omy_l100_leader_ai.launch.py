@@ -60,8 +60,8 @@ def generate_launch_description():
             description='Port name for hardware connection.',
         ),
         DeclareLaunchArgument(
-            'use_self_collision_avoidance',
-            default_value='true',
+            'use_self_collision_avoidance', # 자체 충돌 회피 노드 비활성화
+            default_value='false',
             description='Whether to launch the self-collision detection node',
         ),
         DeclareLaunchArgument(

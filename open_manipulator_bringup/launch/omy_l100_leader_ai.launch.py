@@ -132,6 +132,8 @@ def generate_launch_description():
         arguments=[
             'joint_state_broadcaster',
             'joint_trajectory_command_broadcaster',
+            'gravity_compensation_controller',
+            'spring_actuator_controller',
         ],
         parameters=[{'robot_description': urdf_file}],
     )

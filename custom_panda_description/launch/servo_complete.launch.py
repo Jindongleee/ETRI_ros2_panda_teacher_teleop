@@ -8,7 +8,8 @@ This launch file includes:
 - RViz (visualization)
 - joy_node (joystick input)
 - servo_node (MoveIt Servo)
-- joy_to_servo_node (joystick to servo converter)
+- joy_to_twist_node (joystick to servo converter)
+- clutch_pedal_node (safety control - robot only moves when pedal is held)
 
 Usage:
     ros2 launch custom_panda_description servo_complete.launch.py
@@ -16,6 +17,9 @@ Usage:
 Optional arguments:
     use_sim_time:=true/false  (default: false)
     use_rviz:=true/false      (default: true)
+    
+Safety:
+    Robot only moves when clutch pedal is held down (hold-to-activate safety feature)
 """
 
 import os
@@ -137,6 +141,7 @@ def generate_launch_description():
     )
     
     # Joystick to Twist Node (converts joy messages to twist commands)
+    # Now uses clutch pedal for safety control instead of joystick deadman button
     joy_to_twist_node = Node(
         package='custom_panda_description',
         executable='joy_to_twist_node.py',
@@ -146,9 +151,10 @@ def generate_launch_description():
             # Scales are further normalized in the node to keep commands within [-1, 1]
             'linear_scale': 10.0,
             'angular_scale': 10.0,
-            'deadman_button': 6,  # L1 button
+            'deadman_button': 6,  # L1 button (deprecated, kept for backward compatibility)
             'l2_button': 8,  # L2 button
             'frame_id': 'panda_link8',  # End-effector 기준으로 변경
+            'use_clutch': True,  # Use clutch pedal instead of deadman button
             # Joystick axis mapping (which axis controls which direction)
             # Default: Left stick X/Y for linear X/Y, Right stick Y for linear Z
             'axis_linear_x': 0,   # Left stick X (좌우)
@@ -181,6 +187,20 @@ def generate_launch_description():
         }]
     )
     
+    # Clutch Pedal Node (evdev-based - reads PCsensor FootSwitch directly)
+    # This provides safety control: robot only moves when clutch pedal is held
+    clutch_pedal_node = Node(
+        package='panda_teleop_omy_l100',
+        executable='clutch_pedal_node.py',
+        name='clutch_pedal_node',
+        output='screen',
+        parameters=[{
+            'device_name': 'PCsensor FootSwitch',  # Auto-detect by name
+            # 'device_path': '/dev/input/event18',  # Or specify path directly
+            'key_code': 48  # KEY_B = 48
+        }]
+    )
+    
     # ========================================
     # Delayed Starts (to avoid resource conflicts)
     # ========================================
@@ -189,7 +209,7 @@ def generate_launch_description():
     # has time to publish initial joint_states before servo_node starts
     delayed_control_nodes = TimerAction(
         period=2.0,
-        actions=[joy_node, servo_node, joy_to_twist_node, joy_to_gripper_node]
+        actions=[joy_node, servo_node, joy_to_twist_node, joy_to_gripper_node, clutch_pedal_node]
     )
     
     # Delay RViz startup by 3 seconds to ensure everything is ready
