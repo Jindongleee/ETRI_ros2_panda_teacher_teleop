@@ -33,6 +33,7 @@ Episode Management:
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import JointState
 from geometry_msgs.msg import TwistStamped
 from std_msgs.msg import Bool
@@ -137,11 +138,16 @@ class DataCollectionNode(Node):
         self.tf_listener = TransformListener(self.tf_buffer, self)
         
         # ===== Subscribers =====
+        # Use BEST_EFFORT QoS to match trajectory_to_joint_states publisher
+        qos_profile = QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            depth=10
+        )
         self.joint_states_sub = self.create_subscription(
             JointState,
             '/joint_states',
             self.joint_states_callback,
-            10
+            qos_profile
         )
         
         self.twist_cmd_sub = self.create_subscription(
@@ -238,6 +244,12 @@ class DataCollectionNode(Node):
     def joint_states_callback(self, msg: JointState):
         """Store latest joint state"""
         self.latest_joint_state = msg
+        # Debug: Log first few callbacks to verify it's working
+        if not hasattr(self, '_joint_states_callback_count'):
+            self._joint_states_callback_count = 0
+        self._joint_states_callback_count += 1
+        if self._joint_states_callback_count <= 3:
+            self.get_logger().info(f'✅ joint_states_callback received! Count: {self._joint_states_callback_count}, Joints: {len(msg.position)}')
     
     def twist_cmd_callback(self, msg: TwistStamped):
         """Store latest twist command"""
@@ -301,13 +313,30 @@ class DataCollectionNode(Node):
     
     def collect_data_sample(self):
         """Collect one data sample: {state, action}"""
-        # Check if we have all required data
-        if self.latest_joint_state is None or self.latest_twist_cmd is None or self.latest_ee_pose is None:
+        # Check if we have all required data (with debug logging)
+        missing_data = []
+        if self.latest_joint_state is None:
+            missing_data.append('joint_state')
+        if self.latest_twist_cmd is None:
+            missing_data.append('twist_cmd')
+        if self.latest_ee_pose is None:
+            missing_data.append('ee_pose')
+        
+        if missing_data:
+            self.get_logger().warn(
+                f'⚠️ Missing data for sample collection: {", ".join(missing_data)} | '
+                f'Episode: {self.current_episode}, State: {self.episode_state.name}',
+                throttle_duration_sec=2.0
+            )
             return
         
         # Check workspace bounds
         if not self.is_in_workspace(self.latest_ee_pose['position']):
-            self.get_logger().warn('EE out of workspace! Skipping sample...', throttle_duration_sec=2.0)
+            self.get_logger().warn(
+                f'⚠️ EE out of workspace! Position: [{self.latest_ee_pose["position"][0]:.3f}, '
+                f'{self.latest_ee_pose["position"][1]:.3f}, {self.latest_ee_pose["position"][2]:.3f}]',
+                throttle_duration_sec=2.0
+            )
             return
         
         # Get current state
@@ -343,6 +372,21 @@ class DataCollectionNode(Node):
         
         self.episode_data.append(sample)
         self.episode_seq += 1
+        
+        # 실시간 state-action 출력
+        ee_pos = state['ee_pose'][:3]  # [x, y, z]
+        linear_vel = action['delta_twist'][:3]  # [vx, vy, vz]
+        angular_vel = action['delta_twist'][3:]  # [wx, wy, wz]
+        linear_vel_norm = np.linalg.norm(linear_vel)
+        angular_vel_norm = np.linalg.norm(angular_vel)
+        
+        self.get_logger().info(
+            f'[Episode {self.current_episode:03d} | Seq {self.episode_seq:04d} | Total: {len(self.episode_data):04d}] '
+            f'State: EE=[{ee_pos[0]:.3f}, {ee_pos[1]:.3f}, {ee_pos[2]:.3f}] | '
+            f'Action: v=[{linear_vel[0]:.4f}, {linear_vel[1]:.4f}, {linear_vel[2]:.4f}] '
+            f'|v|={linear_vel_norm:.4f}, w=[{angular_vel[0]:.4f}, {angular_vel[1]:.4f}, {angular_vel[2]:.4f}] '
+            f'|w|={angular_vel_norm:.4f}'
+        )
     
     def check_episode_progress(self):
         """Check if target is reached"""
@@ -500,6 +544,10 @@ class DataCollectionNode(Node):
     
     def publish_markers(self):
         """Publish RViz markers for visualization"""
+        # Check if target position is initialized
+        if self.target_position is None:
+            return
+        
         marker_array = MarkerArray()
         
         # Target marker (red sphere)
@@ -510,9 +558,9 @@ class DataCollectionNode(Node):
         target_marker.id = 0
         target_marker.type = Marker.SPHERE
         target_marker.action = Marker.ADD
-        target_marker.pose.position.x = self.target_position[0]
-        target_marker.pose.position.y = self.target_position[1]
-        target_marker.pose.position.z = self.target_position[2]
+        target_marker.pose.position.x = float(self.target_position[0])
+        target_marker.pose.position.y = float(self.target_position[1])
+        target_marker.pose.position.z = float(self.target_position[2])
         target_marker.pose.orientation.w = 1.0
         target_marker.scale.x = 0.05  # 5cm diameter
         target_marker.scale.y = 0.05
@@ -534,9 +582,9 @@ class DataCollectionNode(Node):
             text_marker.id = 1
             text_marker.type = Marker.TEXT_VIEW_FACING
             text_marker.action = Marker.ADD
-            text_marker.pose.position.x = self.target_position[0]
-            text_marker.pose.position.y = self.target_position[1]
-            text_marker.pose.position.z = self.target_position[2] + 0.1
+            text_marker.pose.position.x = float(self.target_position[0])
+            text_marker.pose.position.y = float(self.target_position[1])
+            text_marker.pose.position.z = float(self.target_position[2]) + 0.1
             text_marker.text = f'Episode {self.current_episode}/{self.max_episodes}\nDist: {distance*100:.1f}cm'
             text_marker.scale.z = 0.03
             text_marker.color.r = 1.0
