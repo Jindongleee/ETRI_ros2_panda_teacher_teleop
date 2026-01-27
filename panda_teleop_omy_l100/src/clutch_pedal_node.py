@@ -37,7 +37,7 @@ import sys
 
 try:
     import evdev
-    from evdev import InputDevice, ecodes, categorize
+    from evdev import InputDevice, ecodes
 except ImportError:
     print("ERROR: evdev library not found!")
     print("Please install: pip install evdev")
@@ -105,14 +105,15 @@ class ClutchPedalNode(Node):
             self.get_logger().error('3. Or run with sudo (not recommended)')
             sys.exit(1)
         
-        # Grab device (optional - prevents other programs from reading it)
-        # Commented out by default to allow other programs to read keyboard
-        # Uncomment if you want exclusive access:
-        # try:
-        #     self.device.grab()
-        #     self.get_logger().info('Device grabbed (exclusive access)')
-        # except Exception as e:
-        #     self.get_logger().warn(f'Could not grab device: {e}')
+        # Grab device (REQUIRED - prevents other programs like X11 from reading it)
+        # Without grabbing, input events go to X11/keyboard handler instead of our node
+        try:
+            self.device.grab()
+            self.get_logger().info('Device grabbed (exclusive access) - input events will be captured')
+        except Exception as e:
+            self.get_logger().error(f'Could not grab device: {e}')
+            self.get_logger().error('Input events may be captured by other programs (X11, etc.)')
+            self.get_logger().error('Try running with sudo or check permissions')
         
         # Publish initial state (paused)
         self.publish_clutch_state()
@@ -120,11 +121,14 @@ class ClutchPedalNode(Node):
         # Timer for reading events (100 Hz)
         self.timer = self.create_timer(0.01, self.timer_callback)
         
+        # Periodic publisher to ensure topic is always active (10 Hz)
+        self.publish_timer = self.create_timer(0.1, self.periodic_publish_callback)
+        
         self.get_logger().info('===================================')
         self.get_logger().info('Clutch Pedal Node started')
         self.get_logger().info(f'Device: {self.device.path}')
         self.get_logger().info(f'Device name: {self.device.name}')
-        self.get_logger().info(f'Key code: {self.key_code} (KEY_B)')
+        self.get_logger().info(f'Key code: {self.key_code}')
         self.get_logger().info('===================================')
         self.get_logger().info('HOLD pedal to ENABLE teleoperation')
         self.get_logger().info('RELEASE pedal to PAUSE teleoperation')
@@ -141,40 +145,51 @@ class ClutchPedalNode(Node):
         return None
     
     def timer_callback(self):
-        """Read input events from device"""
+        """Read input events from device (non-blocking)"""
         try:
-            # Read all available events (non-blocking)
-            for event in self.device.read():
-                # Filter key events only
-                if event.type == ecodes.EV_KEY:
-                    key_event = categorize(event)
+            # Read all available events using read_one() which is non-blocking
+            # Keep reading until no more events are available
+            while True:
+                try:
+                    event = self.device.read_one()
+                    if event is None:
+                        # No more events available
+                        break
                     
-                    # Check if it's our target key (KEY_B)
-                    if event.code == self.key_code:
-                        prev_state = self.clutch_active
-                        
-                        # Key states:
-                        # 0 = key up (released)
-                        # 1 = key down (pressed)
-                        # 2 = key hold (auto-repeat)
-                        if event.value == 1:  # Key pressed
-                            self.clutch_active = True
-                        elif event.value == 0:  # Key released
-                            self.clutch_active = False
-                        # Ignore value == 2 (auto-repeat), keep current state
-                        
-                        # Log and publish on state change
-                        if prev_state != self.clutch_active:
-                            self.publish_clutch_state()
+                    # Filter key events only
+                    if event.type == ecodes.EV_KEY:
+                        # Check if it's our target key
+                        if event.code == self.key_code:
+                            prev_state = self.clutch_active
                             
-                            if self.clutch_active:
-                                self.get_logger().info('>>> Pedal PRESSED - Teleoperation ACTIVE')
-                            else:
-                                self.get_logger().info('>>> Pedal RELEASED - Teleoperation PAUSED')
+                            # Key states:
+                            # 0 = key up (released)
+                            # 1 = key down (pressed)
+                            # 2 = key hold (auto-repeat)
+                            if event.value == 1:  # Key pressed
+                                self.clutch_active = True
+                            elif event.value == 0:  # Key released
+                                self.clutch_active = False
+                            # Ignore value == 2 (auto-repeat), keep current state
+                            
+                            # Log and publish on state change
+                            if prev_state != self.clutch_active:
+                                self.publish_clutch_state()
+                                
+                                if self.clutch_active:
+                                    self.get_logger().info('>>> Pedal PRESSED - Teleoperation ACTIVE')
+                                else:
+                                    self.get_logger().info('>>> Pedal RELEASED - Teleoperation PAUSED')
+                
+                except BlockingIOError:
+                    # No events available - this is normal, exit loop
+                    break
         
-        except BlockingIOError:
-            # No events available - this is normal
-            pass
+        except OSError as e:
+            # Device might have been disconnected
+            self.get_logger().error(f'Device error: {e}')
+            # Try to republish current state
+            self.publish_clutch_state()
         except Exception as e:
             self.get_logger().error(f'Error reading device: {e}')
     
@@ -183,6 +198,10 @@ class ClutchPedalNode(Node):
         msg = Bool()
         msg.data = self.clutch_active
         self.clutch_pub.publish(msg)
+    
+    def periodic_publish_callback(self):
+        """Periodically publish state to ensure topic is active"""
+        self.publish_clutch_state()
     
     def cleanup(self):
         """Release device"""

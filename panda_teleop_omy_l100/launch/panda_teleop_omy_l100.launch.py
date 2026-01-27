@@ -198,22 +198,10 @@ def generate_launch_description():
         name='clutch_pedal_node',
         output='screen',
         parameters=[{
-            'device_name': 'PCsensor FootSwitch',  # Auto-detect by name
-            # 'device_path': '/dev/input/event18',  # Or specify path directly
+            'device_name': 'PCsensor FootSwitch Keyboard',  # Auto-detect by name
             'key_code': 48  # KEY_B = 48
         }]
-    )
-    
-    # Alternative: Old clutch control node (terminal-based, less reliable)
-    # Uncomment if evdev doesn't work or for testing
-    # clutch_control_node = Node(
-    #     package='panda_teleop_omy_l100',
-    #     executable='clutch_control_node.py',
-    #     name='clutch_control_node',
-    #     output='screen',
-    #     prefix='xterm -e'  # Run in separate terminal for keyboard input
-    # )
-    
+    )    
     # ========================================
     # Data Collection Node (for Imitation Learning)
     # ========================================

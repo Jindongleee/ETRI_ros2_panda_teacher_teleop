@@ -40,6 +40,7 @@ class OmyL100ToTwist(Node):
         self.declare_parameter('angular_scale', 1.5)  # Scale factor for angular velocity
         # 제어 주기: 100 Hz (Servo와 일치, publish_period: 0.01s)
         self.declare_parameter('publish_rate', 100.0)  # Hz
+        
         # 축 반전 파라미터 (리더암과 팔로워암 좌표계 방향이 반대일 때 사용)
         # 1.0 = 정방향, -1.0 = 반전
         self.declare_parameter('invert_linear_x', 1.0)
