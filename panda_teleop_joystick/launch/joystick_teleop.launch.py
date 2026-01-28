@@ -155,7 +155,7 @@ def generate_launch_description():
             # Scales are further normalized in the node to keep commands within [-1, 1]
             'linear_scale': 10.0,
             'angular_scale': 10.0,
-            'frame_id': 'gripper_tip_link',  # End-effector 기준
+            'frame_id': 'panda_link0',  # End-effector 기준
             'use_clutch': True,  # Use clutch pedal for safety control
             
             # Button mapping for button-based controls
@@ -172,7 +172,7 @@ def generate_launch_description():
             
             # Axis inversion (1 = normal, -1 = inverted)
             'invert_linear_x': 1,
-            'invert_linear_y': 1,
+            'invert_linear_y': -1,
             'invert_angular_x': 1,
             'invert_angular_y': 1,
             

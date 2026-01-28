@@ -18,7 +18,7 @@
       move_group_name: "panda_arm"
       planning_frame: "panda_link0"
       ee_frame_name: "gripper_tip_link"
-      robot_link_command_frame: "gripper_tip_link"  # End-effector 기준으로 변경
+      robot_link_command_frame: "panda_link0"  # End-effector 기준으로 변경
 
       incoming_command_timeout: 0.5
       num_outgoing_halt_msgs_to_publish: 4
