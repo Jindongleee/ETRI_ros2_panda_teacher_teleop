@@ -195,8 +195,20 @@ python3 scripts/visualize_episode.py data/omy_l100/session_YYYYMMDD_HHMMSS/episo
 
 ## 📚 Documentation
 
-- Workspace README (this file) - Complete system overview
-- `TOPIC_INFORMATION.md` - ROS2 topic reference
+### 📖 주요 문서
+- **`README.md`** (this file) - 프로젝트 개요 및 Quick Start
+- **`ARCHITECTURE.md`** 📘 - **완전한 시스템 아키텍처** (필독!)
+  - 969줄의 상세한 기술 문서
+  - 전체 시스템 다이어그램
+  - 각 컨트롤러별 노드 상세 설명
+  - 토픽 플로우 및 의존성 그래프
+  - 데이터 수집 시스템 완벽 가이드
+  - 새 컨트롤러 추가 가이드
+- **`QUICK_REFERENCE.md`** 🚀 - 빠른 참조 카드
+  - 자주 쓰는 명령어 모음
+  - 조이스틱 조작법
+  - 문제 해결 체크리스트
+- **`TOPIC_INFORMATION.md`** - ROS2 토픽 상세 레퍼런스
 
 ---
 
