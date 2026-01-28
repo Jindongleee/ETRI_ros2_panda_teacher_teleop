@@ -25,14 +25,12 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}
 )
 
-# Install Python scripts
+# Install Python scripts (OMY L100 specific only)
 install(PROGRAMS
-  src/trajectory_to_joint_states.py
   src/omy_l100_to_twist_node.py
   src/omy_l100_to_gripper_node.py
   src/clutch_control_node.py
-  src/clutch_pedal_node.py
-  src/data_collection_node.py
+  src/disable_collision_flag_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

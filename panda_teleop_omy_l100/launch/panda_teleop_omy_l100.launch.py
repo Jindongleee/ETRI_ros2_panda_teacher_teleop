@@ -39,6 +39,7 @@ def generate_launch_description():
     # Get package directories
     panda_teleop_pkg = get_package_share_directory('panda_teleop_omy_l100')
     custom_panda_pkg = get_package_share_directory('custom_panda_description')
+    panda_common_pkg = get_package_share_directory('panda_common')
     open_manipulator_bringup_pkg = get_package_share_directory('open_manipulator_bringup')
     
     # Paths
@@ -47,7 +48,7 @@ def generate_launch_description():
     rviz_config_file = os.path.join(custom_panda_pkg, 'config', 'view_robot.rviz')
     servo_config_file = os.path.join(panda_teleop_pkg, 'config', 'servo_config.yaml')
     kinematics_file = os.path.join(panda_teleop_pkg, 'config', 'kinematics.yaml')
-    data_collection_config_file = os.path.join(panda_teleop_pkg, 'config', 'data_collection_config.yaml')
+    data_collection_config_file = os.path.join(panda_common_pkg, 'config', 'data_collection_config_omy_l100.yaml')
     
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
@@ -108,7 +109,7 @@ def generate_launch_description():
     # servo_node가 발행하는 /panda_arm_controller/joint_trajectory를 구독하여
     # /joint_states로 변환하여 발행 (robot_state_publisher가 TF를 발행할 수 있도록)
     trajectory_to_joint_states_node = Node(
-        package='panda_teleop_omy_l100',
+        package='panda_common',
         executable='trajectory_to_joint_states.py',
         name='trajectory_to_joint_states',
         output='screen'
@@ -193,7 +194,7 @@ def generate_launch_description():
     
     # Clutch Pedal Node (evdev-based - reads PCsensor FootSwitch directly)
     clutch_pedal_node = Node(
-        package='panda_teleop_omy_l100',
+        package='panda_common',
         executable='clutch_pedal_node.py',
         name='clutch_pedal_node',
         output='screen',
@@ -208,7 +209,7 @@ def generate_launch_description():
     
     # Data Collection Node (optional - enable with enable_data_collection:=true)
     data_collection_node = Node(
-        package='panda_teleop_omy_l100',
+        package='panda_common',
         executable='data_collection_node.py',
         name='data_collection_node',
         output='screen',

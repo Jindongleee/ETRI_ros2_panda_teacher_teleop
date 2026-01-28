@@ -12,10 +12,9 @@ Button mapping for your joystick:
 - Clutch pedal (default): Must be held for movement (safety feature)
 - Left Stick X (Axis 0): Linear X (좌: 0.5, 우: -0.5)
 - Left Stick Y (Axis 1): Linear Y (상: 0.5, 하: -0.5)
-- Right Stick X (Axis 3): Linear Z (좌: 0.5, 우: -0.5)
-- Right Stick Y (Axis 4): Not used
-- L1 (Button 4): Angular Z = 0.8 (when clutch is active)
-- L1+L2 (Button 4+8): Angular Z = -0.8 (when clutch is active)
+- Right Stick Y (Axis 3): Linear Z (상: 0.5, 하: -0.5)
+- L1 (Button 4): Angular X = +0.8 (Roll rotation when clutch is active)
+- L2 (Button 8): Angular X = -0.8 (Roll rotation when clutch is active)
 """
 
 import rclpy
@@ -35,20 +34,20 @@ class JoyToTwist(Node):
         self.declare_parameter('angular_scale', 3.5)
         self.declare_parameter('deadman_button', 6)  # L1 button (deprecated, use clutch instead)
         self.declare_parameter('l2_button', 8)  # L2 button
-        self.declare_parameter('frame_id', 'panda_link8')  # End-effector 기준
+        self.declare_parameter('frame_id', 'gripper_tip_link')  # End-effector 기준
         self.declare_parameter('use_clutch', True)  # Use clutch pedal instead of deadman button
         
         # Joystick axis mapping (which axis controls which linear/angular direction)
         self.declare_parameter('axis_linear_x', 0)   # Left stick X
         self.declare_parameter('axis_linear_y', 1)   # Left stick Y
         self.declare_parameter('axis_linear_z', 3)   # Right stick Y
-        self.declare_parameter('axis_angular_z', 2)  # Right stick X (for rotation)
+        self.declare_parameter('axis_angular_x', -1)  # -1 = button mode (L1/L2)
         
         # Axis inversion (set to -1 to invert, 1 to keep normal)
         self.declare_parameter('invert_linear_x', 1)
         self.declare_parameter('invert_linear_y', 1)
         self.declare_parameter('invert_linear_z', 1)
-        self.declare_parameter('invert_angular_z', 1)
+        self.declare_parameter('invert_angular_x', 1)
         
         # Deadzone for joystick axes (ignore small values to prevent drift)
         self.declare_parameter('axis_deadzone', 0.1)  # Default: 0.1 (10% of full range)
@@ -67,12 +66,12 @@ class JoyToTwist(Node):
         self.axis_linear_x = self.get_parameter('axis_linear_x').value
         self.axis_linear_y = self.get_parameter('axis_linear_y').value
         self.axis_linear_z = self.get_parameter('axis_linear_z').value
-        self.axis_angular_z = self.get_parameter('axis_angular_z').value
+        self.axis_angular_x = self.get_parameter('axis_angular_x').value
         
         self.invert_linear_x = self.get_parameter('invert_linear_x').value
         self.invert_linear_y = self.get_parameter('invert_linear_y').value
         self.invert_linear_z = self.get_parameter('invert_linear_z').value
-        self.invert_angular_z = self.get_parameter('invert_angular_z').value
+        self.invert_angular_x = self.get_parameter('invert_angular_x').value
         
         # Subscribers
         self.joy_sub = self.create_subscription(
@@ -170,43 +169,48 @@ class JoyToTwist(Node):
                 axis_val = apply_deadzone(axis_val, self.axis_deadzone)
                 twist.twist.linear.z = axis_val * self.invert_linear_z * self.linear_scale
             
-            # Angular Z: from configured axis with inversion, or use button mode if axis_angular_z < 0
-            if self.axis_angular_z < 0:
-                # Button mode: L1만 누르면 +angular_scale, L1+L2 누르면 -angular_scale
-                if l2_pressed:
-                    twist.twist.angular.z = -self.angular_scale
+            # Angular X: from configured axis with inversion, or use button mode if axis_angular_x < 0
+            # L1 button (deadman_button) for control, L2 for direction change
+            l1_pressed = len(msg.buttons) > self.deadman_button and msg.buttons[self.deadman_button] == 1
+            
+            if self.axis_angular_x < 0:
+                # Button mode: L1 for +angular_scale, L2 for -angular_scale
+                if l1_pressed and not l2_pressed:
+                    twist.twist.angular.x = self.angular_scale
+                elif l2_pressed and not l1_pressed:
+                    twist.twist.angular.x = -self.angular_scale
                 else:
-                    twist.twist.angular.z = self.angular_scale
+                    twist.twist.angular.x = 0.0
             else:
                 # Axis mode: use joystick axis
-                if len(msg.axes) > abs(self.axis_angular_z):
-                    axis_val = msg.axes[abs(self.axis_angular_z)]
+                if len(msg.axes) > abs(self.axis_angular_x):
+                    axis_val = msg.axes[abs(self.axis_angular_x)]
                     axis_val = apply_deadzone(axis_val, self.axis_deadzone)
-                    twist.twist.angular.z = axis_val * self.invert_angular_z * self.angular_scale
+                    twist.twist.angular.x = axis_val * self.invert_angular_x * self.angular_scale
             
             # Normalize command if any component magnitude > 1.0 (to satisfy MoveIt Servo expectation)
             max_component = max(
                 abs(twist.twist.linear.x),
                 abs(twist.twist.linear.y),
                 abs(twist.twist.linear.z),
-                abs(twist.twist.angular.z),
+                abs(twist.twist.angular.x),
             )
             if max_component > 1.0:
                 scale = 1.0 / max_component
                 twist.twist.linear.x *= scale
                 twist.twist.linear.y *= scale
                 twist.twist.linear.z *= scale
-                twist.twist.angular.z *= scale
+                twist.twist.angular.x *= scale
             
             # Log active movement (only when significant)
             if abs(twist.twist.linear.x) > 0.01 or \
                abs(twist.twist.linear.y) > 0.01 or \
                abs(twist.twist.linear.z) > 0.01 or \
-               abs(twist.twist.angular.z) > 0.01:
+               abs(twist.twist.angular.x) > 0.01:
                 self.get_logger().info(
                     f'Moving - Linear: [{twist.twist.linear.x:.2f}, '
                     f'{twist.twist.linear.y:.2f}, {twist.twist.linear.z:.2f}] '
-                    f'Angular: [{twist.twist.angular.z:.2f}]',
+                    f'Angular X: [{twist.twist.angular.x:.2f}]',
                     throttle_duration_sec=1.0  # Log once per second
                 )
         else:

@@ -54,7 +54,7 @@
       stamp:
         sec: 1769131809
         nanosec: 526113534
-      frame_id: panda_link8
+      frame_id: gripper_tip_link
     twist:
       linear:
         x: 0.02752228327680855

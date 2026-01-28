@@ -19,13 +19,8 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}
 )
 
-# Install Python scripts
-install(PROGRAMS
-  src/joy_to_twist_node.py
-  src/trajectory_to_joint_states.py
-  src/joy_to_gripper_node.py
-  DESTINATION lib/${PROJECT_NAME}
-)
+# No Python scripts in this package
+# (moved to panda_teleop_joystick and panda_common)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

@@ -37,18 +37,22 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     
     # Get package directories
-    pkg_share = get_package_share_directory('custom_panda_description')
+    panda_desc_pkg = get_package_share_directory('custom_panda_description')
+    panda_teleop_pkg = get_package_share_directory('panda_teleop_joystick')
+    panda_common_pkg = get_package_share_directory('panda_common')
     
     # Paths
-    urdf_file = os.path.join(pkg_share, 'urdf', 'panda_with_robotiq.urdf')
-    srdf_file = os.path.join(pkg_share, 'config', 'panda_robotiq.srdf')
-    rviz_config_file = os.path.join(pkg_share, 'config', 'view_robot.rviz')
-    servo_config_file = os.path.join(pkg_share, 'config', 'servo_config.yaml')
-    kinematics_file = os.path.join(pkg_share, 'config', 'kinematics.yaml')
+    urdf_file = os.path.join(panda_desc_pkg, 'urdf', 'panda_with_robotiq.urdf')
+    srdf_file = os.path.join(panda_desc_pkg, 'config', 'panda_robotiq.srdf')
+    rviz_config_file = os.path.join(panda_desc_pkg, 'config', 'view_robot.rviz')
+    servo_config_file = os.path.join(panda_teleop_pkg, 'config', 'servo_config.yaml')
+    kinematics_file = os.path.join(panda_desc_pkg, 'config', 'kinematics.yaml')
+    data_collection_config_file = os.path.join(panda_common_pkg, 'config', 'data_collection_config_joystick.yaml')
     
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
+    enable_data_collection = LaunchConfiguration('enable_data_collection', default='false')
     
     # Read URDF file
     with open(urdf_file, 'r') as infp:
@@ -81,11 +85,11 @@ def generate_launch_description():
     # ========================================
     # Visualization
     # ========================================
-    # Trajectory to Joint States Node
+    # Trajectory to Joint States Node (from panda_common)
     # servo_node가 발행하는 /panda_arm_controller/joint_trajectory를 구독하여
     # /joint_states로 변환하여 발행 (robot_state_publisher가 TF를 발행할 수 있도록)
     trajectory_to_joint_states_node = Node(
-        package='custom_panda_description',
+        package='panda_common',
         executable='trajectory_to_joint_states.py',
         name='trajectory_to_joint_states',
         output='screen'
@@ -143,7 +147,7 @@ def generate_launch_description():
     # Joystick to Twist Node (converts joy messages to twist commands)
     # Now uses clutch pedal for safety control instead of joystick deadman button
     joy_to_twist_node = Node(
-        package='custom_panda_description',
+        package='panda_teleop_joystick',
         executable='joy_to_twist_node.py',
         name='joy_to_twist_node',
         output='screen',
@@ -153,19 +157,19 @@ def generate_launch_description():
             'angular_scale': 10.0,
             'deadman_button': 6,  # L1 button (deprecated, kept for backward compatibility)
             'l2_button': 8,  # L2 button
-            'frame_id': 'panda_link8',  # End-effector 기준으로 변경
+            'frame_id': 'gripper_tip_link',  # End-effector 기준으로 변경
             'use_clutch': True,  # Use clutch pedal instead of deadman button
             # Joystick axis mapping (which axis controls which direction)
             # Default: Left stick X/Y for linear X/Y, Right stick Y for linear Z
             'axis_linear_x': 0,   # Left stick X (좌우)
             'axis_linear_y': 1,   # Left stick Y (상하)
             'axis_linear_z': 3,   # Right stick Y (상하)
-            'axis_angular_z': 2, # -1 = button mode (L1/L2), or axis index for stick control
+            'axis_angular_x': -1, # -1 = button mode (L1=+, L2=-), or axis index for stick control
             # Axis inversion (1 = normal, -1 = inverted)
             'invert_linear_x': 1,
             'invert_linear_y': 1,
             'invert_linear_z': 1,
-            'invert_angular_z': 1,
+            'invert_angular_x': 1,
             # Deadzone for joystick axes (ignore small values to prevent drift)
             # If axis value is within [-deadzone, +deadzone], it's treated as 0.0
             'axis_deadzone': 0.25  # 25% deadzone (adjust if your joystick has more/less drift)
@@ -174,7 +178,7 @@ def generate_launch_description():
 
     # Joystick to Gripper Node (converts joy buttons to gripper open/close)
     joy_to_gripper_node = Node(
-        package='custom_panda_description',
+        package='panda_teleop_joystick',
         executable='joy_to_gripper_node.py',
         name='joy_to_gripper_node',
         output='screen',
@@ -190,12 +194,12 @@ def generate_launch_description():
     # Clutch Pedal Node (evdev-based - reads PCsensor FootSwitch directly)
     # This provides safety control: robot only moves when clutch pedal is held
     clutch_pedal_node = Node(
-        package='panda_teleop_omy_l100',
+        package='panda_common',
         executable='clutch_pedal_node.py',
         name='clutch_pedal_node',
         output='screen',
         parameters=[{
-            'device_name': 'PCsensor FootSwitch',  # Auto-detect by name
+            'device_name': 'PCsensor FootSwitch Keyboard',  # Auto-detect by name
             # 'device_path': '/dev/input/event18',  # Or specify path directly
             'key_code': 48  # KEY_B = 48
         }]
@@ -232,6 +236,23 @@ def generate_launch_description():
         actions=[start_servo_service]
     )
     
+    # Data Collection Node (optional, controlled by enable_data_collection parameter)
+    data_collection_node = Node(
+        package='panda_common',
+        executable='data_collection_node.py',
+        name='data_collection_node',
+        output='screen',
+        parameters=[data_collection_config_file],
+        condition=IfCondition(enable_data_collection)
+    )
+    
+    # Data collection starts delayed (4 seconds) to ensure all other nodes are ready
+    delayed_data_collection = TimerAction(
+        period=4.0,
+        actions=[data_collection_node],
+        condition=IfCondition(enable_data_collection)
+    )
+    
     # ========================================
     # Launch Description
     # ========================================
@@ -248,6 +269,11 @@ def generate_launch_description():
             default_value='true',
             description='Launch RViz for visualization'
         ),
+        DeclareLaunchArgument(
+            'enable_data_collection',
+            default_value='false',
+            description='Enable data collection for imitation learning'
+        ),
         
         # Base Robot (starts immediately at t=0s)
         robot_state_publisher_node,
@@ -260,5 +286,8 @@ def generate_launch_description():
         delayed_start_servo,
         
         # Visualization (delayed 3 seconds at t=3s)
-        delayed_rviz
+        delayed_rviz,
+        
+        # Data Collection (delayed 4 seconds at t=4s, optional)
+        delayed_data_collection
     ])

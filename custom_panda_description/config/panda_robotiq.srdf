@@ -7,7 +7,7 @@
     
     <!-- Panda Arm Group -->
     <group name="panda_arm">
-        <chain base_link="panda_link0" tip_link="panda_link8" />
+        <chain base_link="panda_link0" tip_link="gripper_tip_link" />
     </group>
     
     <!-- Gripper Group -->
@@ -34,7 +34,7 @@
     <!-- End Effector -->
     <!-- ========================================== -->
     
-    <end_effector name="gripper" parent_link="panda_link8" group="gripper" parent_group="panda_arm" />
+    <end_effector name="gripper" parent_link="gripper_tip_link" group="gripper" parent_group="panda_arm" />
     
     <!-- ========================================== -->
     <!-- Group States -->

@@ -33,7 +33,7 @@ class OmyL100ToTwist(Node):
         self.declare_parameter('base_frame', 'leader_link0')  # omy_l100 base frame
         self.declare_parameter('ee_frame', 'leader_link7')  # omy_l100 end-effector frame
         self.declare_parameter('target_frame', 'panda_link0')  # panda base frame (for coordinate transform)
-        self.declare_parameter('follower_ee_frame', 'panda_link8')  # panda end-effector frame
+        self.declare_parameter('follower_ee_frame', 'gripper_tip_link')  # panda end-effector frame
         self.declare_parameter('joint_states_topic', '/leader/joint_states')
         # 스케일: 기본값 (launch 파일에서 오버라이드됨)
         self.declare_parameter('linear_scale', 1.5)   # Scale factor for linear velocity
@@ -256,7 +256,7 @@ class OmyL100ToTwist(Node):
         """Publish zero twist command"""
         twist = TwistStamped()
         twist.header.stamp = self.get_clock().now().to_msg()
-        twist.header.frame_id = 'panda_link8'
+        twist.header.frame_id = 'gripper_tip_link'
         twist.twist.linear.x = 0.0
         twist.twist.linear.y = 0.0
         twist.twist.linear.z = 0.0
@@ -354,7 +354,7 @@ class OmyL100ToTwist(Node):
                     # Create TwistStamped message
                     twist = TwistStamped()
                     twist.header.stamp = current_time.to_msg()
-                    twist.header.frame_id = 'panda_link8'  # panda end-effector frame (servo_config와 일치)
+                    twist.header.frame_id = 'gripper_tip_link'  # panda end-effector frame (servo_config와 일치)
 
                     # Apply scale and compute velocity
                     # 스케일 적용 전 속도 (원본)
@@ -421,7 +421,7 @@ class OmyL100ToTwist(Node):
                 # last_pose가 None이면 0.0 twist를 발행 (초기화 단계)
                 twist = TwistStamped()
                 twist.header.stamp = current_time.to_msg()
-                twist.header.frame_id = 'panda_link8'  # panda end-effector frame
+                twist.header.frame_id = 'gripper_tip_link'  # panda end-effector frame
                 twist.twist.linear.x = 0.0
                 twist.twist.linear.y = 0.0
                 twist.twist.linear.z = 0.0
@@ -457,7 +457,7 @@ class OmyL100ToTwist(Node):
             try:
                 twist = TwistStamped()
                 twist.header.stamp = self.get_clock().now().to_msg()
-                twist.header.frame_id = 'panda_link8'  # panda end-effector frame
+                twist.header.frame_id = 'gripper_tip_link'  # panda end-effector frame
                 twist.twist.linear.x = 0.0
                 twist.twist.linear.y = 0.0
                 twist.twist.linear.z = 0.0

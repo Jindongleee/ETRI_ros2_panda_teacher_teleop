@@ -456,7 +456,7 @@ ros2 topic echo /joint_states
 
 ### TF 확인
 ```bash
-ros2 run tf2_ros tf2_echo panda_link0 panda_link8
+ros2 run tf2_ros tf2_echo panda_link0 gripper_tip_link
 ```
 
 ### 노드 그래프 시각화

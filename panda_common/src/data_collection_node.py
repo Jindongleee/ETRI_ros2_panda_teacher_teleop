@@ -260,7 +260,7 @@ class DataCollectionNode(Node):
         try:
             transform = self.tf_buffer.lookup_transform(
                 'panda_link0',
-                'panda_link8',
+                'gripper_tip_link',
                 rclpy.time.Time(),
                 timeout=rclpy.duration.Duration(seconds=0.1)
             )
