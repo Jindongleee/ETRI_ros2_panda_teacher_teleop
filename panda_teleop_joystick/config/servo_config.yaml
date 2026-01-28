@@ -6,13 +6,13 @@
       command_in_type: "speed_units"
 
       scale:
-        linear: 2.0
-        rotational: 3.5
-        joint: 2.0
+        linear: 1.0
+        rotational: 1.0
+        joint: 1.0
 
-      publish_period: 0.01
+      publish_period: 0.01 # 100 Hz
       low_latency_mode: false
-      low_pass_filter_coeff: 1.1
+      low_pass_filter_coeff: 1.1 
 
       move_group_name: "panda_arm"
       planning_frame: "panda_link0"

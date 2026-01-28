@@ -25,9 +25,9 @@ class JoyToGripper(Node):
     def __init__(self):
         super().__init__('joy_to_gripper_node')
 
-        # Parameters (button indices follow servo_config.yaml joystick section by default)
-        self.declare_parameter('button_open', 8)   # Triangle (DualShock3) / Y
-        self.declare_parameter('button_close', 9)  # Cross     (DualShock3) / A
+        # Parameters (button indices)
+        self.declare_parameter('button_open', 1)   # Circle (Button 1)
+        self.declare_parameter('button_close', 3)  # Square (Button 3)
         self.declare_parameter('step', 0.02)       # Increment per press
         self.declare_parameter('min_position', 0.0)
         self.declare_parameter('max_position', 0.8)  # From SRDF: finger_joint upper ≈ 0.8

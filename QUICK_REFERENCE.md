@@ -26,13 +26,14 @@ ros2 launch panda_teleop_joystick joystick_teleop.launch.py enable_data_collecti
 
 | 입력 | 기능 | 속도 |
 |------|------|------|
-| **Left Stick ↑↓** | Linear X (전후) | 0.5 m/s |
-| **Left Stick ←→** | Linear Y (좌우) | 0.5 m/s |
-| **Right Stick ↑↓** | Linear Z (상하) | 0.5 m/s |
-| **L1** | Angular X + (Roll) | 1.0 rad/s |
-| **L2** | Angular X - (Roll) | 1.0 rad/s |
-| **△ (Triangle)** | 그리퍼 열기 | +0.05 |
-| **✕ (Cross)** | 그리퍼 닫기 | -0.05 |
+| **Left Stick X ←→** | Linear X (좌우) | 0.5 m/s |
+| **Left Stick Y ↑↓** | Linear Y (전후) | 0.5 m/s |
+| **L1 / L2** | Linear Z (상하) | 0.5 m/s |
+| **Right Stick Y ↑↓** | Angular X (Roll) | 1.0 rad/s |
+| **Right Stick X ←→** | Angular Y (Pitch) | 1.0 rad/s |
+| **R1 / R2** | Angular Z (Yaw) | 1.0 rad/s |
+| **○ (Circle)** | 그리퍼 열기 | -0.02 |
+| **□ (Square)** | 그리퍼 닫기 | +0.02 |
 | **클러치 페달** | 로봇 활성화 | - |
 
 ---

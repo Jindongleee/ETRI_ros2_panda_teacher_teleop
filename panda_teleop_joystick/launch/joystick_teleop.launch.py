@@ -155,24 +155,29 @@ def generate_launch_description():
             # Scales are further normalized in the node to keep commands within [-1, 1]
             'linear_scale': 10.0,
             'angular_scale': 10.0,
-            'deadman_button': 6,  # L1 button (deprecated, kept for backward compatibility)
-            'l2_button': 8,  # L2 button
-            'frame_id': 'gripper_tip_link',  # End-effector 기준으로 변경
-            'use_clutch': True,  # Use clutch pedal instead of deadman button
-            # Joystick axis mapping (which axis controls which direction)
-            # Default: Left stick X/Y for linear X/Y, Right stick Y for linear Z
-            'axis_linear_x': 0,   # Left stick X (좌우)
-            'axis_linear_y': 1,   # Left stick Y (상하)
-            'axis_linear_z': 3,   # Right stick Y (상하)
-            'axis_angular_x': -1, # -1 = button mode (L1=+, L2=-), or axis index for stick control
+            'frame_id': 'gripper_tip_link',  # End-effector 기준
+            'use_clutch': True,  # Use clutch pedal for safety control
+            
+            # Button mapping for button-based controls
+            'button_linear_z_up': 6,      # L1 button (Linear Z up)
+            'button_linear_z_down': 8,    # L2 button (Linear Z down)
+            'button_angular_z_pos': 7,    # R1 button (Angular Z positive)
+            'button_angular_z_neg': 9,    # R2 button (Angular Z negative)
+            
+            # Joystick axis mapping
+            'axis_linear_x': 1,      # Left stick X (좌우)
+            'axis_linear_y': 0,      # Left stick Y (전후)
+            'axis_angular_x': 2,     # Right stick Y (Roll)
+            'axis_angular_y': 3,     # Right stick X (Pitch)
+            
             # Axis inversion (1 = normal, -1 = inverted)
             'invert_linear_x': 1,
             'invert_linear_y': 1,
-            'invert_linear_z': 1,
             'invert_angular_x': 1,
-            # Deadzone for joystick axes (ignore small values to prevent drift)
-            # If axis value is within [-deadzone, +deadzone], it's treated as 0.0
-            'axis_deadzone': 0.25  # 25% deadzone (adjust if your joystick has more/less drift)
+            'invert_angular_y': 1,
+            
+            # Deadzone for joystick axes
+            'axis_deadzone': 0.25
         }]
     )
 
@@ -183,8 +188,8 @@ def generate_launch_description():
         name='joy_to_gripper_node',
         output='screen',
         parameters=[{
-            'button_open': 8,   # button_gripper_open in servo_config.yaml
-            'button_close': 9,  # button_gripper_close in servo_config.yaml
+            'button_open': 1,   # Circle button
+            'button_close': 3,  # Square button
             'step': 0.02,
             'min_position': 0.0,
             'max_position': 0.8

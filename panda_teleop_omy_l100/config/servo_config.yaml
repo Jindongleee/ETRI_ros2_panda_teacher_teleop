@@ -11,7 +11,7 @@
         rotational: 1.0
         joint: 1.0
 
-      publish_period: 0.03
+      publish_period: 0.01 # 100 Hz
       low_latency_mode: false
       low_pass_filter_coeff: 1.1
 

@@ -39,7 +39,7 @@ class OmyL100ToTwist(Node):
         self.declare_parameter('linear_scale', 1.5)   # Scale factor for linear velocity
         self.declare_parameter('angular_scale', 1.5)  # Scale factor for angular velocity
         # 제어 주기: 100 Hz (Servo와 일치, publish_period: 0.01s)
-        self.declare_parameter('publish_rate', 100.0)  # Hz
+        self.declare_parameter('publish_rate', 150.0)  # Hz
         
         # 축 반전 파라미터 (리더암과 팔로워암 좌표계 방향이 반대일 때 사용)
         # 1.0 = 정방향, -1.0 = 반전
@@ -71,8 +71,8 @@ class OmyL100ToTwist(Node):
         self.invert_angular_z = self.get_parameter('invert_angular_z').value
 
         # 최대 속도 제한 (대폭 완화)
-        self.max_linear_speed = 1.0   # [m/s] (이전: 0.2)
-        self.max_angular_speed = 2.0  # [rad/s] (이전: 0.5)
+        self.max_linear_speed = 10.0   # [m/s] (이전: 0.2)
+        self.max_angular_speed = 10.0  # [rad/s] (이전: 0.5)
         
         # Clutch control
         self.clutch_active = False  # False = teleoperation active, True = paused

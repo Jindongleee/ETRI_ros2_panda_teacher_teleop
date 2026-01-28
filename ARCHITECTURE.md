@@ -138,10 +138,11 @@ panda_teleop_joystick/
 ```
 
 **조이스틱 매핑**:
-- **Left Stick**: Linear X/Y (전후/좌우)
-- **Right Stick**: Linear Z (상하)
-- **L1/L2**: Angular X (Roll 회전)
-- **Triangle/Cross**: 그리퍼 열기/닫기
+- **Left Stick X/Y**: Linear X/Y (좌우/전후)
+- **L1/L2 버튼**: Linear Z (상하)
+- **Right Stick X/Y**: Angular Y/X (Pitch/Roll)
+- **R1/R2 버튼**: Angular Z (Yaw 회전)
+- **Circle/Square**: 그리퍼 열기/닫기
 
 **역할**:
 - 🎮 조이스틱 입력 → 속도 명령 변환
