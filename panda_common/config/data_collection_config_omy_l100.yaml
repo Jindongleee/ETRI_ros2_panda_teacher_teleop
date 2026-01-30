@@ -5,7 +5,7 @@ data_collection_node:
     controller_type: "omy_l100"        # Controller identifier for comparison
     
     # Data Collection Rate
-    collection_rate: 15.0              # Hz (samples per second)
+    collection_rate: 20.0              # Hz (samples per second)
     
     # Workspace Limits (Panda robot safe operating range)
     # All values in meters relative to panda_link0
@@ -13,7 +13,7 @@ data_collection_node:
     workspace_x_max: 0.65              # Backward limit
     workspace_y_min: -0.3              # Left limit
     workspace_y_max: 0.3               # Right limit
-    workspace_z_min: 0.15              # Lower limit (above table)
+    workspace_z_min: 0.00              # Lower limit (above table)
     workspace_z_max: 0.55              # Upper limit
     
     # Episode Termination Conditions

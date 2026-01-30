@@ -35,13 +35,16 @@ import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import JointState
-from geometry_msgs.msg import TwistStamped
-from std_msgs.msg import Bool
+from geometry_msgs.msg import TwistStamped, Point
+from std_msgs.msg import Bool, ColorRGBA
+from std_srvs.srv import Trigger
 from visualization_msgs.msg import Marker, MarkerArray
+from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from tf2_ros import TransformListener, Buffer
 import numpy as np
 import json
 import os
+import time
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
@@ -132,6 +135,7 @@ class DataCollectionNode(Node):
         self.session_timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         self.session_dir = None
         self.episode_metrics = []
+        self.last_marker_publish_time = None
         
         # ===== TF =====
         self.tf_buffer = Buffer()
@@ -172,6 +176,29 @@ class DataCollectionNode(Node):
                 10
             )
         
+        # Joint Trajectory publisher for moving to home position
+        self.joint_trajectory_pub = self.create_publisher(
+            JointTrajectory,
+            '/panda_arm_controller/joint_trajectory',
+            10
+        )
+        
+        # ===== Service Clients =====
+        # Servo control service clients (MoveIt Servo)
+        # Use stop/start around home motion to avoid Servo pulling robot back
+        self.servo_stop_client = self.create_client(
+            Trigger,
+            '/servo_node/stop_servo'
+        )
+        self.servo_start_client = self.create_client(
+            Trigger,
+            '/servo_node/start_servo'
+        )
+        
+        # ===== Home Position =====
+        # Safe home position for Panda robot (joint angles in radians)
+        self.home_joints = [0.0, -0.785, 0.0, -2.356, 0.0, 1.571, 0.785]
+        
         # ===== Timer =====
         timer_period = 1.0 / self.collection_rate  # 15Hz = 0.0667s
         self.timer = self.create_timer(timer_period, self.timer_callback)
@@ -211,7 +238,7 @@ class DataCollectionNode(Node):
         x = np.random.uniform(self.workspace_limits['x_min'], self.workspace_limits['x_max'])
         y = np.random.uniform(self.workspace_limits['y_min'], self.workspace_limits['y_max'])
         z = np.random.uniform(self.workspace_limits['z_min'], self.workspace_limits['z_max'])
-        self.target_position = np.array([x, y, z])
+        self.target_position = np.array([x, y, 0.00])
         
         # Publish marker
         if self.enable_rviz_markers:
@@ -291,9 +318,15 @@ class DataCollectionNode(Node):
         # Update EE pose
         self.latest_ee_pose = self.get_ee_pose()
         
-        # Publish markers
+        # Publish markers at a lower rate (e.g., ~5Hz) to reduce load
         if self.enable_rviz_markers:
-            self.publish_markers()
+            now = self.get_clock().now()
+            if (
+                self.last_marker_publish_time is None or
+                (now - self.last_marker_publish_time).nanoseconds * 1e-9 >= 0.2
+            ):
+                self.publish_markers()
+                self.last_marker_publish_time = now
         
         # State machine
         if self.episode_state == EpisodeState.WAITING_CLUTCH:
@@ -373,20 +406,21 @@ class DataCollectionNode(Node):
         self.episode_data.append(sample)
         self.episode_seq += 1
         
-        # 실시간 state-action 출력
-        ee_pos = state['ee_pose'][:3]  # [x, y, z]
-        linear_vel = action['delta_twist'][:3]  # [vx, vy, vz]
-        angular_vel = action['delta_twist'][3:]  # [wx, wy, wz]
-        linear_vel_norm = np.linalg.norm(linear_vel)
-        angular_vel_norm = np.linalg.norm(angular_vel)
-        
-        self.get_logger().info(
-            f'[Episode {self.current_episode:03d} | Seq {self.episode_seq:04d} | Total: {len(self.episode_data):04d}] '
-            f'State: EE=[{ee_pos[0]:.3f}, {ee_pos[1]:.3f}, {ee_pos[2]:.3f}] | '
-            f'Action: v=[{linear_vel[0]:.4f}, {linear_vel[1]:.4f}, {linear_vel[2]:.4f}] '
-            f'|v|={linear_vel_norm:.4f}, w=[{angular_vel[0]:.4f}, {angular_vel[1]:.4f}, {angular_vel[2]:.4f}] '
-            f'|w|={angular_vel_norm:.4f}'
-        )
+        # 실시간 state-action 출력 (모든 샘플이 아니라 N번째마다만 로그 출력해서 부하 감소)
+        if self.episode_seq % 10 == 0:
+            ee_pos = state['ee_pose'][:3]  # [x, y, z]
+            linear_vel = action['delta_twist'][:3]  # [vx, vy, vz]
+            angular_vel = action['delta_twist'][3:]  # [wx, wy, wz]
+            linear_vel_norm = np.linalg.norm(linear_vel)
+            angular_vel_norm = np.linalg.norm(angular_vel)
+            
+            self.get_logger().info(
+                f'[Episode {self.current_episode:03d} | Seq {self.episode_seq:04d} | Total: {len(self.episode_data):04d}] '
+                f'State: EE=[{ee_pos[0]:.3f}, {ee_pos[1]:.3f}, {ee_pos[2]:.3f}] | '
+                f'Action: v=[{linear_vel[0]:.4f}, {linear_vel[1]:.4f}, {linear_vel[2]:.4f}] '
+                f'|v|={linear_vel_norm:.4f}, w=[{angular_vel[0]:.4f}, {angular_vel[1]:.4f}, {angular_vel[2]:.4f}] '
+                f'|w|={angular_vel_norm:.4f}'
+            )
     
     def check_episode_progress(self):
         """Check if target is reached"""
@@ -453,12 +487,91 @@ class DataCollectionNode(Node):
                 self.get_logger().info('❌ Movement detected! Resetting stationary timer...')
             self.stationary_timer = 0.0
     
+    def move_to_home_position(self):
+        """Move robot to home position using Servo pause + JointTrajectory"""
+        self.get_logger().info('='*60)
+        self.get_logger().info('🏠 Moving robot to HOME POSITION...')
+        self.get_logger().info('='*60)
+        
+        # Step 1: Stop Servo (so it doesn't fight against home trajectory)
+        if not self.servo_stop_client.wait_for_service(timeout_sec=5.0):
+            self.get_logger().warn('⚠️ Servo stop service not available, continuing without stopping Servo')
+        else:
+            stop_request = Trigger.Request()
+            try:
+                future = self.servo_stop_client.call_async(stop_request)
+                rclpy.spin_until_future_complete(self, future, timeout_sec=3.0)
+                
+                if future.result() is not None and future.result().success:
+                    self.get_logger().info('✅ Servo stopped successfully')
+                else:
+                    self.get_logger().warn('⚠️ Failed to stop Servo, continuing anyway...')
+            except Exception as e:
+                self.get_logger().error(f'❌ Error stopping Servo: {str(e)}')
+        
+        # Wait for servo to fully stop
+        time.sleep(1.0)
+        
+        # Step 2: Send home trajectory
+        traj = JointTrajectory()
+        traj.header.stamp = self.get_clock().now().to_msg()
+        traj.joint_names = [
+            'panda_joint1', 'panda_joint2', 'panda_joint3',
+            'panda_joint4', 'panda_joint5', 'panda_joint6', 'panda_joint7'
+        ]
+        
+        point = JointTrajectoryPoint()
+        point.positions = self.home_joints
+        point.time_from_start.sec = 5  # 5 seconds to reach home
+        point.time_from_start.nanosec = 0
+        
+        traj.points = [point]
+        
+        self.joint_trajectory_pub.publish(traj)
+        self.get_logger().info('📤 Home position trajectory sent (5 seconds)')
+        
+        # Wait for movement to complete
+        self.get_logger().info('⏳ Waiting for robot to reach home position...')
+        time.sleep(6.5)  # 5s trajectory + 1.5s buffer
+        
+        # Step 3: Restart Servo (Trigger service on /servo_node/start_servo)
+        if not self.servo_start_client.wait_for_service(timeout_sec=5.0):
+            self.get_logger().warn('⚠️ Servo start service not available, Servo will remain stopped')
+        else:
+            start_request = Trigger.Request()
+            
+            try:
+                future = self.servo_start_client.call_async(start_request)
+                rclpy.spin_until_future_complete(self, future, timeout_sec=3.0)
+                
+                if future.result() is not None and future.result().success:
+                    self.get_logger().info('✅ Servo started successfully')
+                else:
+                    self.get_logger().warn('⚠️ Failed to start Servo')
+            except Exception as e:
+                self.get_logger().error(f'❌ Error starting Servo: {str(e)}')
+        
+        self.get_logger().info('✅ Robot should be at home position')
+        self.get_logger().info('='*60)
+    
     def finish_episode(self):
         """Finish current episode and save data"""
         episode_duration = (self.get_clock().now() - self.episode_start_time).nanoseconds * 1e-9
         
         # Save episode data
         self.save_episode()
+        
+        # Calculate total distance traveled by end-effector
+        total_distance = 0.0
+        if len(self.episode_data) > 1:
+            for i in range(1, len(self.episode_data)):
+                prev_pos = np.array(self.episode_data[i-1]['state']['ee_pose'][:3])
+                curr_pos = np.array(self.episode_data[i]['state']['ee_pose'][:3])
+                distance = np.linalg.norm(curr_pos - prev_pos)
+                total_distance += distance
+        
+        # Calculate average velocity
+        average_velocity = total_distance / episode_duration if episode_duration > 0 else 0.0
         
         # Save metadata
         metadata = {
@@ -469,6 +582,8 @@ class DataCollectionNode(Node):
             'end_time': datetime.now().isoformat(),
             'duration': episode_duration,
             'num_samples': len(self.episode_data),
+            'total_distance_traveled': total_distance,
+            'average_velocity': average_velocity,
             'success': True
         }
         self.episode_metrics.append(metadata)
@@ -477,12 +592,16 @@ class DataCollectionNode(Node):
         self.get_logger().info('='*60)
         self.get_logger().info(f'✅ Episode {self.current_episode}/{self.max_episodes} COMPLETED!')
         self.get_logger().info(f'📊 Samples: {len(self.episode_data)} | Duration: {episode_duration:.1f}s')
+        self.get_logger().info(f'📏 Distance: {total_distance:.3f}m | Avg Velocity: {average_velocity:.4f}m/s ({average_velocity*100:.2f}cm/s)')
         self.get_logger().info('='*60)
         
         # Check if all episodes complete
         if self.current_episode >= self.max_episodes:
             self.complete_collection()
         else:
+            # Move robot back to home position before next episode
+            self.move_to_home_position()
+            
             # Prepare for next episode
             self.generate_new_target()
             self.episode_state = EpisodeState.WAITING_CLUTCH
@@ -550,7 +669,7 @@ class DataCollectionNode(Node):
         
         marker_array = MarkerArray()
         
-        # Target marker (red sphere)
+        # Target marker (pink sphere)
         target_marker = Marker()
         target_marker.header.frame_id = 'panda_link0'
         target_marker.header.stamp = self.get_clock().now().to_msg()
@@ -566,8 +685,8 @@ class DataCollectionNode(Node):
         target_marker.scale.y = 0.05
         target_marker.scale.z = 0.05
         target_marker.color.r = 1.0
-        target_marker.color.g = 0.0
-        target_marker.color.b = 0.0
+        target_marker.color.g = 0.5
+        target_marker.color.b = 0.8
         target_marker.color.a = 0.8
         marker_array.markers.append(target_marker)
         
@@ -592,6 +711,185 @@ class DataCollectionNode(Node):
             text_marker.color.b = 1.0
             text_marker.color.a = 1.0
             marker_array.markers.append(text_marker)
+            
+            # Line from EE to target (yellow line)
+            line_marker = Marker()
+            line_marker.header.frame_id = 'panda_link0'
+            line_marker.header.stamp = self.get_clock().now().to_msg()
+            line_marker.ns = 'distance_line'
+            line_marker.id = 2
+            line_marker.type = Marker.LINE_STRIP
+            line_marker.action = Marker.ADD
+            line_marker.scale.x = 0.005  # Line thickness
+            line_marker.color.r = 1.0
+            line_marker.color.g = 1.0
+            line_marker.color.b = 0.0
+            line_marker.color.a = 0.6
+            
+            # EE position
+            p1 = Point()
+            p1.x = float(self.latest_ee_pose['position'][0])
+            p1.y = float(self.latest_ee_pose['position'][1])
+            p1.z = float(self.latest_ee_pose['position'][2])
+            
+            # Target position
+            p2 = Point()
+            p2.x = float(self.target_position[0])
+            p2.y = float(self.target_position[1])
+            p2.z = float(self.target_position[2])
+            
+            line_marker.points = [p1, p2]
+            marker_array.markers.append(line_marker)
+        
+        # Workspace boundary (cyan box outline)
+        workspace_marker = Marker()
+        workspace_marker.header.frame_id = 'panda_link0'
+        workspace_marker.header.stamp = self.get_clock().now().to_msg()
+        workspace_marker.ns = 'workspace'
+        workspace_marker.id = 3
+        workspace_marker.type = Marker.LINE_LIST
+        workspace_marker.action = Marker.ADD
+        workspace_marker.scale.x = 0.005
+        workspace_marker.color.r = 0.0
+        workspace_marker.color.g = 1.0
+        workspace_marker.color.b = 1.0
+        workspace_marker.color.a = 0.3
+        
+        # Get workspace limits
+        x_min, x_max = self.workspace_limits['x_min'], self.workspace_limits['x_max']
+        y_min, y_max = self.workspace_limits['y_min'], self.workspace_limits['y_max']
+        z_min, z_max = self.workspace_limits['z_min'], self.workspace_limits['z_max']
+        
+        # Bottom rectangle (z_min)
+        corners_bottom = [
+            (x_min, y_min, z_min), (x_max, y_min, z_min),
+            (x_max, y_min, z_min), (x_max, y_max, z_min),
+            (x_max, y_max, z_min), (x_min, y_max, z_min),
+            (x_min, y_max, z_min), (x_min, y_min, z_min)
+        ]
+        
+        # Top rectangle (z_max)
+        corners_top = [
+            (x_min, y_min, z_max), (x_max, y_min, z_max),
+            (x_max, y_min, z_max), (x_max, y_max, z_max),
+            (x_max, y_max, z_max), (x_min, y_max, z_max),
+            (x_min, y_max, z_max), (x_min, y_min, z_max)
+        ]
+        
+        # Vertical edges
+        vertical_edges = [
+            (x_min, y_min, z_min), (x_min, y_min, z_max),
+            (x_max, y_min, z_min), (x_max, y_min, z_max),
+            (x_max, y_max, z_min), (x_max, y_max, z_max),
+            (x_min, y_max, z_min), (x_min, y_max, z_max)
+        ]
+        
+        # Add all edges
+        for i in range(0, len(corners_bottom), 2):
+            p1, p2 = Point(), Point()
+            p1.x, p1.y, p1.z = corners_bottom[i]
+            p2.x, p2.y, p2.z = corners_bottom[i+1]
+            workspace_marker.points.extend([p1, p2])
+        
+        for i in range(0, len(corners_top), 2):
+            p1, p2 = Point(), Point()
+            p1.x, p1.y, p1.z = corners_top[i]
+            p2.x, p2.y, p2.z = corners_top[i+1]
+            workspace_marker.points.extend([p1, p2])
+        
+        for i in range(0, len(vertical_edges), 2):
+            p1, p2 = Point(), Point()
+            p1.x, p1.y, p1.z = vertical_edges[i]
+            p2.x, p2.y, p2.z = vertical_edges[i+1]
+            workspace_marker.points.extend([p1, p2])
+        
+        marker_array.markers.append(workspace_marker)
+        
+        # Grid marker (floor grid for distance reference)
+        grid_marker = Marker()
+        grid_marker.header.frame_id = 'panda_link0'
+        grid_marker.header.stamp = self.get_clock().now().to_msg()
+        grid_marker.ns = 'grid'
+        grid_marker.id = 4
+        grid_marker.type = Marker.LINE_LIST
+        grid_marker.action = Marker.ADD
+        grid_marker.scale.x = 0.002  # Thinner lines for grid
+        grid_marker.color.r = 0.5
+        grid_marker.color.g = 0.5
+        grid_marker.color.b = 0.5
+        grid_marker.color.a = 0.4
+        
+        # Grid lines parallel to Y axis (along X direction)
+        for i in range(int(x_min * 10), int(x_max * 10) + 1):  # 10cm intervals
+            x = i * 0.1
+            if x_min <= x <= x_max:
+                p1 = Point()
+                p1.x, p1.y, p1.z = x, y_min, z_min
+                p2 = Point()
+                p2.x, p2.y, p2.z = x, y_max, z_min
+                grid_marker.points.extend([p1, p2])
+        
+        # Grid lines parallel to X axis (along Y direction)
+        for i in range(int(y_min * 10), int(y_max * 10) + 1):  # 10cm intervals
+            y = i * 0.1
+            if y_min <= y <= y_max:
+                p1 = Point()
+                p1.x, p1.y, p1.z = x_min, y, z_min
+                p2 = Point()
+                p2.x, p2.y, p2.z = x_max, y, z_min
+                grid_marker.points.extend([p1, p2])
+        
+        marker_array.markers.append(grid_marker)
+        
+        # Target axes marker (RGB = XYZ)
+        axes_marker = Marker()
+        axes_marker.header.frame_id = 'panda_link0'
+        axes_marker.header.stamp = self.get_clock().now().to_msg()
+        axes_marker.ns = 'target_axes'
+        axes_marker.id = 5
+        axes_marker.type = Marker.LINE_LIST
+        axes_marker.action = Marker.ADD
+        axes_marker.scale.x = 0.003  # Line thickness
+        
+        origin = Point()
+        origin.x = float(self.target_position[0])
+        origin.y = float(self.target_position[1])
+        origin.z = float(self.target_position[2])
+        
+        # X axis (red) - 5cm length
+        x_end = Point()
+        x_end.x = origin.x + 0.05
+        x_end.y = origin.y
+        x_end.z = origin.z
+        axes_marker.points.extend([origin, x_end])
+        axes_marker.colors.extend([
+            ColorRGBA(r=1.0, g=0.0, b=0.0, a=1.0),
+            ColorRGBA(r=1.0, g=0.0, b=0.0, a=1.0)
+        ])
+        
+        # Y axis (green) - 5cm length
+        y_end = Point()
+        y_end.x = origin.x
+        y_end.y = origin.y + 0.05
+        y_end.z = origin.z
+        axes_marker.points.extend([origin, y_end])
+        axes_marker.colors.extend([
+            ColorRGBA(r=0.0, g=1.0, b=0.0, a=1.0),
+            ColorRGBA(r=0.0, g=1.0, b=0.0, a=1.0)
+        ])
+        
+        # Z axis (blue) - 5cm length
+        z_end = Point()
+        z_end.x = origin.x
+        z_end.y = origin.y
+        z_end.z = origin.z + 0.05
+        axes_marker.points.extend([origin, z_end])
+        axes_marker.colors.extend([
+            ColorRGBA(r=0.0, g=0.0, b=1.0, a=1.0),
+            ColorRGBA(r=0.0, g=0.0, b=1.0, a=1.0)
+        ])
+        
+        marker_array.markers.append(axes_marker)
         
         self.marker_pub.publish(marker_array)
 

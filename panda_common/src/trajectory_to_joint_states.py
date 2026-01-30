@@ -53,9 +53,6 @@ class TrajectoryToJointStates(Node):
         # Use initial positions if defined, otherwise 0.0
         self.current_positions = {name: initial_positions.get(name, 0.0) for name in self.joint_names}
         self.current_velocities = {name: 0.0 for name in self.joint_names}
-        # Debug용: 관절 속도 추정 로그를 위한 이전 상태 저장
-        self._last_debug_time = self.get_clock().now()
-        self._last_debug_positions = dict(self.current_positions)
         
         # Internal gripper state (finger_joint opening)
         self.gripper_position = 0.0
@@ -203,30 +200,10 @@ class TrajectoryToJointStates(Node):
         # /joint_states 발행
         self.joint_states_pub.publish(joint_state)
 
-        # ===== Debug: 추정 관절 속도(rad/s) 출력 =====
-        now = self.get_clock().now()
-        dt = (now - self._last_debug_time).nanoseconds * 1e-9
-        if dt > 0.0:
-            max_abs_vel = 0.0
-            sum_sq = 0.0
-            for name, pos in zip(self.joint_names, positions):
-                last_pos = self._last_debug_positions.get(name, pos)
-                vel = (pos - last_pos) / dt
-                abs_vel = abs(vel)
-                if abs_vel > max_abs_vel:
-                    max_abs_vel = abs_vel
-                sum_sq += vel * vel
-            joint_speed_l2 = math.sqrt(sum_sq)
-
-            # 움직임이 충분히 있을 때만 로그 출력 (노이즈 방지)
-            if max_abs_vel > 0.01:
-                self.get_logger().info(
-                    f'Estimated joint speed  max: {max_abs_vel:.2f} rad/s, '
-                    f'L2-norm: {joint_speed_l2:.2f} rad/s'
-                )
-
-            self._last_debug_time = now
-            self._last_debug_positions = {name: pos for name, pos in zip(self.joint_names, positions)}
+        # NOTE: "Estimated joint speed" 로그 제거
+        # trajectory는 Servo가 보내는 목표 위치라서, 조이스틱 움직임 시 목표가 갑자기 바뀌면
+        # (pos - last_pos) / dt 가 실제 로봇 속도가 아닌 비현실적으로 큰 값(수십 rad/s)으로 나옴.
+        # 실제 로봇은 그 속도로 움직이지 않으며, 시각화용으로는 문제 없음.
 
 
 def main(args=None):
