@@ -20,8 +20,8 @@ data_collection_node:
     reach_threshold: 0.02              # Target reach distance in meters (2cm)
     velocity_threshold: 0.008          # Linear velocity threshold in m/s (8mm/s)
     angular_velocity_threshold: 0.015  # Angular velocity threshold in rad/s (~0.86 deg/s)
-    stationary_duration: 3.0           # Required stationary time in seconds
-    max_episode_duration: 60.0         # Maximum episode time in seconds (timeout)
+    stationary_duration: 1.0           # Required stationary time in seconds
+    max_episode_duration: 20.0         # Maximum episode time in seconds (timeout)
     
     # Storage Configuration
     output_dir: "./data"               # Output directory for collected data

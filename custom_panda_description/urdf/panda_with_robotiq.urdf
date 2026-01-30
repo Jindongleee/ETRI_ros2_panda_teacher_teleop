@@ -201,7 +201,7 @@
     <joint name="panda_to_gripper" type="fixed">
         <parent link="panda_link8" />
         <child link="robotiq_85_base_link" />
-        <origin xyz="0 0 0" rpy="0 0 -2.35619449019" />
+        <origin xyz="0 0 0" rpy="0 0 0.785398163397" />
     </joint>
     
     <!-- Robotiq 85 Base Link -->

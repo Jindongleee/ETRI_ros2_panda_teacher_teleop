@@ -262,7 +262,8 @@ class DataCollectionNode(Node):
         self.episode_seq = 0
         self.episode_start_time = self.get_clock().now()
         self.stationary_timer = 0.0
-        
+        self.episode_success = True  # True=target reached, False=timeout
+
         self.get_logger().info('='*60)
         self.get_logger().info(f'📝 Episode {self.current_episode}/{self.max_episodes} STARTED')
         self.get_logger().info(f'🎯 Target: [{self.target_position[0]:.3f}, {self.target_position[1]:.3f}, {self.target_position[2]:.3f}]')
@@ -443,6 +444,7 @@ class DataCollectionNode(Node):
         # Check timeout
         elapsed = (self.get_clock().now() - self.episode_start_time).nanoseconds * 1e-9
         if elapsed > self.max_episode_duration:
+            self.episode_success = False  # 타임아웃 시 실패
             self.get_logger().warn(f'⏰ Episode timeout ({self.max_episode_duration}s)! Ending episode...')
             self.episode_state = EpisodeState.EPISODE_END
     
@@ -510,7 +512,7 @@ class DataCollectionNode(Node):
                 self.get_logger().error(f'❌ Error stopping Servo: {str(e)}')
         
         # Wait for servo to fully stop
-        time.sleep(1.0)
+        time.sleep(0.3)
         
         # Step 2: Send home trajectory
         traj = JointTrajectory()
@@ -522,17 +524,13 @@ class DataCollectionNode(Node):
         
         point = JointTrajectoryPoint()
         point.positions = self.home_joints
-        point.time_from_start.sec = 5  # 5 seconds to reach home
+        point.time_from_start.sec = 3  # 5 seconds to reach home
         point.time_from_start.nanosec = 0
         
         traj.points = [point]
         
         self.joint_trajectory_pub.publish(traj)
-        self.get_logger().info('📤 Home position trajectory sent (5 seconds)')
-        
-        # Wait for movement to complete
-        self.get_logger().info('⏳ Waiting for robot to reach home position...')
-        time.sleep(6.5)  # 5s trajectory + 1.5s buffer
+        self.get_logger().info('📤 Home position trajectory sent (3 seconds)')
         
         # Step 3: Restart Servo (Trigger service on /servo_node/start_servo)
         if not self.servo_start_client.wait_for_service(timeout_sec=5.0):
@@ -584,7 +582,7 @@ class DataCollectionNode(Node):
             'num_samples': len(self.episode_data),
             'total_distance_traveled': total_distance,
             'average_velocity': average_velocity,
-            'success': True
+            'success': self.episode_success
         }
         self.episode_metrics.append(metadata)
         self.save_episode_metadata(metadata)
@@ -632,11 +630,15 @@ class DataCollectionNode(Node):
         self.collection_complete = True
         
         # Save session summary
+        success_count = sum(1 for e in self.episode_metrics if e.get('success', True))
+        fail_count = len(self.episode_metrics) - success_count
         summary = {
             'controller_type': self.controller_type,
             'session_timestamp': self.session_timestamp,
             'total_episodes': self.max_episodes,
-            'total_samples': sum(len(self.episode_data) for _ in range(self.max_episodes)),
+            'total_samples': sum(e.get('num_samples', 0) for e in self.episode_metrics),
+            'success': success_count,
+            'fail': fail_count,
             'episodes': self.episode_metrics
         }
         
@@ -649,7 +651,8 @@ class DataCollectionNode(Node):
         self.get_logger().info('='*60)
         self.get_logger().info(f'Controller: {self.controller_type}')
         self.get_logger().info(f'Total Episodes: {self.max_episodes}/{self.max_episodes}')
-        self.get_logger().info(f'Success Rate: 100%')
+        success_rate = (success_count / self.max_episodes * 100) if self.max_episodes > 0 else 0
+        self.get_logger().info(f'Success: {success_count}, Fail: {fail_count} (Rate: {success_rate:.0f}%)')
         self.get_logger().info(f'Data saved in: {self.session_dir}')
         self.get_logger().info('='*60)
         self.get_logger().info('Node will remain active. Press Ctrl+C to shutdown.')
@@ -669,31 +672,19 @@ class DataCollectionNode(Node):
         
         marker_array = MarkerArray()
         
-        # Target marker (pink sphere)
-        target_marker = Marker()
-        target_marker.header.frame_id = 'panda_link0'
-        target_marker.header.stamp = self.get_clock().now().to_msg()
-        target_marker.ns = 'target'
-        target_marker.id = 0
-        target_marker.type = Marker.SPHERE
-        target_marker.action = Marker.ADD
-        target_marker.pose.position.x = float(self.target_position[0])
-        target_marker.pose.position.y = float(self.target_position[1])
-        target_marker.pose.position.z = float(self.target_position[2])
-        target_marker.pose.orientation.w = 1.0
-        target_marker.scale.x = 0.05  # 5cm diameter
-        target_marker.scale.y = 0.05
-        target_marker.scale.z = 0.05
-        target_marker.color.r = 1.0
-        target_marker.color.g = 0.5
-        target_marker.color.b = 0.8
-        target_marker.color.a = 0.8
-        marker_array.markers.append(target_marker)
-        
-        # Distance text
+        # Distance text and EE-based markers
         if self.latest_ee_pose is not None:
-            distance = np.linalg.norm(self.latest_ee_pose['position'] - self.target_position)
+            ee_pos = self.latest_ee_pose['position']
+            tgt = self.target_position
+            distance = np.linalg.norm(ee_pos - tgt)
+            dx = (tgt[0] - ee_pos[0]) * 100
+            dy = (tgt[1] - ee_pos[1]) * 100
+            dz = (tgt[2] - ee_pos[2]) * 100
             
+            # Distance text (워크스페이스 밖 고정 위치 - 가독성)
+            x_min, x_max = self.workspace_limits['x_min'], self.workspace_limits['x_max']
+            y_min, y_max = self.workspace_limits['y_min'], self.workspace_limits['y_max']
+            z_max = self.workspace_limits['z_max']
             text_marker = Marker()
             text_marker.header.frame_id = 'panda_link0'
             text_marker.header.stamp = self.get_clock().now().to_msg()
@@ -701,47 +692,131 @@ class DataCollectionNode(Node):
             text_marker.id = 1
             text_marker.type = Marker.TEXT_VIEW_FACING
             text_marker.action = Marker.ADD
-            text_marker.pose.position.x = float(self.target_position[0])
-            text_marker.pose.position.y = float(self.target_position[1])
-            text_marker.pose.position.z = float(self.target_position[2]) + 0.1
-            text_marker.text = f'Episode {self.current_episode}/{self.max_episodes}\nDist: {distance*100:.1f}cm'
-            text_marker.scale.z = 0.03
-            text_marker.color.r = 1.0
-            text_marker.color.g = 1.0
-            text_marker.color.b = 1.0
+            # 워크스페이스 왼쪽 밖 (y_min - 0.1), 위쪽 (z_max + 0.05)
+            text_marker.pose.position.x = (x_min + x_max) / 2
+            text_marker.pose.position.y = y_min - 0.15
+            text_marker.pose.position.z = z_max + 0.08
+            text_marker.text = f'Ep {self.current_episode}/{self.max_episodes}\nDist: {distance*100:.1f}cm\nΔx:{dx:.0f} Δy:{dy:.0f} Δz:{dz:.0f}cm'
+            text_marker.scale.z = 0.04
+            text_marker.color.r = 0.0
+            text_marker.color.g = 0.0
+            text_marker.color.b = 0.0
             text_marker.color.a = 1.0
             marker_array.markers.append(text_marker)
             
-            # Line from EE to target (yellow line)
-            line_marker = Marker()
-            line_marker.header.frame_id = 'panda_link0'
-            line_marker.header.stamp = self.get_clock().now().to_msg()
-            line_marker.ns = 'distance_line'
-            line_marker.id = 2
-            line_marker.type = Marker.LINE_STRIP
-            line_marker.action = Marker.ADD
-            line_marker.scale.x = 0.005  # Line thickness
-            line_marker.color.r = 1.0
-            line_marker.color.g = 1.0
-            line_marker.color.b = 0.0
-            line_marker.color.a = 0.6
+            # EE sphere (박스와 동일 크기 0.01, distance-based color: green=near, red=far)
+            max_dist_ref = 0.5
+            t_ratio = min(1.0, distance / max_dist_ref)
+            ee_sphere = Marker()
+            ee_sphere.header.frame_id = 'panda_link0'
+            ee_sphere.header.stamp = self.get_clock().now().to_msg()
+            ee_sphere.ns = 'ee_sphere'
+            ee_sphere.id = 6
+            ee_sphere.type = Marker.SPHERE
+            ee_sphere.action = Marker.ADD
+            ee_sphere.pose.position.x = float(ee_pos[0])
+            ee_sphere.pose.position.y = float(ee_pos[1])
+            ee_sphere.pose.position.z = float(ee_pos[2])
+            ee_sphere.pose.orientation.w = 1.0
+            ee_sphere.scale.x = 0.01  # gripper_tip_link 박스와 동일
+            ee_sphere.scale.y = 0.01
+            ee_sphere.scale.z = 0.01
+            ee_sphere.color.r = t_ratio
+            ee_sphere.color.g = 1.0 - t_ratio
+            ee_sphere.color.b = 0.0
+            ee_sphere.color.a = 0.9
+            marker_array.markers.append(ee_sphere)
             
-            # EE position
-            p1 = Point()
-            p1.x = float(self.latest_ee_pose['position'][0])
-            p1.y = float(self.latest_ee_pose['position'][1])
-            p1.z = float(self.latest_ee_pose['position'][2])
+            # EE → floor projection line (laser-like vertical line)
+            floor_line = Marker()
+            floor_line.header.frame_id = 'panda_link0'
+            floor_line.header.stamp = self.get_clock().now().to_msg()
+            floor_line.ns = 'ee_floor_line'
+            floor_line.id = 10
+            floor_line.type = Marker.LINE_STRIP
+            floor_line.action = Marker.ADD
+            p_ee = Point()
+            p_ee.x, p_ee.y, p_ee.z = float(ee_pos[0]), float(ee_pos[1]), float(ee_pos[2])
+            p_floor = Point()
+            p_floor.x, p_floor.y, p_floor.z = float(ee_pos[0]), float(ee_pos[1]), 0.0
+            floor_line.points = [p_ee, p_floor]
+            floor_line.scale.x = 0.002  # 선 두께 (더 잘 보이게)
+            floor_line.color.r = 0.5   # 연한 파란색
+            floor_line.color.g = 0.75
+            floor_line.color.b = 1.0
+            floor_line.color.a = 0.9
+            marker_array.markers.append(floor_line)
             
-            # Target position
-            p2 = Point()
-            p2.x = float(self.target_position[0])
-            p2.y = float(self.target_position[1])
-            p2.z = float(self.target_position[2])
+            # 바닥 그림자 디스크 (현재 투영점 - 흰색)
+            floor_shadow = Marker()
+            floor_shadow.header.frame_id = 'panda_link0'
+            floor_shadow.header.stamp = self.get_clock().now().to_msg()
+            floor_shadow.ns = 'ee_floor_shadow'
+            floor_shadow.id = 11
+            floor_shadow.type = Marker.CYLINDER
+            floor_shadow.action = Marker.ADD
+            floor_shadow.pose.position.x = float(ee_pos[0])
+            floor_shadow.pose.position.y = float(ee_pos[1])
+            floor_shadow.pose.position.z = 0.001  # 바닥 살짝 위
+            floor_shadow.pose.orientation.w = 1.0
+            floor_shadow.scale.x = 0.02  # 4cm 직경
+            floor_shadow.scale.y = 0.02
+            floor_shadow.scale.z = 0.001  # 얇은 디스크
+            floor_shadow.color.r = 1.0   # 주황색 (투명도 없음)
+            floor_shadow.color.g = 0.0
+            floor_shadow.color.b = 0.0
+            floor_shadow.color.a = 1.0
+            marker_array.markers.append(floor_shadow)
             
-            line_marker.points = [p1, p2]
-            marker_array.markers.append(line_marker)
+            # Reach zone (목표지점 + 도달범위 통일 - 초록 구)
+            reach_zone = Marker()
+            reach_zone.header.frame_id = 'panda_link0'
+            reach_zone.header.stamp = self.get_clock().now().to_msg()
+            reach_zone.ns = 'reach_zone'
+            reach_zone.id = 7
+            reach_zone.type = Marker.SPHERE
+            reach_zone.action = Marker.ADD
+            reach_zone.pose.position.x = float(tgt[0])
+            reach_zone.pose.position.y = float(tgt[1])
+            reach_zone.pose.position.z = float(tgt[2])
+            reach_zone.pose.orientation.w = 1.0
+            reach_zone.scale.x = self.reach_threshold * 2
+            reach_zone.scale.y = self.reach_threshold * 2
+            reach_zone.scale.z = self.reach_threshold * 2
+            reach_zone.color.r = 1.0
+            reach_zone.color.g = 1.0
+            reach_zone.color.b = 1.0
+            reach_zone.color.a = 1.0  # 더 잘 보이게
+            marker_array.markers.append(reach_zone)
         
-        # Workspace boundary (cyan box outline)
+        # Get workspace limits
+        x_min, x_max = self.workspace_limits['x_min'], self.workspace_limits['x_max']
+        y_min, y_max = self.workspace_limits['y_min'], self.workspace_limits['y_max']
+        z_min, z_max = self.workspace_limits['z_min'], self.workspace_limits['z_max']
+        
+        # Workspace floor (완전 초록색 채움)
+        floor_fill = Marker()
+        floor_fill.header.frame_id = 'panda_link0'
+        floor_fill.header.stamp = self.get_clock().now().to_msg()
+        floor_fill.ns = 'workspace_floor'
+        floor_fill.id = 13
+        floor_fill.type = Marker.TRIANGLE_LIST
+        floor_fill.action = Marker.ADD
+        floor_fill.scale.x = 1.0
+        floor_fill.scale.y = 1.0
+        floor_fill.scale.z = 1.0
+        floor_fill.color.r = 1.0
+        floor_fill.color.g = 1.0
+        floor_fill.color.b = 1.0
+        floor_fill.color.a = 0.0
+        # 바닥 사각형: 2개 삼각형 (4개 꼭짓점)
+        floor_fill.points = [
+            Point(x=x_min, y=y_min, z=z_min), Point(x=x_max, y=y_min, z=z_min), Point(x=x_max, y=y_max, z=z_min),
+            Point(x=x_min, y=y_min, z=z_min), Point(x=x_max, y=y_max, z=z_min), Point(x=x_min, y=y_max, z=z_min)
+        ]
+        marker_array.markers.append(floor_fill)
+        
+        # Workspace boundary (흰색 박스 테두리)
         workspace_marker = Marker()
         workspace_marker.header.frame_id = 'panda_link0'
         workspace_marker.header.stamp = self.get_clock().now().to_msg()
@@ -751,14 +826,9 @@ class DataCollectionNode(Node):
         workspace_marker.action = Marker.ADD
         workspace_marker.scale.x = 0.005
         workspace_marker.color.r = 0.0
-        workspace_marker.color.g = 1.0
+        workspace_marker.color.g = 0.0
         workspace_marker.color.b = 1.0
-        workspace_marker.color.a = 0.3
-        
-        # Get workspace limits
-        x_min, x_max = self.workspace_limits['x_min'], self.workspace_limits['x_max']
-        y_min, y_max = self.workspace_limits['y_min'], self.workspace_limits['y_max']
-        z_min, z_max = self.workspace_limits['z_min'], self.workspace_limits['z_max']
+        workspace_marker.color.a = 0.5
         
         # Bottom rectangle (z_min)
         corners_bottom = [
@@ -813,11 +883,11 @@ class DataCollectionNode(Node):
         grid_marker.id = 4
         grid_marker.type = Marker.LINE_LIST
         grid_marker.action = Marker.ADD
-        grid_marker.scale.x = 0.002  # Thinner lines for grid
-        grid_marker.color.r = 0.5
-        grid_marker.color.g = 0.5
-        grid_marker.color.b = 0.5
-        grid_marker.color.a = 0.4
+        grid_marker.scale.x = 0.004  # Thinner lines for grid
+        grid_marker.color.r = 0.3
+        grid_marker.color.g = 0.3
+        grid_marker.color.b = 0.3
+        grid_marker.color.a = 0.5
         
         # Grid lines parallel to Y axis (along X direction)
         for i in range(int(x_min * 10), int(x_max * 10) + 1):  # 10cm intervals
@@ -856,40 +926,34 @@ class DataCollectionNode(Node):
         origin.y = float(self.target_position[1])
         origin.z = float(self.target_position[2])
         
-        # X axis (red) - 5cm length
-        x_end = Point()
-        x_end.x = origin.x + 0.05
-        x_end.y = origin.y
-        x_end.z = origin.z
-        axes_marker.points.extend([origin, x_end])
-        axes_marker.colors.extend([
-            ColorRGBA(r=1.0, g=0.0, b=0.0, a=1.0),
-            ColorRGBA(r=1.0, g=0.0, b=0.0, a=1.0)
-        ])
-        
-        # Y axis (green) - 5cm length
-        y_end = Point()
-        y_end.x = origin.x
-        y_end.y = origin.y + 0.05
-        y_end.z = origin.z
-        axes_marker.points.extend([origin, y_end])
-        axes_marker.colors.extend([
-            ColorRGBA(r=0.0, g=1.0, b=0.0, a=1.0),
-            ColorRGBA(r=0.0, g=1.0, b=0.0, a=1.0)
-        ])
-        
-        # Z axis (blue) - 5cm length
-        z_end = Point()
-        z_end.x = origin.x
-        z_end.y = origin.y
-        z_end.z = origin.z + 0.05
-        axes_marker.points.extend([origin, z_end])
-        axes_marker.colors.extend([
-            ColorRGBA(r=0.0, g=0.0, b=1.0, a=1.0),
-            ColorRGBA(r=0.0, g=0.0, b=1.0, a=1.0)
-        ])
         
         marker_array.markers.append(axes_marker)
+        
+        # Concentric distance rings around target (on z_min plane)
+        z_min = self.workspace_limits['z_min']
+        tx, ty, tz = float(self.target_position[0]), float(self.target_position[1]), float(self.target_position[2])
+        for i, radius in enumerate([0.05, 0.10, 0.15, 0.20]):
+            ring = Marker()
+            ring.header.frame_id = 'panda_link0'
+            ring.header.stamp = self.get_clock().now().to_msg()
+            ring.ns = 'distance_rings'
+            ring.id = 20 + i
+            ring.type = Marker.LINE_STRIP
+            ring.action = Marker.ADD
+            ring.scale.x = 0.005
+            ring.color.r = 0.6
+            ring.color.g = 0.6
+            ring.color.b = 0.6
+            ring.color.a = 0.9
+            n_pts = 32
+            for k in range(n_pts + 1):
+                ang = 2 * np.pi * k / n_pts
+                p = Point()
+                p.x = tx + radius * np.cos(ang)
+                p.y = ty + radius * np.sin(ang)
+                p.z = z_min + 0.002
+                ring.points.append(p)
+            marker_array.markers.append(ring)
         
         self.marker_pub.publish(marker_array)
 

@@ -175,11 +175,13 @@ Visualization Manager:
       Name: MarkerArray
       Namespaces:
         distance: true
-        distance_line: true
+        ee_floor_line: true
+        ee_floor_shadow: true
         grid: true
-        target: true
+        reach_zone: true
         target_axes: true
         workspace: true
+        workspace_floor: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -189,7 +191,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 48; 48; 48
+    Background Color: 255; 255; 255
     Fixed Frame: world
     Frame Rate: 30
   Name: root

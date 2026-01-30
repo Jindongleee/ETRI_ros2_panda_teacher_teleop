@@ -137,16 +137,6 @@ class TrajectoryToJointStates(Node):
         pos = max(0.0, min(float(msg.data), 0.8))
         self.gripper_position = pos
 
-        # In URDF:
-        # - finger_joint               : main driving joint (0=open, ~0.8=closed)
-        # - left_inner_knuckle_joint   : mimic finger_joint * 1
-        # - left_inner_finger_joint    : mimic finger_joint * -1
-        # - right_inner_knuckle_joint  : mimic finger_joint * -1
-        # - right_inner_finger_joint   : mimic finger_joint * 1
-        # - right_outer_knuckle_joint  : mimic finger_joint * -1
-        #
-        # For visualization, we manually apply these relationships.
-
         if 'finger_joint' in self.current_positions:
             self.current_positions['finger_joint'] = pos
 

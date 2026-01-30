@@ -161,8 +161,8 @@ def generate_launch_description():
             'base_frame': 'leader_link0',  # omy_l100 base frame
             'ee_frame': 'leader_link7',    # omy_l100 end-effector frame
             'joint_states_topic': '/leader/joint_states',
-            'linear_scale': 10.0,   # 스케일 대폭 증가 (이전: 2.0)
-            'angular_scale': 10.0,   # 스케일 대폭 증가 (이전: 1.0)
+            'linear_scale': 15.0,   # 스케일 대폭 증가 (이전: 2.0)
+            'angular_scale': 13.0,   # 스케일 대폭 증가 (이전: 1.0)
             'publish_rate': 100.0,   # Servo와 주파수 일치 (이전: 50.0)
             'max_linear_speed': 10.0,   # [m/s] (이전: 0.2)
             'max_angular_speed': 10.0,  # [rad/s] (이전: 0.5)
@@ -170,10 +170,10 @@ def generate_launch_description():
             # 1.0 = 정방향, -1.0 = 반전
             # 리더암 위로 올리면 팔로워암도 위로 가도록 Z축 반전
             'invert_linear_x': 1.0,
-            'invert_linear_y': 1.0,
-            'invert_linear_z': -1.0,  # Z축 반전 (위로 올리면 위로 가도록)
+            'invert_linear_y': -1.0,
+            'invert_linear_z': 1.0,  # Z축 반전 (위로 올리면 위로 가도록)
             'invert_angular_x': -1.0,
-            'invert_angular_y': -1.0,
+            'invert_angular_y': 1.0,
             'invert_angular_z': 1.0
         }]
     )

@@ -153,14 +153,14 @@ def generate_launch_description():
         output='screen',
         parameters=[{
             # Scales are further normalized in the node to keep commands within [-1, 1]
-            'linear_scale': 10.0,
-            'angular_scale': 10.0,
+            'linear_scale': 0.5,
+            'angular_scale': 0.3,
             'frame_id': 'panda_link0',  # End-effector 기준
             'use_clutch': True,  # Use clutch pedal for safety control
             
             # Button mapping for button-based controls
-            'button_linear_z_up': 6,      # L1 button (Linear Z up)
-            'button_linear_z_down': 8,    # L2 button (Linear Z down)
+            'button_linear_z_up': 8,      # L1 button (Linear Z up)
+            'button_linear_z_down': 6,    # L2 button (Linear Z down)
             'button_angular_z_pos': 7,    # R1 button (Angular Z positive)
             'button_angular_z_neg': 9,    # R2 button (Angular Z negative)
             
@@ -174,10 +174,10 @@ def generate_launch_description():
             'invert_linear_x': 1,
             'invert_linear_y': -1,
             'invert_angular_x': 1,
-            'invert_angular_y': 1,
+            'invert_angular_y': -1,
             
             # Deadzone for joystick axes
-            'axis_deadzone': 0.25
+            'axis_deadzone': 0.00
         }]
     )
 
