@@ -12,20 +12,20 @@
         joint: 1.0
 
       publish_period: 0.01 # 50 Hz
-      low_latency_mode: false
-      low_pass_filter_coeff: 1.1
+      low_latency_mode: false # 저지연 모드 비활성화
+      low_pass_filter_coeff: 1.1 # 로우 패스 필터 계수
 
-      move_group_name: "panda_arm"
-      planning_frame: "panda_link0"
-      ee_frame_name: "gripper_tip_link"
-      robot_link_command_frame: "panda_link0"  
+      move_group_name: "panda_arm" # 모션 그룹 이름
+      planning_frame: "panda_link0" # 계획 프레임 이름
+      ee_frame_name: "gripper_tip_link" # 엔드이펙터 프레임 이름
+      robot_link_command_frame: "panda_link0"  # 로봇 링크 명령 프레임 이름
 
-      incoming_command_timeout: 0.5
-      num_outgoing_halt_msgs_to_publish: 4
+      incoming_command_timeout: 0.5 # 입력 명령 제한 시간
+      num_outgoing_halt_msgs_to_publish: 4 # 출력 정지 메시지 발행 횟수
 
-      lower_singularity_threshold: 10.0
-      hard_stop_singularity_threshold: 20.0
-      joint_limit_margin: 0.01
+      lower_singularity_threshold: 10.0  # 특이점 하한 임계값
+      hard_stop_singularity_threshold: 20.0  # 특이점 하드 정지 임계값
+      joint_limit_margin: 0.01  # 연결 링크 한계 여유 값
 
       # 충돌 체크 설정 (필수 파라미터: collision_check_rate > 0)
       check_collisions: false
@@ -45,7 +45,7 @@
       # MoveIt Servo가 요구하는 smoothing filter 플러그인
       # Butterworth 필터를 사용 (MoveIt 2 예제와 동일)
       smoothing_filter_plugin_name: "online_signal_smoothing::ButterworthFilterPlugin"
-      override_velocity_scaling_factor: 1.0
-      override_acceleration_scaling_factor: 1.0
+      override_velocity_scaling_factor: 1.0 # 속도 스케일링 인자
+      override_acceleration_scaling_factor: 1.0 # 가속도 스케일링 인자
       
       is_primary_planning_scene_monitor: true
