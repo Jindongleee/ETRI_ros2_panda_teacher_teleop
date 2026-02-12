@@ -204,6 +204,34 @@
     ---
 
 
+## 3. HTC Vive 컨트롤러 텔레오퍼레이션 모드 (Vive Teleoperation Mode)
+
+### 3.1 vive_node (vive_ros2)
+- **Pub**: `controller_data` (MT: `vive_ros2/msg/VRControllerData`)
+  - HTC Vive 컨트롤러의 포즈·버튼 데이터 (SteamVR/OpenVR, 100 Hz)
+  - VRControllerData 필드: trackpad_x, trackpad_y, trigger, menu_button, trigger_button, trackpad_touch, trackpad_button, grip_button, role, time, abs_pose (TransformStamped), rel_pose (TransformStamped)
+
+### 3.2 vive_ros2_bridge_node (panda_teleop_vive)
+- **Sub**: `controller_data` (MT: `vive_ros2/msg/VRControllerData`)
+- **Pub**: `/vive/controller/pose` (MT: `geometry_msgs/msg/PoseStamped`)
+  - 선택한 컨트롤러(controller_role: 0=오른손, 1=왼손)의 절대 포즈
+- **Pub**: `/vive/controller/buttons` (MT: `sensor_msgs/msg/Joy`)
+  - 버튼: axes=[trigger, trackpad_x, trackpad_y], buttons=[trigger_button, grip_button, menu_button, trackpad_touch, trackpad_button]
+
+### 3.3 vive_to_twist_node
+- **Sub**: `/vive/controller/pose` (MT: `geometry_msgs/msg/PoseStamped`), `/vive/controller/buttons` (MT: `sensor_msgs/msg/Joy`), `/clutch/active` (MT: `std_msgs/msg/Bool`, 선택)
+- **Pub**: `/servo_node/delta_twist_cmds` (MT: `geometry_msgs/msg/TwistStamped`)
+  - Vive 컨트롤러 포즈 변화를 팔로워암 속도 명령(Twist)으로 변환 (클러치 또는 데드맨 버튼 활성 시)
+
+### 3.4 vive_to_gripper_node
+- **Sub**: `/vive/controller/buttons` (MT: `sensor_msgs/msg/Joy`)
+- **Pub**: `/gripper/position` (MT: `std_msgs/msg/Float64`)
+  - Vive 트리거/그립 버튼에 따른 그리퍼 열기/닫기 명령
+
+### 3.5 servo_node / trajectory_to_joint_states / robot_state_publisher
+- OMY L100 모드와 동일: `/servo_node/delta_twist_cmds` → servo_node → `/panda_arm_controller/joint_trajectory` → trajectory_to_joint_states → `/joint_states` → robot_state_publisher
+
+
 ## 5. 시스템 아키텍처 흐름
 
 ### 조이스틱 모드:
@@ -245,4 +273,25 @@ omy_l100_to_gripper_node (리더암 그리퍼 값을 팔로워암 그리퍼 명�
 trajectory_to_joint_states (그리퍼 명령을 joint_states에 반영)
 
 clutch_pedal_node → /clutch/active (모든 제어 노드에 클러치 신호 전달하여 안전 제어)
+```
+
+### Vive 모드:
+```
+vive_input (OpenVR) + vive_node (vive_ros2)
+    ↓ controller_data (VRControllerData)
+
+vive_ros2_bridge_node (controller_data → PoseStamped + Joy)
+    ↓ /vive/controller/pose, /vive/controller/buttons
+
+vive_to_twist_node (포즈 변화 → Twist, 클러치/데드맨 시에만)
+    ↓ /servo_node/delta_twist_cmds
+
+servo_node → trajectory_to_joint_states → robot_state_publisher
+(OMY L100과 동일)
+
+vive_to_gripper_node (/vive/controller/buttons → 그리퍼 열기/닫기)
+    ↓ /gripper/position
+    → trajectory_to_joint_states (그리퍼 반영)
+
+clutch_pedal_node → /clutch/active (Vive 그립 버튼으로도 데드맨 가능)
 ```

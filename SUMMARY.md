@@ -79,29 +79,14 @@ data/
 │       ├── episode_001.jsonl
 │       ├── episode_001_meta.json
 │       └── ...
-└── joystick/
+├── joystick/
+│   └── session_YYYYMMDD_HHMMSS/
+│        └── ...
+└── vive/
     └── session_YYYYMMDD_HHMMSS/
         └── ...
 ```
 
-### 수집률
-- **설정**: 15Hz
-- **예상**: ~900 samples/episode (60초)
-- **실제**: ~530-840 samples/episode
-
----
-
-## 🎮 조이스틱 매핑
-
-| 입력 | 기능 | 최대 속도 |
-|------|------|----------|
-| **Left Stick** | Linear X/Y | 0.5 m/s |
-| **Right Stick** | Linear Z | 0.5 m/s |
-| **L1/L2** | Angular X | 1.0 rad/s |
-| **△/✕** | Gripper | ±0.05 |
-| **페달** | 안전 제어 | - |
-
----
 
 ## 🔧 핵심 노드
 
@@ -134,37 +119,7 @@ data/
 /joint_states                     → 관절 상태
 /tf, /tf_static                   → 좌표 변환
 ```
-
 ---
-
-## 📚 문서 (5개)
-
-| 문서 | 크기 | 용도 |
-|------|------|------|
-| **README.md** | 7.9KB | 시작 가이드 |
-| **ARCHITECTURE.md** | 36KB | 완전한 아키텍처 ⭐⭐⭐ |
-| **QUICK_REFERENCE.md** | 2.4KB | 빠른 참조 |
-| **TOPIC_INFORMATION.md** | 5.8KB | 토픽 레퍼런스 |
-| **DOCS_INDEX.md** | 3.3KB | 문서 네비게이션 |
-
-**총 문서 크기**: ~56KB
-
----
-
-## 🎯 주요 특징
-
-```
-✅ 모듈식 설계        → 컨트롤러 독립적
-✅ 공통 유틸리티      → 코드 재사용
-✅ 안전 제어          → 클러치 페달
-✅ 자동 데이터 수집   → Episode 관리
-✅ 확장 가능          → 새 컨트롤러 추가 쉬움
-✅ 실시간 시각화      → RViz 통합
-✅ 표준 준수          → ROS2 Best Practices
-```
-
----
-
 ## 🛠️ 빌드 상태
 
 ```bash
@@ -239,74 +194,3 @@ python3 scripts/validate_dataset.py data/joystick/session_*/
 # 에피소드 시각화
 python3 scripts/visualize_episode.py data/joystick/session_*/episode_001.jsonl
 ```
-
----
-
-## 📞 문제 해결
-
-### 로봇이 안 움직임
-```bash
-ros2 topic echo /clutch/active        # 클러치 확인
-ros2 topic echo /servo_node/delta_twist_cmds  # 명령 확인
-ros2 node list                        # 노드 확인
-```
-
-### RViz에 로봇 안 보임
-```bash
-ros2 run tf2_ros tf2_echo panda_link0 gripper_tip_link  # TF 확인
-ros2 topic echo /joint_states         # 상태 확인
-```
-
----
-
-## 🎓 학습 자료
-
-### 필수 읽기
-1. 📖 **README.md** - 시작점
-2. 📘 **ARCHITECTURE.md** - 핵심 문서 (969줄!)
-3. 🚀 **QUICK_REFERENCE.md** - 일상 사용
-
-### 참고 자료
-- 🔍 **TOPIC_INFORMATION.md** - 토픽 상세
-- 📚 **DOCS_INDEX.md** - 문서 네비게이션
-
----
-
-## 📊 통계
-
-```
-패키지:        16개
-핵심 패키지:    4개
-Python 노드:   10개
-Launch 파일:    2개
-Config 파일:   15개
-문서:          5개 (56KB)
-총 코드 줄:    ~3000줄
-```
-
----
-
-## 💡 Tip
-
-**즐겨찾기 추천**:
-- 📖 `DOCS_INDEX.md` - 문서 시작점
-- 🚀 `QUICK_REFERENCE.md` - 일상 명령어
-- 📘 `ARCHITECTURE.md` - 깊은 이해
-
-**디버깅 명령어**:
-```bash
-# 노드 목록
-ros2 node list
-
-# 토픽 목록
-ros2 topic list
-
-# TF 트리
-ros2 run tf2_tools view_frames
-```
-
----
-
-**🎊 즐거운 로봇 프로그래밍 되세요!**
-
-*Last Updated: 2026-01-28*
