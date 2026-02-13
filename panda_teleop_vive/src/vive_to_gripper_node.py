@@ -20,6 +20,9 @@ class ViveToGripper(Node):
     def __init__(self):
         super().__init__('vive_to_gripper_node')
 
+        self.declare_parameter('mode', 'analog')  # 'analog' or 'discrete'
+        self.declare_parameter('axis_trigger', 0) # Axis index for trigger
+        self.declare_parameter('invert_trigger', False) # Invert axis mapping
         self.declare_parameter('button_open', 2)
         self.declare_parameter('button_close', 0)
         self.declare_parameter('step', 0.02)
@@ -27,6 +30,9 @@ class ViveToGripper(Node):
         self.declare_parameter('max_position', 0.8)
         self.declare_parameter('vive_buttons_topic', '/vive/controller/buttons')
 
+        self.mode = self.get_parameter('mode').value
+        self.axis_trigger = self.get_parameter('axis_trigger').value
+        self.invert_trigger = self.get_parameter('invert_trigger').value
         self.button_open = self.get_parameter('button_open').value
         self.button_close = self.get_parameter('button_close').value
         self.step = self.get_parameter('step').value
@@ -46,7 +52,7 @@ class ViveToGripper(Node):
         self.gripper_pub = self.create_publisher(Float64, '/gripper/position', 10)
 
         self.get_logger().info(
-            f'Vive to Gripper: topic={self.vive_buttons_topic}, open={self.button_open}, close={self.button_close}'
+            f'Vive to Gripper: topic={self.vive_buttons_topic}, mode={self.mode}'
         )
         self._publish_position()
 
@@ -56,6 +62,35 @@ class ViveToGripper(Node):
         self.gripper_pub.publish(msg)
 
     def buttons_callback(self, msg: Joy):
+        if self.mode == 'analog':
+            self._handle_analog_mode(msg)
+        else:
+            self._handle_discrete_mode(msg)
+
+    def _handle_analog_mode(self, msg: Joy):
+        axes = msg.axes
+        if self.axis_trigger < len(axes):
+            trigger_val = axes[self.axis_trigger]
+            
+            # Normalize trigger_val (0.0 to 1.0) to [min_pos, max_pos]
+            # Assuming trigger 0.0 = Open, 1.0 = Closed by default (like a gas pedal)
+            # If invert_trigger is True, 0.0 = Closed, 1.0 = Open
+            
+            # Clamp input to 0-1 just in case
+            trigger_val = max(0.0, min(1.0, trigger_val))
+
+            if self.invert_trigger:
+                # 1.0 -> min (Open), 0.0 -> max (Closed)
+                 ratio = 1.0 - trigger_val
+            else:
+                # 0.0 -> min (Open), 1.0 -> max (Closed)
+                ratio = trigger_val
+
+            target_pos = self.min_position + ratio * (self.max_position - self.min_position)
+            self.current_position = target_pos
+            self._publish_position()
+
+    def _handle_discrete_mode(self, msg: Joy):
         buttons = msg.buttons
         if not self._last_buttons:
             self._last_buttons = [0] * max(len(buttons), 1)

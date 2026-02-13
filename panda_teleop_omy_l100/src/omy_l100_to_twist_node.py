@@ -131,21 +131,6 @@ class OmyL100ToTwist(Node):
 
         # Timer for periodic publishing (if needed)
         self.timer = self.create_timer(1.0 / publish_rate, self.timer_callback)
-
-        self.get_logger().info('Omy L100 to Twist node started')
-        self.get_logger().info(f'Subscribing to: {joint_states_topic}')
-        self.get_logger().info(f'Base frame: {self.base_frame}, EE frame: {self.ee_frame}')
-        self.get_logger().info(f'Follower EE frame: {self.follower_ee_frame}')
-        self.get_logger().info(f'Publishing to: /servo_node/delta_twist_cmds')
-        self.get_logger().info(f'Subscribing to: /clutch/active')
-        self.get_logger().info(f'[CONFIG] Linear scale: {self.linear_scale}, Angular scale: {self.angular_scale}')
-        self.get_logger().info(f'[CONFIG] Max linear speed: {self.max_linear_speed} m/s, Max angular speed: {self.max_angular_speed} rad/s')
-        self.get_logger().info(f'[CONFIG] Publish rate: {publish_rate} Hz')
-        self.get_logger().info(f'[CONFIG] Axis inversion - Linear: X={self.invert_linear_x}, Y={self.invert_linear_y}, Z={self.invert_linear_z}')
-        self.get_logger().info(f'[CONFIG] Axis inversion - Angular: X={self.invert_angular_x}, Y={self.invert_angular_y}, Z={self.invert_angular_z}')
-        self.get_logger().info(f'[CONFIG] Initial offset: [{self.offset_position[0]:.3f}, {self.offset_position[1]:.3f}, {self.offset_position[2]:.3f}]')
-        self.get_logger().info('[INFO] Offset will be auto-calculated on first motion or clutch toggle')
-        self.get_logger().info('[INFO] Hold "b" key in clutch_control_node to enable teleoperation')
     
     def clutch_callback(self, msg: Bool):
         """Handle clutch state changes

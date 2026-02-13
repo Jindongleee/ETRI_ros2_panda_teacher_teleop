@@ -206,6 +206,8 @@
 
 ## 3. HTC Vive 컨트롤러 텔레오퍼레이션 모드 (Vive Teleoperation Mode)
 
+
+
 ### 3.1 vive_node (vive_ros2)
 - **Pub**: `controller_data` (MT: `vive_ros2/msg/VRControllerData`)
   - HTC Vive 컨트롤러의 포즈·버튼 데이터 (SteamVR/OpenVR, 100 Hz)
@@ -215,21 +217,95 @@
 - **Sub**: `controller_data` (MT: `vive_ros2/msg/VRControllerData`)
 - **Pub**: `/vive/controller/pose` (MT: `geometry_msgs/msg/PoseStamped`)
   - 선택한 컨트롤러(controller_role: 0=오른손, 1=왼손)의 절대 포즈
+    ```yaml
+    header:
+      stamp: {sec: 1770862309, nanosec: 80000000}
+      frame_id: "vive_world"
+    pose:
+      position: {x: 0.512, y: 0.205, z: 1.450}
+      orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707}
+    ```
 - **Pub**: `/vive/controller/buttons` (MT: `sensor_msgs/msg/Joy`)
-  - 버튼: axes=[trigger, trackpad_x, trackpad_y], buttons=[trigger_button, grip_button, menu_button, trackpad_touch, trackpad_button]
+  - 버튼 및 트리거 상태
+    ```yaml
+    header:
+      stamp: {sec: 1770862309, nanosec: 87421466}
+      frame_id: vive_controller
+    axes:
+    - 1.0  # Trigger (0.0=Open, 1.0=Closed)
+    - 0.0  # Trackpad X
+    - 0.0  # Trackpad Y
+    buttons:
+    - 1    # Trigger Button (Pressed)
+    - 0    # Grip Button
+    - 0    # Menu Button
+    - 0    # Trackpad Touch
+    - 0    # Trackpad Click
+    ```
 
 ### 3.3 vive_to_twist_node
-- **Sub**: `/vive/controller/pose` (MT: `geometry_msgs/msg/PoseStamped`), `/vive/controller/buttons` (MT: `sensor_msgs/msg/Joy`), `/clutch/active` (MT: `std_msgs/msg/Bool`, 선택)
+- **Sub**: `/vive/controller/pose`, `/vive/controller/buttons`, `/clutch/active`
 - **Pub**: `/servo_node/delta_twist_cmds` (MT: `geometry_msgs/msg/TwistStamped`)
-  - Vive 컨트롤러 포즈 변화를 팔로워암 속도 명령(Twist)으로 변환 (클러치 또는 데드맨 버튼 활성 시)
+  - Vive 컨트롤러 포즈 변화(Delta Pose)를 속도 명령으로 변환 (클러치/데드맨 활성 시)
+    ```yaml
+    header:
+      stamp: {sec: 1770862309, nanosec: 120000000}
+      frame_id: "world"
+    twist:
+      linear:  {x: 0.5, y: 0.0, z: 0.0}  # 컨트롤러 이동 속도 비례
+      angular: {x: 0.0, y: 0.0, z: 0.0}
+    ```
 
 ### 3.4 vive_to_gripper_node
 - **Sub**: `/vive/controller/buttons` (MT: `sensor_msgs/msg/Joy`)
 - **Pub**: `/gripper/position` (MT: `std_msgs/msg/Float64`)
-  - Vive 트리거/그립 버튼에 따른 그리퍼 열기/닫기 명령
+  - Vive 트리거 값을 그리퍼 위치로 매핑 (Analog Mode)
+    ```yaml
+    data: 0.8  # (Trigger=1.0 일 때 닫힘)
+    ---
+    data: 0.0  # (Trigger=0.0 일 때 열림)
+    ```
+
 
 ### 3.5 servo_node / trajectory_to_joint_states / robot_state_publisher
 - OMY L100 모드와 동일: `/servo_node/delta_twist_cmds` → servo_node → `/panda_arm_controller/joint_trajectory` → trajectory_to_joint_states → `/joint_states` → robot_state_publisher
+
+
+## 4. 조이스틱 텔레오퍼레이션 모드 (Joystick Teleoperation Mode)
+
+### 4.1 joy_node (joy_linux)
+- **Pub**: `/joy` (MT: `sensor_msgs/msg/Joy`)
+  - 게임패드/조이스틱 입력
+    ```yaml
+    header:
+      stamp: {sec: 1770862500, nanosec: 100000000}
+      frame_id: "joy"
+    axes: [0.0, 1.0, 0.0, 0.0, -1.0, 0.0] # L-Stick V, L-Stick H, ...
+    buttons: [0, 0, 0, 0, 0, 0, 1, 0, ...]  # Button press states
+    ```
+
+### 4.2 joy_to_twist_node
+- **Pub**: `/servo_node/delta_twist_cmds` (MT: `geometry_msgs/msg/TwistStamped`)
+  - 조이스틱 입력을 로봇 속도 명령으로 변환
+  - 매핑: Left Stick(Linear X/Y), L1/L2(Linear Z), Right Stick(Angular X/Y), R1/R2(Angular Z)
+    ```yaml
+    header:
+      stamp: {sec: 1770862500, nanosec: 150000000}
+      frame_id: "gripper_tip_link"
+    twist:
+      linear:  {x: 0.15, y: 0.0, z: 0.0}
+      angular: {x: 0.0, y: 0.0, z: 0.2}
+    ```
+
+### 4.3 joy_to_gripper_node
+- **Pub**: `/gripper/position` (MT: `std_msgs/msg/Float64`)
+  - 버튼 입력(Circle=Open, Square=Close)에 따른 그리퍼 제어
+    ```yaml
+    data: 0.0  # Open Button Pressed
+    ---
+    data: 0.8  # Close Button Pressed
+    ```
+
 
 
 ## 5. 시스템 아키텍처 흐름
@@ -242,38 +318,6 @@ joy_node → joy_to_twist_node → servo_node → trajectory_to_joint_states →
          (joy_to_twist_node는 /clutch/active를 구독하여 안전 제어)
 ```
 
-### 텔레오퍼레이션 모드:
-```
-omy_l100_leader (리더암 joint_states 발행)
-    
-    ↓ /leader/joint_states
-
-omy_l100_to_twist_node (리더암 EEF pose를 FK로 계산 → 속도(twist) 계산 → 스케일 적용 → 팔로워암 twist 명령 발행)
-    
-    ↓ /servo_node/delta_twist_cmds
-
-servo_node (MoveIt Servo: twist 명령을 IK로 변환하여 관절 궤적 계산)
-    
-    ↓ /panda_arm_controller/joint_trajectory
-
-trajectory_to_joint_states (관절 궤적을 joint_states로 변환)
-
-    ↓ /joint_states
-
-robot_state_publisher (joint_states를 TF로 변환하여 RViz 시각화)
-
-omy_l100_leader (리더암 joint_states 발행)
-
-    ↓ /leader/joint_states
-
-omy_l100_to_gripper_node (리더암 그리퍼 값을 팔로워암 그리퍼 명령으로 변환)
-
-    ↓ /gripper/position
-    
-trajectory_to_joint_states (그리퍼 명령을 joint_states에 반영)
-
-clutch_pedal_node → /clutch/active (모든 제어 노드에 클러치 신호 전달하여 안전 제어)
-```
 
 ### Vive 모드:
 ```

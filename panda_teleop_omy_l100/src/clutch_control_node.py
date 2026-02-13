@@ -59,15 +59,6 @@ class ClutchControlNode(Node):
         
         # Publish initial state (paused)
         self.publish_clutch_state()
-        
-        self.get_logger().info('Clutch Control Node started')
-        self.get_logger().info('===================================')
-        self.get_logger().info('HOLD "b" key to ENABLE teleoperation')
-        self.get_logger().info('RELEASE "b" key to PAUSE teleoperation')
-        self.get_logger().info('===================================')
-        self.get_logger().info('Current state: PAUSED (waiting for clutch)')
-        self.get_logger().info('Press "q" to quit')
-        self.get_logger().info(f'Key timeout: {self.key_timeout*1000:.0f}ms (for hold detection)')
     
     def timer_callback(self):
         """Check for keyboard input - hold 'b' to activate
