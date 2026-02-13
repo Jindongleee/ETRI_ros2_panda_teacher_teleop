@@ -11,7 +11,7 @@
         rotational: 1.0
         joint: 1.0
 
-      publish_period: 0.01 # 50 Hz
+      publish_period: 0.0033333333333333335 # 300 Hz
       low_latency_mode: false # 저지연 모드 비활성화
       low_pass_filter_coeff: 1.1 # 로우 패스 필터 계수
 

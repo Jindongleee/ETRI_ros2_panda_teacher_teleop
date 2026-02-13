@@ -163,7 +163,6 @@ def generate_launch_description():
             'joint_states_topic': '/leader/joint_states',
             'linear_scale': 10.0,   # 스케일 대폭 증가 (이전: 2.0)
             'angular_scale': 10.0,   # 스케일 대폭 증가 (이전: 1.0)
-            'publish_rate': 100.0,   # Servo와 주파수 일치 (이전: 50.0)
             'max_linear_speed': 10.0,   # [m/s] (이전: 0.2)
             'max_angular_speed': 10.0,  # [rad/s] (이전: 0.5)
             # 축 반전 파라미터 (리더암과 팔로워암 좌표계 방향이 반대일 때)
