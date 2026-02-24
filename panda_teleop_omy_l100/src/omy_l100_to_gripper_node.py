@@ -89,8 +89,7 @@ class OmyL100ToGripper(Node):
         # Linear mapping: omy_l100 [-1.0, 1.0] → panda [0.0, 0.8]
         # Formula: panda = (omy - omy_min) / (omy_max - omy_min) * (panda_max - panda_min) + panda_min
         normalized = (omy_gripper_value - self.omy_gripper_min) / (self.omy_gripper_max - self.omy_gripper_min)
-        panda_gripper = normalized * (self.panda_gripper_max - self.panda_gripper_min) + self.panda_gripper_min
-
+        panda_gripper = (1.0 - normalized) * (self.panda_gripper_max - self.panda_gripper_min) + self.panda_gripper_min
         # Clamp to panda gripper range
         panda_gripper = max(self.panda_gripper_min, min(panda_gripper, self.panda_gripper_max))
 
