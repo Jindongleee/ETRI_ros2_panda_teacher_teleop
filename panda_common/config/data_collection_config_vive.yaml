@@ -1,3 +1,4 @@
+# OmyL100과 동일한 수집 파라미터 (controller_type만 "vive")
 data_collection_node:
   ros__parameters:
     # Episode Configuration
@@ -20,7 +21,7 @@ data_collection_node:
     reach_threshold: 0.02              # Target reach distance in meters (2cm)
     velocity_threshold: 0.008          # Linear velocity threshold in m/s (8mm/s)
     angular_velocity_threshold: 0.015  # Angular velocity threshold in rad/s (~0.86 deg/s)
-    stationary_duration: 1.0           # Required stationary time in seconds
+    stationary_duration: 1.0            # Required stationary time in seconds
     max_episode_duration: 20.0         # Maximum episode time in seconds (timeout)
 
     # Storage Configuration
