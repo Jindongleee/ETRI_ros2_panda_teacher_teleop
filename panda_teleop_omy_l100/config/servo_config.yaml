@@ -1,51 +1,66 @@
+# =============================================================================
+# MoveIt Servo 설정 (OmyL100 텔레오퍼레이션용)
+# omy_l100_to_twist_node → /servo_node/delta_twist_cmds → Servo(IK) → joint_trajectory
+# =============================================================================
 /**:
   ros__parameters:
-    # 이 계층이 반드시 추가되어야 노드가 인식합니다.
+    # ROS2 파라미터 네임스페이스 (이 계층이 반드시 있어야 servo_node가 인식함)
     moveit_servo:
+      # Gazebo 시뮬레이션 사용 여부 (false = RViz/실제 로봇)
       use_gazebo: false
+      # 입력 명령 단위: "speed_units" = 선속도/각속도 (TwistStamped)
       command_in_type: "speed_units"
 
+      # 스케일: omy_l100_to_twist_node에서 이미 스케일 적용하므로 여기서는 1.0
       scale:
-        # 스케일 증가: omy_l100_to_twist_node에서 이미 스케일 적용하므로 여기서는 1.0으로 설정
         linear: 1.0
         rotational: 1.0
         joint: 1.0
 
-      publish_period: 0.0033333333333333335 # 300 Hz
-      low_latency_mode: false # 저지연 모드 비활성화
-      low_pass_filter_coeff: 1.1 # 로우 패스 필터 계수
+      # Servo 제어 주기 (약 0.00333초 = 300 Hz, 고속 추종용)
+      publish_period: 0.0033333333333333335
+      # 저지연 모드 비활성화
+      low_latency_mode: false
+      # 로우 패스 필터 계수
+      low_pass_filter_coeff: 1.1
 
-      move_group_name: "panda_arm" # 모션 그룹 이름
-      planning_frame: "panda_link0" # 계획 프레임 이름
-      ee_frame_name: "gripper_tip_link" # 엔드이펙터 프레임 이름
-      robot_link_command_frame: "panda_link0"  # 로봇 링크 명령 프레임 이름
+      # MoveIt 모션 그룹/프레임 이름 (URDF/SRDF와 일치해야 함)
+      move_group_name: "panda_arm"
+      planning_frame: "panda_link0"
+      ee_frame_name: "gripper_tip_link"
+      robot_link_command_frame: "panda_link0"
 
-      incoming_command_timeout: 0.5 # 입력 명령 제한 시간
-      num_outgoing_halt_msgs_to_publish: 4 # 출력 정지 메시지 발행 횟수
+      # 입력이 이 시간(초) 동안 없으면 자동 정지
+      incoming_command_timeout: 0.5
+      # 정지 시 보낼 halt 메시지 개수
+      num_outgoing_halt_msgs_to_publish: 4
 
-      lower_singularity_threshold: 10.0  # 특이점 하한 임계값
-      hard_stop_singularity_threshold: 20.0  # 특이점 하드 정지 임계값
-      joint_limit_margin: 0.01  # 연결 링크 한계 여유 값
+      # 특이점(Singularity) 감지: Jacobian 조건수 기준
+      lower_singularity_threshold: 10.0   # 이 값 넘으면 속도 감소
+      hard_stop_singularity_threshold: 20.0  # 이 값 넘으면 즉시 정지
+      joint_limit_margin: 0.01  # 조인트 한계 여유(rad)
 
-      # 충돌 체크 설정 (필수 파라미터: collision_check_rate > 0)
+      # 충돌 검사 (필수 파라미터: collision_check_rate > 0)
       check_collisions: false
       collision_check_rate: 50.0
       self_collision_proximity_threshold: 100.0
       scene_collision_proximity_threshold: 100.0
 
+      # 토픽 이름
       cartesian_command_in_topic: "~/delta_twist_cmds"
       joint_command_in_topic: "~/delta_joint_cmds"
       command_out_topic: "/panda_arm_controller/joint_trajectory"
       command_out_type: "trajectory_msgs/JointTrajectory"
 
+      # 출력 궤적에 포함할 데이터
       publish_joint_positions: true
       publish_joint_velocities: true
       publish_joint_accelerations: false
 
-      # MoveIt Servo가 요구하는 smoothing filter 플러그인
-      # Butterworth 필터를 사용 (MoveIt 2 예제와 동일)
+      # 스무딩 필터 플러그인 (Butterworth, MoveIt 2 예제와 동일)
       smoothing_filter_plugin_name: "online_signal_smoothing::ButterworthFilterPlugin"
-      override_velocity_scaling_factor: 1.0 # 속도 스케일링 인자
-      override_acceleration_scaling_factor: 1.0 # 가속도 스케일링 인자
-      
+      override_velocity_scaling_factor: 1.0
+      override_acceleration_scaling_factor: 1.0
+
+      # Planning scene 주도 노드 여부
       is_primary_planning_scene_monitor: true

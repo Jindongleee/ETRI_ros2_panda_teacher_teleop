@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-Vive to Gripper Node
-Subscribes to Vive controller buttons (sensor_msgs/Joy).
-Maps trigger/grip (or configurable buttons) to gripper open/close.
-Publishes std_msgs/Float64 on /gripper/position.
+Vive → 그리퍼 제어 노드
+=========================
+목적: Vive 컨트롤러의 버튼/트리거 입력을 Panda 그리퍼 위치 명령으로 변환한다.
 
-Topics:
-  - Subscribe: /vive/controller/buttons (sensor_msgs/Joy)
-  - Publish:   /gripper/position (std_msgs/Float64)
+구독 토픽: /vive/controller/buttons (sensor_msgs/Joy)
+발행 토픽: /gripper/position (std_msgs/Float64)
+
+제어 모드:
+  - analog: 트리거 축 값(0~1)을 그리퍼 위치에 직접 매핑
+  - discrete: 버튼 누름 시 step만큼 증감 (라이징 엣지)
 """
 
 import rclpy
@@ -17,15 +19,18 @@ from std_msgs.msg import Float64
 
 
 class ViveToGripper(Node):
+    """Vive 컨트롤러 입력을 그리퍼 위치 명령으로 변환하는 ROS2 노드"""
+
     def __init__(self):
         super().__init__('vive_to_gripper_node')
 
-        self.declare_parameter('mode', 'analog')  # 'analog' or 'discrete'
-        self.declare_parameter('axis_trigger', 0) # Axis index for trigger
-        self.declare_parameter('invert_trigger', False) # Invert axis mapping
-        self.declare_parameter('button_open', 2)
-        self.declare_parameter('button_close', 0)
-        self.declare_parameter('step', 0.02)
+        # 파라미터: 제어 모드 및 매핑 설정
+        self.declare_parameter('mode', 'analog')        # 'analog' 또는 'discrete'
+        self.declare_parameter('axis_trigger', 0)       # 트리거 축 인덱스
+        self.declare_parameter('invert_trigger', False)  # 트리거 반전 여부
+        self.declare_parameter('button_open', 2)        # 열기 버튼 (discrete 모드)
+        self.declare_parameter('button_close', 0)       # 닫기 버튼 (discrete 모드)
+        self.declare_parameter('step', 0.02)            # 1회 버튼당 위치 변화 (discrete)
         self.declare_parameter('min_position', 0.0)
         self.declare_parameter('max_position', 0.8)
         self.declare_parameter('vive_buttons_topic', '/vive/controller/buttons')
@@ -40,57 +45,50 @@ class ViveToGripper(Node):
         self.max_position = self.get_parameter('max_position').value
         self.vive_buttons_topic = self.get_parameter('vive_buttons_topic').value
 
+        # 내부 상태
         self.current_position = 0.0
         self._last_buttons = []
 
+        # 구독: Vive 버튼 입력
         self.buttons_sub = self.create_subscription(
-            Joy,
-            self.vive_buttons_topic,
-            self.buttons_callback,
-            10
+            Joy, self.vive_buttons_topic, self.buttons_callback, 10
         )
+
+        # 발행: 그리퍼 위치
         self.gripper_pub = self.create_publisher(Float64, '/gripper/position', 10)
 
-        self.get_logger().info(
-            f'Vive to Gripper: topic={self.vive_buttons_topic}, mode={self.mode}'
-        )
+        self.get_logger().info(f'[그리퍼] 노드 시작 (모드: {self.mode})')
         self._publish_position()
 
     def _publish_position(self):
+        """현재 그리퍼 위치를 발행"""
         msg = Float64()
         msg.data = self.current_position
         self.gripper_pub.publish(msg)
 
     def buttons_callback(self, msg: Joy):
+        """모드에 따라 analog 또는 discrete 처리"""
         if self.mode == 'analog':
             self._handle_analog_mode(msg)
         else:
             self._handle_discrete_mode(msg)
 
     def _handle_analog_mode(self, msg: Joy):
+        """트리거 축 값을 그리퍼 위치에 연속 매핑"""
         axes = msg.axes
         if self.axis_trigger < len(axes):
-            trigger_val = axes[self.axis_trigger]
-            
-            # Normalize trigger_val (0.0 to 1.0) to [min_pos, max_pos]
-            # Assuming trigger 0.0 = Open, 1.0 = Closed by default (like a gas pedal)
-            # If invert_trigger is True, 0.0 = Closed, 1.0 = Open
-            
-            # Clamp input to 0-1 just in case
-            trigger_val = max(0.0, min(1.0, trigger_val))
+            trigger_val = max(0.0, min(1.0, axes[self.axis_trigger]))
 
             if self.invert_trigger:
-                # 1.0 -> min (Open), 0.0 -> max (Closed)
-                 ratio = 1.0 - trigger_val
+                ratio = 1.0 - trigger_val
             else:
-                # 0.0 -> min (Open), 1.0 -> max (Closed)
                 ratio = trigger_val
 
-            target_pos = self.min_position + ratio * (self.max_position - self.min_position)
-            self.current_position = target_pos
+            self.current_position = self.min_position + ratio * (self.max_position - self.min_position)
             self._publish_position()
 
     def _handle_discrete_mode(self, msg: Joy):
+        """버튼 라이징 엣지로 그리퍼 위치를 step만큼 증감"""
         buttons = msg.buttons
         if not self._last_buttons:
             self._last_buttons = [0] * max(len(buttons), 1)
@@ -123,6 +121,7 @@ def main(args=None):
     except KeyboardInterrupt:
         pass
     finally:
+        node.get_logger().info('[그리퍼] 노드 종료')
         node.destroy_node()
         rclpy.shutdown()
 
