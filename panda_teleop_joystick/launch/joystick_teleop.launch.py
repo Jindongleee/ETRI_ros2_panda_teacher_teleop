@@ -1,76 +1,69 @@
 #!/usr/bin/env python3
 """
-Complete servo control launch file with visualization
-Launches all necessary nodes for joystick-controlled robot with RViz.
+조이스틱 텔레오퍼레이션 런치 파일
+====================================
+목적: 조이스틱으로 Panda 로봇을 제어하기 위한 전체 시스템을 일괄 실행한다.
 
-This launch file includes:
-- robot_state_publisher (robot description and TF)
-- RViz (visualization)
-- joy_node (joystick input)
-- servo_node (MoveIt Servo)
-- joy_to_twist_node (joystick to servo converter)
-- clutch_pedal_node (safety control - robot only moves when pedal is held)
+실행 노드 구성:
+  [t=0s] robot_state_publisher     - URDF 기반 로봇 모델 및 TF 트리 발행
+         trajectory_to_joint_states - Servo 출력 궤적을 /joint_states로 변환
+  [t=2s] joy_node                  - 조이스틱 디바이스 입력 수신
+         servo_node                - MoveIt Servo (IK 기반 속도 제어)
+         joy_to_twist_node         - 조이스틱 → TwistStamped 변환
+         joy_to_gripper_node       - 조이스틱 버튼 → 그리퍼 명령 변환
+         clutch_pedal_node         - 풋스위치 기반 클러치 안전 제어
+  [t=3s] rviz2                     - 시각화 (use_rviz:=false로 비활성화 가능)
+  [t=5s] start_servo 서비스 호출   - Servo 활성화
 
-Usage:
-    ros2 launch custom_panda_description servo_complete.launch.py
-    
-Optional arguments:
-    use_sim_time:=true/false  (default: false)
-    use_rviz:=true/false      (default: true)
-    
-Safety:
-    Robot only moves when clutch pedal is held down (hold-to-activate safety feature)
+선택 인자:
+  use_sim_time:=true/false           (기본: false)
+  use_rviz:=true/false               (기본: true)
+  enable_data_collection:=true/false  (기본: false, 모방학습 데이터 수집용)
 """
 
 import os
 import yaml
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction, ExecuteProcess
+from launch.actions import DeclareLaunchArgument, TimerAction, ExecuteProcess
 from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
-    
-    # Get package directories
+
+    # === 패키지 경로 ===
     panda_desc_pkg = get_package_share_directory('custom_panda_description')
     panda_teleop_pkg = get_package_share_directory('panda_teleop_joystick')
     panda_common_pkg = get_package_share_directory('panda_common')
-    
-    # Paths
+
+    # === 설정 파일 경로 ===
     urdf_file = os.path.join(panda_desc_pkg, 'urdf', 'panda_with_robotiq.urdf')
     srdf_file = os.path.join(panda_desc_pkg, 'config', 'panda_robotiq.srdf')
     rviz_config_file = os.path.join(panda_desc_pkg, 'config', 'view_robot.rviz')
     servo_config_file = os.path.join(panda_teleop_pkg, 'config', 'servo_config.yaml')
     kinematics_file = os.path.join(panda_desc_pkg, 'config', 'kinematics.yaml')
     data_collection_config_file = os.path.join(panda_common_pkg, 'config', 'data_collection_config_joystick.yaml')
-    
-    # Launch arguments
+
+    # === 런치 인자 ===
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_rviz = LaunchConfiguration('use_rviz', default='true')
     enable_data_collection = LaunchConfiguration('enable_data_collection', default='false')
-    
-    # Read URDF file
+
+    # === URDF / SRDF / Kinematics 로드 ===
     with open(urdf_file, 'r') as infp:
         robot_description_content = infp.read()
-    
-    # Read SRDF file
     with open(srdf_file, 'r') as infp:
         robot_description_semantic_content = infp.read()
-    
-    # Read kinematics.yaml file (for IK solver configuration)
     with open(kinematics_file, 'r') as f:
         kinematics_config = yaml.safe_load(f)
-    
-    # ========================================
-    # Base Robot
-    # ========================================
-    
-    # Robot State Publisher
+
+    # ==================================================
+    # 로봇 기반 노드 (즉시 시작)
+    # ==================================================
+
+    # URDF 기반 TF 트리 발행
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -81,22 +74,19 @@ def generate_launch_description():
             'use_sim_time': use_sim_time
         }]
     )
-    
-    # ========================================
-    # Visualization
-    # ========================================
-    # Trajectory to Joint States Node (from panda_common)
-    # servo_node가 발행하는 /panda_arm_controller/joint_trajectory를 구독하여
-    # /joint_states로 변환하여 발행 (robot_state_publisher가 TF를 발행할 수 있도록)
+
+    # Servo 출력 JointTrajectory → /joint_states 변환
     trajectory_to_joint_states_node = Node(
         package='panda_common',
         executable='trajectory_to_joint_states.py',
         name='trajectory_to_joint_states',
         output='screen'
     )
-    
-    # RViz (conditional - can be disabled)
-    # Delayed start to ensure robot_state_publisher is ready
+
+    # ==================================================
+    # 시각화
+    # ==================================================
+
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -105,29 +95,27 @@ def generate_launch_description():
         arguments=['-d', rviz_config_file] if os.path.exists(rviz_config_file) else [],
         condition=IfCondition(use_rviz)
     )
-    
-    # ========================================
-    # Joystick Control
-    # ========================================
-    
-    # Joy Node (for DualShock 3 controller)
+
+    # ==================================================
+    # 조이스틱 입력
+    # ==================================================
+
     joy_node = Node(
         package='joy',
         executable='joy_node',
         name='joy_node',
         output='screen',
         parameters=[{
-            'dev': '/dev/input/js0',  # Change if your joystick is on a different device
-            'deadzone': 0.05,   
+            'dev': '/dev/input/js0',
+            'deadzone': 0.05,
             'autorepeat_rate': 20.0
         }]
     )
-    
-    # ========================================
-    # MoveIt Servo
-    # ========================================
-    
-    # Servo Node
+
+    # ==================================================
+    # MoveIt Servo (IK 기반 속도 제어)
+    # ==================================================
+
     servo_node = Node(
         package='moveit_servo',
         executable='servo_node_main',
@@ -138,110 +126,100 @@ def generate_launch_description():
             {
                 'robot_description': robot_description_content,
                 'robot_description_semantic': robot_description_semantic_content,
-                'robot_description_kinematics': kinematics_config,  # IK solver 설정 추가!
+                'robot_description_kinematics': kinematics_config,
                 'use_sim_time': use_sim_time
             }
         ]
     )
-    
-    # Joystick to Twist Node (converts joy messages to twist commands)
-    # Now uses clutch pedal for safety control instead of joystick deadman button
+
+    # ==================================================
+    # 텔레오퍼레이션 노드
+    # ==================================================
+
+    # 조이스틱 → Twist 변환 (축/버튼 매핑은 런치 파라미터로 설정)
     joy_to_twist_node = Node(
         package='panda_teleop_joystick',
         executable='joy_to_twist_node.py',
         name='joy_to_twist_node',
         output='screen',
         parameters=[{
-            # Scales are further normalized in the node to keep commands within [-1, 1]
             'linear_scale': 0.5,
             'angular_scale': 0.3,
-            'frame_id': 'panda_link0',  # End-effector 기준
-            'use_clutch': True,  # Use clutch pedal for safety control
-            
-            # Button mapping for button-based controls
-            'button_linear_z_up': 8,      # L1 button (Linear Z up)
-            'button_linear_z_down': 6,    # L2 button (Linear Z down)
-            'button_angular_z_pos': 7,    # R1 button (Angular Z positive)
-            'button_angular_z_neg': 9,    # R2 button (Angular Z negative)
-            
-            # Joystick axis mapping
-            'axis_linear_x': 1,      # Left stick X (좌우)
-            'axis_linear_y': 0,      # Left stick Y (전후)
-            'axis_angular_x': 2,     # Right stick Y (Roll)
-            'axis_angular_y': 3,     # Right stick X (Pitch)
-            
-            # Axis inversion (1 = normal, -1 = inverted)
+            'frame_id': 'panda_link0',
+            'use_clutch': True,
+            'button_linear_z_up': 8,
+            'button_linear_z_down': 6,
+            'button_angular_z_pos': 7,
+            'button_angular_z_neg': 9,
+            'axis_linear_x': 1,
+            'axis_linear_y': 0,
+            'axis_angular_x': 2,
+            'axis_angular_y': 3,
             'invert_linear_x': 1,
             'invert_linear_y': -1,
             'invert_angular_x': 1,
             'invert_angular_y': -1,
-            
-            # Deadzone for joystick axes
             'axis_deadzone': 0.00
         }]
     )
 
-    # Joystick to Gripper Node (converts joy buttons to gripper open/close)
+    # 조이스틱 버튼 → 그리퍼 열기/닫기
     joy_to_gripper_node = Node(
         package='panda_teleop_joystick',
         executable='joy_to_gripper_node.py',
         name='joy_to_gripper_node',
         output='screen',
         parameters=[{
-            'button_open': 1,   # Circle button
-            'button_close': 3,  # Square button
+            'button_open': 1,
+            'button_close': 3,
             'step': 0.02,
             'min_position': 0.0,
             'max_position': 0.8
         }]
     )
-    
-    # Clutch Pedal Node (evdev-based - reads PCsensor FootSwitch directly)
-    # This provides safety control: robot only moves when clutch pedal is held
+
+    # 풋스위치 기반 클러치 안전 제어 (발판을 밟고 있어야 로봇 동작)
     clutch_pedal_node = Node(
         package='panda_common',
         executable='clutch_pedal_node.py',
         name='clutch_pedal_node',
         output='screen',
         parameters=[{
-            'device_name': 'PCsensor FootSwitch Keyboard',  # Auto-detect by name
-            # 'device_path': '/dev/input/event18',  # Or specify path directly
-            'key_code': 48  # KEY_B = 48
+            'device_name': 'PCsensor FootSwitch Keyboard',
+            'key_code': 48
         }]
     )
-    
-    # ========================================
-    # Delayed Starts (to avoid resource conflicts)
-    # ========================================
-    
-    # Delay control nodes by 2 seconds to ensure trajectory_to_joint_states_node 
-    # has time to publish initial joint_states before servo_node starts
+
+    # ==================================================
+    # 지연 시작 (노드 간 의존 순서 보장)
+    # ==================================================
+
+    # t=2s: 제어 노드 (trajectory_to_joint_states가 초기 joint_states 발행 후)
     delayed_control_nodes = TimerAction(
         period=2.0,
         actions=[joy_node, servo_node, joy_to_twist_node, joy_to_gripper_node, clutch_pedal_node]
     )
-    
-    # Delay RViz startup by 3 seconds to ensure everything is ready
+
+    # t=3s: RViz
     delayed_rviz = TimerAction(
         period=3.0,
         actions=[rviz_node]
     )
-    
-    # Servo 시작 서비스 호출 (servo_node 시작 후 2초 뒤)
-    # delayed_control_nodes가 1초 후에 시작되므로, 총 3초 후에 호출
+
+    # t=5s: Servo 활성화 서비스 호출
     start_servo_service = ExecuteProcess(
         cmd=['ros2', 'service', 'call', '/servo_node/start_servo', 'std_srvs/srv/Trigger'],
         output='screen'
     )
-    
-    # Servo 활성화를 더 늦춰서 servo_node가 완전히 초기화되고 
-    # /joint_states를 받을 수 있도록 보장
     delayed_start_servo = TimerAction(
-        period=5.0,  # servo_node 시작 후 3초 뒤 (delayed_control_nodes가 2초 후 시작하므로 총 5초)
+        period=5.0,
         actions=[start_servo_service]
     )
-    
-    # Data Collection Node (optional, controlled by enable_data_collection parameter)
+
+    # ==================================================
+    # 데이터 수집 (선택, enable_data_collection:=true 시 활성화)
+    # ==================================================
+
     data_collection_node = Node(
         package='panda_common',
         executable='data_collection_node.py',
@@ -250,49 +228,38 @@ def generate_launch_description():
         parameters=[data_collection_config_file],
         condition=IfCondition(enable_data_collection)
     )
-    
-    # Data collection starts delayed (4 seconds) to ensure all other nodes are ready
+
     delayed_data_collection = TimerAction(
         period=4.0,
         actions=[data_collection_node],
         condition=IfCondition(enable_data_collection)
     )
-    
-    # ========================================
-    # Launch Description
-    # ========================================
-    
+
+    # ==================================================
+    # 런치 설명 반환
+    # ==================================================
+
     return LaunchDescription([
-        # Arguments
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='false',
-            description='Use simulation (Gazebo) clock if true'
-        ),
-        DeclareLaunchArgument(
-            'use_rviz',
-            default_value='true',
-            description='Launch RViz for visualization'
-        ),
-        DeclareLaunchArgument(
-            'enable_data_collection',
-            default_value='false',
-            description='Enable data collection for imitation learning'
-        ),
-        
-        # Base Robot (starts immediately at t=0s)
+        DeclareLaunchArgument('use_sim_time', default_value='false',
+                              description='시뮬레이션(Gazebo) 시간 사용 여부'),
+        DeclareLaunchArgument('use_rviz', default_value='true',
+                              description='RViz 시각화 실행 여부'),
+        DeclareLaunchArgument('enable_data_collection', default_value='false',
+                              description='모방학습용 데이터 수집 활성화'),
+
+        # 즉시 시작 (t=0s)
         robot_state_publisher_node,
-        trajectory_to_joint_states_node,  # 초기 joint_states 발행을 위해 즉시 시작
-        
-        # Control nodes (delayed 1 second at t=1s)
+        trajectory_to_joint_states_node,
+
+        # 제어 노드 (t=2s)
         delayed_control_nodes,
-        
-        # Start servo service (delayed 3 seconds at t=3s, after servo_node starts)
+
+        # Servo 활성화 (t=5s)
         delayed_start_servo,
-        
-        # Visualization (delayed 3 seconds at t=3s)
+
+        # RViz (t=3s)
         delayed_rviz,
-        
-        # Data Collection (delayed 4 seconds at t=4s, optional)
+
+        # 데이터 수집 (t=4s, 선택)
         delayed_data_collection
     ])
