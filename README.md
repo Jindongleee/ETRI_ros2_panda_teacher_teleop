@@ -1,60 +1,60 @@
 # Panda Robot Teleoperation Workspace
 
-Multi-controller teleoperation system for Panda robot with Robotiq gripper.
+Robotiq 그리퍼를 장착한 Panda 로봇을 위한 멀티 컨트롤러 텔레오퍼레이션 시스템입니다.
 
 ## 📦 Package Structure
 
 ### Core Packages
 
 #### **panda_common** ✨
-Common utilities and nodes for all Panda teleoperation controllers.
-- **Purpose**: Shared functionality across all controllers
-- **Contents**:
-  - `data_collection_node.py` - Imitation learning data collection
-  - `clutch_pedal_node.py` - Safety clutch pedal interface
-  - `trajectory_to_joint_states.py` - Trajectory to joint states converter
-  - Config files for data collection
+모든 Panda 텔레오퍼레이션 컨트롤러가 공통으로 쓰는 유틸리티와 노드 모음입니다.
+- **목적**: 모든 컨트롤러가 공유하는 기능
+- **구성**:
+  - `data_collection_node.py` - 모방학습용 데이터 수집
+  - `clutch_pedal_node.py` - 안전 클러치 페달 인터페이스
+  - `trajectory_to_joint_states.py` - Trajectory를 joint states로 변환
+  - 데이터 수집용 설정 파일
 
 #### **custom_panda_description**
-Panda robot URDF and robot description files.
-- Panda + Robotiq gripper URDF
-- SRDF for MoveIt configuration
-- RViz configuration
-- Kinematics configuration
+Panda 로봇 URDF 및 로봇 설명 파일입니다.
+- Panda + Robotiq 그리퍼 URDF
+- MoveIt 설정용 SRDF
+- RViz 설정
+- Kinematics 설정
 
 ### Controller-Specific Packages
 
 #### **panda_teleop_omy_l100**
-Teleoperation using OMY L100 leader arm.
-- **Purpose**: Control Panda follower arm using OMY L100 leader arm
-- **Contents**:
-  - `omy_l100_to_twist_node.py` - Forward kinematics converter
-  - `omy_l100_to_gripper_node.py` - Gripper mapping
-  - Launch files and configurations
-- **Dependencies**: `panda_common`, `open_manipulator_*`, `dynamixel_*`
+OMY L100 leader arm을 이용한 텔레오퍼레이션입니다.
+- **목적**: OMY L100 leader arm으로 Panda follower arm 제어
+- **구성**:
+  - `omy_l100_to_twist_node.py` - 순기구학 변환기
+  - `omy_l100_to_gripper_node.py` - 그리퍼 매핑
+  - Launch 파일 및 설정
+- **의존성**: `panda_common`, `open_manipulator_*`, `dynamixel_*`
 
 #### **panda_teleop_joystick**
-Teleoperation using game controller (joystick).
-- **Purpose**: Control Panda follower arm using joystick
-- **Contents**:
-  - `joy_to_twist_node.py` - Joystick to twist converter
-  - `joy_to_gripper_node.py` - Gripper control
-  - Launch files and configurations
-- **Dependencies**: `panda_common`, `custom_panda_description`
+게임 컨트롤러(조이스틱)를 이용한 텔레오퍼레이션입니다.
+- **목적**: 조이스틱으로 Panda follower arm 제어
+- **구성**:
+  - `joy_to_twist_node.py` - 조이스틱을 twist로 변환
+  - `joy_to_gripper_node.py` - 그리퍼 제어
+  - Launch 파일 및 설정
+- **의존성**: `panda_common`, `custom_panda_description`
 
 ### Hardware Interface Packages
 
-#### **OpenMANIPULATOR Packages** (for OMY L100)
-- `open_manipulator_bringup` - Hardware bringup
-- `open_manipulator_description` - URDF and meshes
-- `open_manipulator_collision` - Self-collision detection
+#### **OpenMANIPULATOR Packages** (OMY L100용)
+- `open_manipulator_bringup` - 하드웨어 bringup
+- `open_manipulator_description` - URDF 및 메시
+- `open_manipulator_collision` - 자체 충돌 감지
 
-#### **Dynamixel Packages** (for OMY L100)
-- `DynamixelSDK` - Dynamixel motor SDK
-- `dynamixel_hardware_interface` - ROS2 control interface
-- `dynamixel_interfaces` - Custom messages/services
+#### **Dynamixel Packages** (OMY L100용)
+- `DynamixelSDK` - 다이나믹셀 모터 SDK
+- `dynamixel_hardware_interface` - ROS2 control 인터페이스
+- `dynamixel_interfaces` - 커스텀 메시지/서비스
 
-#### **ROS2 Controllers** (for OMY L100)
+#### **ROS2 Controllers** (OMY L100용)
 - `om_gravity_compensation_controller`
 - `om_joint_trajectory_command_broadcaster`
 - `om_spring_actuator_controller`
@@ -75,20 +75,20 @@ source install/setup.bash
 ### 2. Launch with OMY L100 Controller
 
 ```bash
-# Without data collection
+# 데이터 수집 없이
 ros2 launch panda_teleop_omy_l100 panda_teleop_omy_l100.launch.py
 
-# With data collection
+# 데이터 수집 포함
 ros2 launch panda_teleop_omy_l100 panda_teleop_omy_l100.launch.py enable_data_collection:=true
 ```
 
 ### 3. Launch with Joystick Controller
 
 ```bash
-# Without data collection
+# 데이터 수집 없이
 ros2 launch panda_teleop_joystick joystick_teleop.launch.py
 
-# With data collection
+# 데이터 수집 포함
 ros2 launch panda_teleop_joystick joystick_teleop.launch.py enable_data_collection:=true
 ```
 
@@ -96,30 +96,30 @@ ros2 launch panda_teleop_joystick joystick_teleop.launch.py enable_data_collecti
 
 ## 📊 Data Collection
 
-All controllers use the same data collection system from `panda_common`.
+모든 컨트롤러는 `panda_common`의 동일한 데이터 수집 시스템을 사용합니다.
 
 ### Data Storage Structure
 
 ```
 data/
-├── omy_l100/          # OMY L100 controller data
+├── omy_l100/          # OMY L100 컨트롤러 데이터
 │   ├── session_YYYYMMDD_HHMMSS/
 │   │   ├── episode_001.jsonl
 │   │   ├── episode_001_meta.json
 │   │   └── ...
-├── joystick/          # Joystick controller data
+├── joystick/          # 조이스틱 컨트롤러 데이터
 │   └── session_YYYYMMDD_HHMMSS/
 │       └── ...
-└── <future_controller>/  # Easy to add more!
+└── <future_controller>/  # 새 컨트롤러 추가도 쉽게!
 ```
 
 ### Data Format
 
-Each sample contains:
-- **State**: End-effector pose (x, y, z, qx, qy, qz, qw) + joint angles (7 joints)
-- **Action**: Velocity command (vx, vy, vz, wx, wy, wz)
+각 샘플은 다음을 포함합니다:
+- **State**: End-effector pose (x, y, z, qx, qy, qz, qw) + joint angles (7개 관절)
+- **Action**: 속도 명령 (vx, vy, vz, wx, wy, wz)
 
-Collection rate: **15Hz** (configurable)
+수집 주기: **15Hz** (설정 가능)
 
 ---
 
@@ -127,56 +127,56 @@ Collection rate: **15Hz** (configurable)
 
 ### OMY L100 Controller
 
-**Hardware**: 7-DOF collaborative arm
-**Control Method**: Position mirroring via forward kinematics
-**Episode Management**:
-- Automatic target generation
-- Episode ends when target reached (2cm + 3s stationary) or timeout (60s)
+**하드웨어**: 7-DOF 협동로봇 팔
+**제어 방식**: 순기구학을 통한 위치 미러링
+**에피소드 관리**:
+- 목표 자동 생성
+- 목표 도달(2cm + 3초 정지) 또는 타임아웃(60초) 시 에피소드 종료
 
 ### Joystick Controller
 
-**Hardware**: Game controller (tested with PS4/Xbox compatible)
-**Control Method**: 
-- Left stick: Linear X/Y
-- Right stick: Linear Z
-- L1/L2 buttons: Angular X (Roll)
-- Clutch pedal: Safety control
+**하드웨어**: 게임 컨트롤러 (PS4/Xbox 호환 확인됨)
+**제어 방식**: 
+- 왼쪽 스틱: 선형 X/Y
+- 오른쪽 스틱: 선형 Z
+- L1/L2 버튼: 각속도 X (Roll)
+- 클러치 페달: 안전 제어
 
 ---
 
 ## 🔧 Adding a New Controller
 
-To add a new controller:
+새 컨트롤러를 추가하려면:
 
-1. **Create new package**:
+1. **새 패키지 생성**:
    ```bash
    ros2 pkg create panda_teleop_<your_controller> --build-type ament_cmake
    ```
 
-2. **Add dependency** to `panda_common` in `package.xml`:
+2. **의존성 추가** — `package.xml`에 `panda_common` 추가:
    ```xml
    <depend>panda_common</depend>
    ```
 
-3. **Implement converter node**:
-   - Convert your controller input to `TwistStamped` messages
-   - Publish to `/servo_node/delta_twist_cmds`
+3. **컨버터 노드 구현**:
+   - 컨트롤러 입력을 `TwistStamped` 메시지로 변환
+   - `/servo_node/delta_twist_cmds`로 publish
 
-4. **Create launch file** that includes:
-   - Your converter node
-   - Nodes from `panda_common` (data collection, clutch, etc.)
-   - Panda robot from `custom_panda_description`
+4. **Launch 파일 작성**, 다음을 포함:
+   - 작성한 컨버터 노드
+   - `panda_common`의 노드들 (데이터 수집, 클러치 등)
+   - `custom_panda_description`의 Panda 로봇
 
-5. **Done!** Your controller now has full data collection support.
+5. **완료!** 이제 새 컨트롤러도 데이터 수집 기능을 온전히 지원합니다.
 
 ---
 
 ## 🛠️ Data Analysis Tools
 
-Located in `scripts/` directory:
+`scripts/` 디렉토리에 있습니다.
 
 ### **validate_dataset.py**
-Validates collected datasets for completeness and correctness.
+수집된 데이터셋의 완전성과 정확성을 검증합니다.
 
 ```bash
 cd ~/ros2_ws
@@ -184,7 +184,7 @@ python3 scripts/validate_dataset.py data/omy_l100/session_YYYYMMDD_HHMMSS/
 ```
 
 ### **visualize_episode.py**
-Visualizes episode trajectories and actions.
+에피소드의 궤적과 액션을 시각화합니다.
 
 ```bash
 cd ~/ros2_ws
@@ -196,7 +196,7 @@ python3 scripts/visualize_episode.py data/omy_l100/session_YYYYMMDD_HHMMSS/episo
 ## 📚 Documentation
 
 ### 📖 주요 문서
-- **`README.md`** (this file) - 프로젝트 개요 및 Quick Start
+- **`README.md`** (이 파일) - 프로젝트 개요 및 Quick Start
 - **`ARCHITECTURE.md`** 📘 - **완전한 시스템 아키텍처** (필독!)
   - 969줄의 상세한 기술 문서
   - 전체 시스템 다이어그램
@@ -254,4 +254,4 @@ Apache-2.0
 
 ## 👥 Maintainer
 
-etri (jindong1019@gmail.com)
+이진동 (jindong1019@gmail.com)
